@@ -1,1 +1,4 @@
-/EcoNestPOS_GROUP_A/target/
+**/target/
+**/nbproject/private/
+.env
+**/db.properties

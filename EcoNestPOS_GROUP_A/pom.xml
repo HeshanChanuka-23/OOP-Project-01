@@ -10,4 +10,11 @@
         <maven.compiler.release>26</maven.compiler.release>
         <exec.mainClass>com.econest.EcoNestPOS_GROUP_A</exec.mainClass>
     </properties>
+    <dependencies>
+    <dependency>
+        <groupId>org.mariadb.jdbc</groupId>
+        <artifactId>mariadb-java-client</artifactId>
+        <version>3.5.11</version>
+    </dependency>
+</dependencies>
 </project>
