@@ -27,11 +27,13 @@ public class MainDashboard extends javax.swing.JFrame {
         setMinimumSize(new Dimension(1020, 680));
         setSize(1220, 780);
         setLocationRelativeTo(null);
+        prepareProductTable();
     }
 
     /** Show a panel that ALREADY EXISTS in the GUI Builder CardLayout. */
     public final void showPage(String pageKey) {
         ((CardLayout) contentPanel.getLayout()).show(contentPanel, pageKey);
+        if ("products".equals(pageKey)) refreshProductTable();
         switch (pageKey) {
             case "dashboard": headerTitleLabel.setText("Overview Dashboard"); break;
             case "products": headerTitleLabel.setText("Products"); break;
@@ -145,26 +147,47 @@ public class MainDashboard extends javax.swing.JFrame {
         productsDescription = new javax.swing.JLabel();
         productsDetailsPanel = new javax.swing.JPanel();
         productsTilesPanel = new javax.swing.JPanel();
-        productsTile1Panel = new javax.swing.JPanel();
-        productsTile1TextPanel = new javax.swing.JPanel();
-        productsTile1Title = new javax.swing.JLabel();
-        productsTile1Subtitle = new javax.swing.JLabel();
-        productsTile1Status = new javax.swing.JLabel();
-        productsTile2Panel = new javax.swing.JPanel();
-        productsTile2TextPanel = new javax.swing.JPanel();
-        productsTile2Title = new javax.swing.JLabel();
-        productsTile2Subtitle = new javax.swing.JLabel();
-        productsTile2Status = new javax.swing.JLabel();
-        productsTile3Panel = new javax.swing.JPanel();
-        productsTile3TextPanel = new javax.swing.JPanel();
-        productsTile3Title = new javax.swing.JLabel();
-        productsTile3Subtitle = new javax.swing.JLabel();
-        productsTile3Status = new javax.swing.JLabel();
-        productsTile4Panel = new javax.swing.JPanel();
-        productsTile4TextPanel = new javax.swing.JPanel();
-        productsTile4Title = new javax.swing.JLabel();
-        productsTile4Subtitle = new javax.swing.JLabel();
-        productsTile4Status = new javax.swing.JLabel();
+        productFormPanel = new javax.swing.JPanel();
+        productFormHeading = new javax.swing.JPanel();
+        productFormTitle = new javax.swing.JLabel();
+        productFormCaption = new javax.swing.JLabel();
+        productFieldsPanel = new javax.swing.JPanel();
+        productNameRow = new javax.swing.JPanel();
+        lblProductName = new javax.swing.JLabel();
+        txtProductName = new javax.swing.JTextField();
+        productCategoryRow = new javax.swing.JPanel();
+        lblProductCategory = new javax.swing.JLabel();
+        cmbProductCategory = new javax.swing.JComboBox();
+        productDescriptionRow = new javax.swing.JPanel();
+        lblProductDescription = new javax.swing.JLabel();
+        productDescriptionScroll = new javax.swing.JScrollPane();
+        txtProductDescription = new javax.swing.JTextArea();
+        productPriceRow = new javax.swing.JPanel();
+        lblProductPrice = new javax.swing.JLabel();
+        txtProductPrice = new javax.swing.JTextField();
+        productRatingRow = new javax.swing.JPanel();
+        lblEcoRating = new javax.swing.JLabel();
+        spnEcoRating = new javax.swing.JSpinner();
+        productIdRow = new javax.swing.JPanel();
+        lblCurrentProduct = new javax.swing.JLabel();
+        lblSelectedProductId = new javax.swing.JLabel();
+        productActionsPanel = new javax.swing.JPanel();
+        btnAddProduct = new javax.swing.JButton();
+        btnUpdateProduct = new javax.swing.JButton();
+        btnDeleteProduct = new javax.swing.JButton();
+        btnClearProduct = new javax.swing.JButton();
+        productTablePanel = new javax.swing.JPanel();
+        productTableHeading = new javax.swing.JPanel();
+        productTableTitleArea = new javax.swing.JPanel();
+        productTableTitle = new javax.swing.JLabel();
+        productTableCaption = new javax.swing.JLabel();
+        productSearchPanel = new javax.swing.JPanel();
+        txtProductSearch = new javax.swing.JTextField();
+        btnSearchProduct = new javax.swing.JButton();
+        btnRefreshProducts = new javax.swing.JButton();
+        productTableScroll = new javax.swing.JScrollPane();
+        tblProducts = new javax.swing.JTable();
+        productTableHint = new javax.swing.JLabel();
         productsModuleStatus = new javax.swing.JLabel();
         inventoryPage = new javax.swing.JPanel();
         inventoryIntroPanel = new javax.swing.JPanel();
@@ -377,13 +400,13 @@ public class MainDashboard extends javax.swing.JFrame {
         brandPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(16, 22, 7, 8));
         brandPanel.setLayout(new java.awt.GridLayout(2, 1));
 
-        brandTitleLabel.setText("EcoNest  •");
-        brandTitleLabel.setForeground(new java.awt.Color(239, 250, 241));
         brandTitleLabel.setFont(new java.awt.Font("Segoe UI", 1, 25)); // NOI18N
+        brandTitleLabel.setForeground(new java.awt.Color(239, 250, 241));
+        brandTitleLabel.setText("EcoNest  •");
         brandPanel.add(brandTitleLabel);
 
-        brandTaglineLabel.setText("Sustainable retail POS");
         brandTaglineLabel.setForeground(new java.awt.Color(176, 213, 190));
+        brandTaglineLabel.setText("Sustainable retail POS");
         brandPanel.add(brandTaglineLabel);
 
         sidebarPanel.add(brandPanel, java.awt.BorderLayout.NORTH);
@@ -406,12 +429,12 @@ public class MainDashboard extends javax.swing.JFrame {
         });
         navigationPanel.add(btnDashboard);
 
-        btnProducts.setText("   Products");
         btnProducts.setBackground(new java.awt.Color(24, 55, 45));
-        btnProducts.setForeground(new java.awt.Color(218, 243, 224));
         btnProducts.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        btnProducts.setFocusPainted(false);
+        btnProducts.setForeground(new java.awt.Color(218, 243, 224));
+        btnProducts.setText("   Products");
         btnProducts.setBorderPainted(false);
+        btnProducts.setFocusPainted(false);
         btnProducts.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnProducts.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -420,12 +443,12 @@ public class MainDashboard extends javax.swing.JFrame {
         });
         navigationPanel.add(btnProducts);
 
-        btnInventory.setText("   Inventory");
         btnInventory.setBackground(new java.awt.Color(24, 55, 45));
-        btnInventory.setForeground(new java.awt.Color(218, 243, 224));
         btnInventory.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        btnInventory.setFocusPainted(false);
+        btnInventory.setForeground(new java.awt.Color(218, 243, 224));
+        btnInventory.setText("   Inventory");
         btnInventory.setBorderPainted(false);
+        btnInventory.setFocusPainted(false);
         btnInventory.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnInventory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -434,12 +457,12 @@ public class MainDashboard extends javax.swing.JFrame {
         });
         navigationPanel.add(btnInventory);
 
-        btnClients.setText("   Clients");
         btnClients.setBackground(new java.awt.Color(24, 55, 45));
-        btnClients.setForeground(new java.awt.Color(218, 243, 224));
         btnClients.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        btnClients.setFocusPainted(false);
+        btnClients.setForeground(new java.awt.Color(218, 243, 224));
+        btnClients.setText("   Clients");
         btnClients.setBorderPainted(false);
+        btnClients.setFocusPainted(false);
         btnClients.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnClients.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -448,12 +471,12 @@ public class MainDashboard extends javax.swing.JFrame {
         });
         navigationPanel.add(btnClients);
 
-        btnDeliveryAgents.setText("   Delivery Agents");
         btnDeliveryAgents.setBackground(new java.awt.Color(24, 55, 45));
-        btnDeliveryAgents.setForeground(new java.awt.Color(218, 243, 224));
         btnDeliveryAgents.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        btnDeliveryAgents.setFocusPainted(false);
+        btnDeliveryAgents.setForeground(new java.awt.Color(218, 243, 224));
+        btnDeliveryAgents.setText("   Delivery Agents");
         btnDeliveryAgents.setBorderPainted(false);
+        btnDeliveryAgents.setFocusPainted(false);
         btnDeliveryAgents.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnDeliveryAgents.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -490,12 +513,12 @@ public class MainDashboard extends javax.swing.JFrame {
         });
         navigationPanel.add(btnDeliveries);
 
-        btnReports.setText("   Reports");
         btnReports.setBackground(new java.awt.Color(24, 55, 45));
-        btnReports.setForeground(new java.awt.Color(218, 243, 224));
         btnReports.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        btnReports.setFocusPainted(false);
+        btnReports.setForeground(new java.awt.Color(218, 243, 224));
+        btnReports.setText("   Reports");
         btnReports.setBorderPainted(false);
+        btnReports.setFocusPainted(false);
         btnReports.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnReports.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -533,8 +556,8 @@ public class MainDashboard extends javax.swing.JFrame {
         workspacePanel.setLayout(new java.awt.BorderLayout());
 
         headerPanel.setBackground(new java.awt.Color(255, 255, 255));
-        headerPanel.setPreferredSize(new java.awt.Dimension(700, 88));
         headerPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(12, 28, 12, 28));
+        headerPanel.setPreferredSize(new java.awt.Dimension(700, 88));
         headerPanel.setLayout(new java.awt.BorderLayout());
 
         headerTitleBlock.setBackground(new java.awt.Color(255, 255, 255));
@@ -545,8 +568,8 @@ public class MainDashboard extends javax.swing.JFrame {
         headerTitleLabel.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
         headerTitleBlock.add(headerTitleLabel);
 
-        headerSubtitleLabel.setText("Your sustainable retail workspace");
         headerSubtitleLabel.setForeground(new java.awt.Color(110, 128, 117));
+        headerSubtitleLabel.setText("Your sustainable retail workspace");
         headerTitleBlock.add(headerSubtitleLabel);
 
         headerPanel.add(headerTitleBlock, java.awt.BorderLayout.CENTER);
@@ -905,115 +928,263 @@ public class MainDashboard extends javax.swing.JFrame {
         productsDetailsPanel.setLayout(new java.awt.BorderLayout());
 
         productsTilesPanel.setBackground(new java.awt.Color(246, 249, 247));
-        productsTilesPanel.setLayout(new java.awt.GridLayout(2, 2, 17, 17));
+        productsTilesPanel.setLayout(new java.awt.BorderLayout(13, 0));
 
-        productsTile1Panel.setBackground(new java.awt.Color(255, 255, 255));
-        productsTile1Panel.setBorder(javax.swing.BorderFactory.createEmptyBorder(17, 19, 17, 18));
-        productsTile1Panel.setLayout(new java.awt.BorderLayout());
+        productFormPanel.setBackground(new java.awt.Color(255, 255, 255));
+        productFormPanel.setPreferredSize(new java.awt.Dimension(343, 445));
+        productFormPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(16, 15, 15, 15));
+        productFormPanel.setLayout(new java.awt.BorderLayout(0, 12));
 
-        productsTile1TextPanel.setBackground(new java.awt.Color(255, 255, 255));
-        productsTile1TextPanel.setPreferredSize(new java.awt.Dimension(330, 88));
-        productsTile1TextPanel.setLayout(new java.awt.GridLayout(2, 1, 0, 6));
+        productFormHeading.setBackground(new java.awt.Color(255, 255, 255));
+        productFormHeading.setPreferredSize(new java.awt.Dimension(310, 50));
+        productFormHeading.setLayout(new java.awt.GridLayout(2, 1, 0, 3));
 
-        productsTile1Title.setText("Catalog items");
-        productsTile1Title.setForeground(new java.awt.Color(35, 55, 44));
-        productsTile1Title.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        productsTile1TextPanel.add(productsTile1Title);
+        productFormTitle.setText("Product details");
+        productFormTitle.setForeground(new java.awt.Color(35, 55, 44));
+        productFormTitle.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
+        productFormHeading.add(productFormTitle);
 
-        productsTile1Subtitle.setText("Add, update and remove products");
-        productsTile1Subtitle.setForeground(new java.awt.Color(110, 128, 117));
-        productsTile1TextPanel.add(productsTile1Subtitle);
+        productFormCaption.setText("Add or edit a catalogue item");
+        productFormCaption.setForeground(new java.awt.Color(110, 128, 117));
+        productFormCaption.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        productFormHeading.add(productFormCaption);
 
-        productsTile1Panel.add(productsTile1TextPanel, java.awt.BorderLayout.NORTH);
+        productFormPanel.add(productFormHeading, java.awt.BorderLayout.NORTH);
 
-        productsTile1Status.setText("Module interface will be integrated here.");
-        productsTile1Status.setForeground(new java.awt.Color(66, 130, 97));
-        productsTile1Status.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        productsTile1Panel.add(productsTile1Status, java.awt.BorderLayout.SOUTH);
+        productFieldsPanel.setBackground(new java.awt.Color(255, 255, 255));
+        productFieldsPanel.setLayout(new java.awt.GridLayout(6, 1, 0, 10));
 
-        productsTilesPanel.add(productsTile1Panel);
+        productNameRow.setBackground(new java.awt.Color(255, 255, 255));
+        productNameRow.setLayout(new java.awt.BorderLayout(8, 0));
 
-        productsTile2Panel.setBackground(new java.awt.Color(255, 255, 255));
-        productsTile2Panel.setBorder(javax.swing.BorderFactory.createEmptyBorder(17, 19, 17, 18));
-        productsTile2Panel.setLayout(new java.awt.BorderLayout());
+        lblProductName.setText("Product name");
+        lblProductName.setForeground(new java.awt.Color(35, 55, 44));
+        lblProductName.setPreferredSize(new java.awt.Dimension(105, 25));
+        productNameRow.add(lblProductName, java.awt.BorderLayout.WEST);
+        productNameRow.add(txtProductName, java.awt.BorderLayout.CENTER);
 
-        productsTile2TextPanel.setBackground(new java.awt.Color(255, 255, 255));
-        productsTile2TextPanel.setPreferredSize(new java.awt.Dimension(330, 88));
-        productsTile2TextPanel.setLayout(new java.awt.GridLayout(2, 1, 0, 6));
+        productFieldsPanel.add(productNameRow);
 
-        productsTile2Title.setText("Product categories");
-        productsTile2Title.setForeground(new java.awt.Color(35, 55, 44));
-        productsTile2Title.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        productsTile2TextPanel.add(productsTile2Title);
+        productCategoryRow.setBackground(new java.awt.Color(255, 255, 255));
+        productCategoryRow.setLayout(new java.awt.BorderLayout(8, 0));
 
-        productsTile2Subtitle.setText("Plants, planters and gardening kits");
-        productsTile2Subtitle.setForeground(new java.awt.Color(110, 128, 117));
-        productsTile2TextPanel.add(productsTile2Subtitle);
+        lblProductCategory.setText("Category");
+        lblProductCategory.setForeground(new java.awt.Color(35, 55, 44));
+        lblProductCategory.setPreferredSize(new java.awt.Dimension(105, 25));
+        productCategoryRow.add(lblProductCategory, java.awt.BorderLayout.WEST);
 
-        productsTile2Panel.add(productsTile2TextPanel, java.awt.BorderLayout.NORTH);
+        cmbProductCategory.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "PLANT", "PLANTER", "GARDENING_KIT" }));
+        productCategoryRow.add(cmbProductCategory, java.awt.BorderLayout.CENTER);
 
-        productsTile2Status.setText("Module interface will be integrated here.");
-        productsTile2Status.setForeground(new java.awt.Color(66, 130, 97));
-        productsTile2Status.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        productsTile2Panel.add(productsTile2Status, java.awt.BorderLayout.SOUTH);
+        productFieldsPanel.add(productCategoryRow);
 
-        productsTilesPanel.add(productsTile2Panel);
+        productDescriptionRow.setBackground(new java.awt.Color(255, 255, 255));
+        productDescriptionRow.setLayout(new java.awt.BorderLayout(8, 0));
 
-        productsTile3Panel.setBackground(new java.awt.Color(255, 255, 255));
-        productsTile3Panel.setBorder(javax.swing.BorderFactory.createEmptyBorder(17, 19, 17, 18));
-        productsTile3Panel.setLayout(new java.awt.BorderLayout());
+        lblProductDescription.setText("Description");
+        lblProductDescription.setForeground(new java.awt.Color(35, 55, 44));
+        lblProductDescription.setPreferredSize(new java.awt.Dimension(105, 25));
+        productDescriptionRow.add(lblProductDescription, java.awt.BorderLayout.WEST);
 
-        productsTile3TextPanel.setBackground(new java.awt.Color(255, 255, 255));
-        productsTile3TextPanel.setPreferredSize(new java.awt.Dimension(330, 88));
-        productsTile3TextPanel.setLayout(new java.awt.GridLayout(2, 1, 0, 6));
+        productDescriptionScroll.setPreferredSize(new java.awt.Dimension(210, 57));
 
-        productsTile3Title.setText("Pricing and eco-ratings");
-        productsTile3Title.setForeground(new java.awt.Color(35, 55, 44));
-        productsTile3Title.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        productsTile3TextPanel.add(productsTile3Title);
+        txtProductDescription.setLineWrap(true);
+        txtProductDescription.setWrapStyleWord(true);
+        productDescriptionScroll.setViewportView(txtProductDescription);
 
-        productsTile3Subtitle.setText("Validate price and environmental score");
-        productsTile3Subtitle.setForeground(new java.awt.Color(110, 128, 117));
-        productsTile3TextPanel.add(productsTile3Subtitle);
+        productDescriptionRow.add(productDescriptionScroll, java.awt.BorderLayout.CENTER);
 
-        productsTile3Panel.add(productsTile3TextPanel, java.awt.BorderLayout.NORTH);
+        productFieldsPanel.add(productDescriptionRow);
 
-        productsTile3Status.setText("Module interface will be integrated here.");
-        productsTile3Status.setForeground(new java.awt.Color(66, 130, 97));
-        productsTile3Status.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        productsTile3Panel.add(productsTile3Status, java.awt.BorderLayout.SOUTH);
+        productPriceRow.setBackground(new java.awt.Color(255, 255, 255));
+        productPriceRow.setLayout(new java.awt.BorderLayout(8, 0));
 
-        productsTilesPanel.add(productsTile3Panel);
+        lblProductPrice.setText("Unit price");
+        lblProductPrice.setForeground(new java.awt.Color(35, 55, 44));
+        lblProductPrice.setPreferredSize(new java.awt.Dimension(105, 25));
+        productPriceRow.add(lblProductPrice, java.awt.BorderLayout.WEST);
+        productPriceRow.add(txtProductPrice, java.awt.BorderLayout.CENTER);
 
-        productsTile4Panel.setBackground(new java.awt.Color(255, 255, 255));
-        productsTile4Panel.setBorder(javax.swing.BorderFactory.createEmptyBorder(17, 19, 17, 18));
-        productsTile4Panel.setLayout(new java.awt.BorderLayout());
+        productFieldsPanel.add(productPriceRow);
 
-        productsTile4TextPanel.setBackground(new java.awt.Color(255, 255, 255));
-        productsTile4TextPanel.setPreferredSize(new java.awt.Dimension(330, 88));
-        productsTile4TextPanel.setLayout(new java.awt.GridLayout(2, 1, 0, 6));
+        productRatingRow.setBackground(new java.awt.Color(255, 255, 255));
+        productRatingRow.setLayout(new java.awt.BorderLayout(8, 0));
 
-        productsTile4Title.setText("Historical records");
-        productsTile4Title.setForeground(new java.awt.Color(35, 55, 44));
-        productsTile4Title.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        productsTile4TextPanel.add(productsTile4Title);
+        lblEcoRating.setText("Eco rating");
+        lblEcoRating.setForeground(new java.awt.Color(35, 55, 44));
+        lblEcoRating.setPreferredSize(new java.awt.Dimension(105, 25));
+        productRatingRow.add(lblEcoRating, java.awt.BorderLayout.WEST);
 
-        productsTile4Subtitle.setText("Keep past order product snapshots");
-        productsTile4Subtitle.setForeground(new java.awt.Color(110, 128, 117));
-        productsTile4TextPanel.add(productsTile4Subtitle);
+        spnEcoRating.setModel(new javax.swing.SpinnerNumberModel(0, 0, 255, 1));
+        productRatingRow.add(spnEcoRating, java.awt.BorderLayout.CENTER);
 
-        productsTile4Panel.add(productsTile4TextPanel, java.awt.BorderLayout.NORTH);
+        productFieldsPanel.add(productRatingRow);
 
-        productsTile4Status.setText("Module interface will be integrated here.");
-        productsTile4Status.setForeground(new java.awt.Color(66, 130, 97));
-        productsTile4Status.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        productsTile4Panel.add(productsTile4Status, java.awt.BorderLayout.SOUTH);
+        productIdRow.setBackground(new java.awt.Color(255, 255, 255));
+        productIdRow.setLayout(new java.awt.BorderLayout(8, 0));
 
-        productsTilesPanel.add(productsTile4Panel);
+        lblCurrentProduct.setText("Selected ID");
+        lblCurrentProduct.setForeground(new java.awt.Color(35, 55, 44));
+        lblCurrentProduct.setPreferredSize(new java.awt.Dimension(105, 25));
+        productIdRow.add(lblCurrentProduct, java.awt.BorderLayout.WEST);
+
+        lblSelectedProductId.setText("New product");
+        lblSelectedProductId.setForeground(new java.awt.Color(66, 130, 97));
+        lblSelectedProductId.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        productIdRow.add(lblSelectedProductId, java.awt.BorderLayout.CENTER);
+
+        productFieldsPanel.add(productIdRow);
+
+        productFormPanel.add(productFieldsPanel, java.awt.BorderLayout.CENTER);
+
+        productActionsPanel.setBackground(new java.awt.Color(255, 255, 255));
+        productActionsPanel.setPreferredSize(new java.awt.Dimension(310, 98));
+        productActionsPanel.setLayout(new java.awt.GridLayout(2, 2, 9, 9));
+
+        btnAddProduct.setText("Add product");
+        btnAddProduct.setForeground(new java.awt.Color(35, 55, 44));
+        btnAddProduct.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnAddProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onAddProduct(evt);
+            }
+        });
+        productActionsPanel.add(btnAddProduct);
+
+        btnUpdateProduct.setText("Update");
+        btnUpdateProduct.setForeground(new java.awt.Color(35, 55, 44));
+        btnUpdateProduct.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnUpdateProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onUpdateProduct(evt);
+            }
+        });
+        productActionsPanel.add(btnUpdateProduct);
+
+        btnDeleteProduct.setText("Delete");
+        btnDeleteProduct.setForeground(new java.awt.Color(35, 55, 44));
+        btnDeleteProduct.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnDeleteProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onDeleteProduct(evt);
+            }
+        });
+        productActionsPanel.add(btnDeleteProduct);
+
+        btnClearProduct.setText("Clear fields");
+        btnClearProduct.setForeground(new java.awt.Color(35, 55, 44));
+        btnClearProduct.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnClearProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onClearProduct(evt);
+            }
+        });
+        productActionsPanel.add(btnClearProduct);
+
+        productFormPanel.add(productActionsPanel, java.awt.BorderLayout.SOUTH);
+
+        productsTilesPanel.add(productFormPanel, java.awt.BorderLayout.WEST);
+
+        productTablePanel.setBackground(new java.awt.Color(255, 255, 255));
+        productTablePanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(16, 15, 15, 15));
+        productTablePanel.setLayout(new java.awt.BorderLayout(0, 10));
+
+        productTableHeading.setBackground(new java.awt.Color(255, 255, 255));
+        productTableHeading.setPreferredSize(new java.awt.Dimension(500, 93));
+        productTableHeading.setLayout(new java.awt.BorderLayout(0, 6));
+
+        productTableTitleArea.setBackground(new java.awt.Color(255, 255, 255));
+        productTableTitleArea.setPreferredSize(new java.awt.Dimension(400, 44));
+        productTableTitleArea.setLayout(new java.awt.GridLayout(2, 1, 0, 3));
+
+        productTableTitle.setText("Available products");
+        productTableTitle.setForeground(new java.awt.Color(35, 55, 44));
+        productTableTitle.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
+        productTableTitleArea.add(productTableTitle);
+
+        productTableCaption.setText("Select a row to update or remove a product");
+        productTableCaption.setForeground(new java.awt.Color(110, 128, 117));
+        productTableCaption.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        productTableTitleArea.add(productTableCaption);
+
+        productTableHeading.add(productTableTitleArea, java.awt.BorderLayout.NORTH);
+
+        productSearchPanel.setBackground(new java.awt.Color(255, 255, 255));
+        productSearchPanel.setPreferredSize(new java.awt.Dimension(500, 38));
+        productSearchPanel.setLayout(new java.awt.BorderLayout(8, 0));
+
+        txtProductSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onSearchProduct(evt);
+            }
+        });
+        productSearchPanel.add(txtProductSearch, java.awt.BorderLayout.CENTER);
+
+        btnSearchProduct.setText("Search");
+        btnSearchProduct.setForeground(new java.awt.Color(35, 55, 44));
+        btnSearchProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onSearchProduct(evt);
+            }
+        });
+        productSearchPanel.add(btnSearchProduct, java.awt.BorderLayout.EAST);
+
+        btnRefreshProducts.setText("Refresh");
+        btnRefreshProducts.setForeground(new java.awt.Color(35, 55, 44));
+        btnRefreshProducts.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onRefreshProducts(evt);
+            }
+        });
+        productSearchPanel.add(btnRefreshProducts, java.awt.BorderLayout.WEST);
+
+        productTableHeading.add(productSearchPanel, java.awt.BorderLayout.SOUTH);
+
+        productTablePanel.add(productTableHeading, java.awt.BorderLayout.NORTH);
+
+        tblProducts.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Name", "Category", "Price", "Eco", "Description"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.math.BigDecimal.class, java.lang.Integer.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblProducts.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                onProductTableClick(evt);
+            }
+        });
+        productTableScroll.setViewportView(tblProducts);
+
+        productTablePanel.add(productTableScroll, java.awt.BorderLayout.CENTER);
+
+        productTableHint.setText("Tip: Search products or select a row to load its details.");
+        productTableHint.setForeground(new java.awt.Color(110, 128, 117));
+        productTableHint.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        productTableHint.setPreferredSize(new java.awt.Dimension(500, 25));
+        productTablePanel.add(productTableHint, java.awt.BorderLayout.SOUTH);
+
+        productsTilesPanel.add(productTablePanel, java.awt.BorderLayout.CENTER);
 
         productsDetailsPanel.add(productsTilesPanel, java.awt.BorderLayout.CENTER);
 
-        productsModuleStatus.setText("Assigned developer: Heshan   |   Placeholder screen - no database changes");
+        productsModuleStatus.setText("Heshan | Products & Inventory  •  Catalogue ready");
         productsModuleStatus.setForeground(new java.awt.Color(110, 128, 117));
         productsModuleStatus.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         productsModuleStatus.setPreferredSize(new java.awt.Dimension(700, 47));
@@ -2121,6 +2292,185 @@ public class MainDashboard extends javax.swing.JFrame {
         showPage("reports");
     }
 
+    // Controller code (not generated by GUI Builder)
+    private final com.econest.catalog.service.ProductService productService =
+            new com.econest.catalog.service.ProductService();
+    private Integer selectedProductId = null;
+    private javax.swing.table.TableRowSorter<javax.swing.table.DefaultTableModel> productSorter;
+
+    private void prepareProductTable() {
+        javax.swing.table.DefaultTableModel model =
+                (javax.swing.table.DefaultTableModel) tblProducts.getModel();
+        productSorter = new javax.swing.table.TableRowSorter<>(model);
+        tblProducts.setRowSorter(productSorter);
+        tblProducts.getSelectionModel().addListSelectionListener(event -> {
+            if (!event.getValueIsAdjusting()) loadSelectedProductIntoForm();
+        });
+        tblProducts.getColumnModel().getColumn(0).setPreferredWidth(45);
+        tblProducts.getColumnModel().getColumn(1).setPreferredWidth(145);
+        tblProducts.getColumnModel().getColumn(2).setPreferredWidth(100);
+        tblProducts.getColumnModel().getColumn(3).setPreferredWidth(82);
+        tblProducts.getColumnModel().getColumn(4).setPreferredWidth(48);
+        tblProducts.setRowHeight(27);
+    }
+
+    private void refreshProductTable() {
+        if (productSorter == null) return;
+        javax.swing.table.DefaultTableModel model =
+                (javax.swing.table.DefaultTableModel) tblProducts.getModel();
+        try {
+            java.util.List<com.econest.catalog.model.Product> products =
+                    productService.listProducts();
+            selectedProductId = null;
+            lblSelectedProductId.setText("New product");
+            model.setRowCount(0);
+            for (com.econest.catalog.model.Product product : products) {
+                model.addRow(new Object[] {
+                    product.getProductId(), product.getName(),
+                    product.getCategory().name(), product.getUnitPrice(),
+                    product.getEcoRating(), product.getDescription()
+                });
+            }
+            productsModuleStatus.setText(
+                    "Products loaded: " + products.size() + "  |  Heshan's catalogue module");
+            applyProductSearch();
+        } catch (java.sql.SQLException | RuntimeException ex) {
+            productsModuleStatus.setText("Database unavailable: " + ex.getMessage());
+        }
+    }
+
+    private com.econest.catalog.model.Product readProductForm() {
+        String name = txtProductName.getText().trim();
+        String category = (String) cmbProductCategory.getSelectedItem();
+        String description = txtProductDescription.getText().trim();
+        String priceString = txtProductPrice.getText().trim();
+        if (priceString.isEmpty()) {
+            throw new IllegalArgumentException("Enter a unit price.");
+        }
+        java.math.BigDecimal price;
+        try {
+            price = new java.math.BigDecimal(priceString);
+        } catch (NumberFormatException exception) {
+            throw new IllegalArgumentException("Enter a valid price, e.g. 1250.00.");
+        }
+        return new com.econest.catalog.model.Product(
+                name,
+                com.econest.catalog.model.ProductCategory.valueOf(category),
+                description.isEmpty() ? null : description,
+                price,
+                ((Number) spnEcoRating.getValue()).intValue()
+        );
+    }
+
+    private void loadSelectedProductIntoForm() {
+        int row = tblProducts.getSelectedRow();
+        if (row < 0) return;
+        int modelRow = tblProducts.convertRowIndexToModel(row);
+        javax.swing.table.DefaultTableModel model =
+                (javax.swing.table.DefaultTableModel) tblProducts.getModel();
+        selectedProductId = ((Number) model.getValueAt(modelRow, 0)).intValue();
+        lblSelectedProductId.setText(String.valueOf(selectedProductId));
+        txtProductName.setText((String) model.getValueAt(modelRow, 1));
+        cmbProductCategory.setSelectedItem((String) model.getValueAt(modelRow, 2));
+        txtProductPrice.setText(String.valueOf(model.getValueAt(modelRow, 3)));
+        spnEcoRating.setValue(model.getValueAt(modelRow, 4));
+        Object description = model.getValueAt(modelRow, 5);
+        txtProductDescription.setText(description == null ? "" : description.toString());
+    }
+
+    private void showProductError(String action, Exception ex) {
+        javax.swing.JOptionPane.showMessageDialog(this,
+                action + ": " + ex.getMessage(), "EcoNest Product Catalogue",
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+    }
+
+    private void onAddProduct(java.awt.event.ActionEvent evt) {
+        try {
+            com.econest.catalog.model.Product p = readProductForm();
+            int id = productService.addProduct(p);
+            clearProductFields();
+            refreshProductTable();
+            javax.swing.JOptionPane.showMessageDialog(this, "Product #" + id + " added.");
+        } catch (java.sql.SQLException | RuntimeException ex) {
+            showProductError("Unable to add product", ex);
+        }
+    }
+
+    private void onUpdateProduct(java.awt.event.ActionEvent evt) {
+        if (selectedProductId == null) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Select a product from the table first.");
+            return;
+        }
+        try {
+            com.econest.catalog.model.Product p = readProductForm();
+            p.setProductId(selectedProductId);
+            productService.updateProduct(p);
+            clearProductFields();
+            refreshProductTable();
+            javax.swing.JOptionPane.showMessageDialog(this, "Product updated.");
+        } catch (java.sql.SQLException | RuntimeException ex) {
+            showProductError("Unable to update product", ex);
+        }
+    }
+
+    private void onDeleteProduct(java.awt.event.ActionEvent evt) {
+        if (selectedProductId == null) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Select a product from the table first.");
+            return;
+        }
+        int choice = javax.swing.JOptionPane.showConfirmDialog(this,
+                "Permanently delete product #" + selectedProductId + "?\n"
+                + "Existing stock and unfinished orders may prevent deletion.",
+                "Confirm product deletion", javax.swing.JOptionPane.YES_NO_OPTION);
+        if (choice != javax.swing.JOptionPane.YES_OPTION) return;
+        try {
+            productService.deleteProduct(selectedProductId);
+            clearProductFields();
+            refreshProductTable();
+            javax.swing.JOptionPane.showMessageDialog(this, "Product deleted.");
+        } catch (java.sql.SQLException | RuntimeException ex) {
+            showProductError("Unable to delete product", ex);
+        }
+    }
+
+    private void clearProductFields() {
+        selectedProductId = null;
+        lblSelectedProductId.setText("New product");
+        txtProductName.setText("");
+        cmbProductCategory.setSelectedIndex(0);
+        txtProductDescription.setText("");
+        txtProductPrice.setText("");
+        spnEcoRating.setValue(0);
+        tblProducts.clearSelection();
+    }
+
+    private void onClearProduct(java.awt.event.ActionEvent evt) {
+        clearProductFields();
+    }
+
+    private void applyProductSearch() {
+        if (productSorter == null) return;
+        String keyword = txtProductSearch.getText().trim();
+        if (keyword.isEmpty()) {
+            productSorter.setRowFilter(null);
+        } else {
+            productSorter.setRowFilter(javax.swing.RowFilter.regexFilter(
+                    "(?i)" + java.util.regex.Pattern.quote(keyword)));
+        }
+    }
+
+    private void onSearchProduct(java.awt.event.ActionEvent evt) {
+        applyProductSearch();
+    }
+
+    private void onRefreshProducts(java.awt.event.ActionEvent evt) {
+        refreshProductTable();
+    }
+
+    private void onProductTableClick(java.awt.event.MouseEvent evt) {
+        loadSelectedProductIntoForm();
+    }
+
     public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -2160,15 +2510,21 @@ public class MainDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel brandPanel;
     private javax.swing.JLabel brandTaglineLabel;
     private javax.swing.JLabel brandTitleLabel;
+    private javax.swing.JButton btnAddProduct;
+    private javax.swing.JButton btnClearProduct;
     private javax.swing.JButton btnClients;
     private javax.swing.JButton btnDashboard;
+    private javax.swing.JButton btnDeleteProduct;
     private javax.swing.JButton btnDeliveries;
     private javax.swing.JButton btnDeliveryAgents;
     private javax.swing.JButton btnEmailNotifications;
     private javax.swing.JButton btnInventory;
     private javax.swing.JButton btnOrders;
     private javax.swing.JButton btnProducts;
+    private javax.swing.JButton btnRefreshProducts;
     private javax.swing.JButton btnReports;
+    private javax.swing.JButton btnSearchProduct;
+    private javax.swing.JButton btnUpdateProduct;
     private javax.swing.JLabel clientsDescription;
     private javax.swing.JPanel clientsDetailsPanel;
     private javax.swing.JLabel clientsEyebrow;
@@ -2197,6 +2553,7 @@ public class MainDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel clientsTile4TextPanel;
     private javax.swing.JLabel clientsTile4Title;
     private javax.swing.JPanel clientsTilesPanel;
+    private javax.swing.JComboBox cmbProductCategory;
     private javax.swing.JPanel contentPanel;
     private javax.swing.JPanel dashboardPage;
     private javax.swing.JLabel deliveriesDescription;
@@ -2294,6 +2651,13 @@ public class MainDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel inventoryTile4TextPanel;
     private javax.swing.JLabel inventoryTile4Title;
     private javax.swing.JPanel inventoryTilesPanel;
+    private javax.swing.JLabel lblCurrentProduct;
+    private javax.swing.JLabel lblEcoRating;
+    private javax.swing.JLabel lblProductCategory;
+    private javax.swing.JLabel lblProductDescription;
+    private javax.swing.JLabel lblProductName;
+    private javax.swing.JLabel lblProductPrice;
+    private javax.swing.JLabel lblSelectedProductId;
     private javax.swing.JPanel metricGridPanel;
     private javax.swing.JLabel metricInventoryCaption;
     private javax.swing.JPanel metricInventoryPanel;
@@ -2344,6 +2708,27 @@ public class MainDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel ordersTile4TextPanel;
     private javax.swing.JLabel ordersTile4Title;
     private javax.swing.JPanel ordersTilesPanel;
+    private javax.swing.JPanel productActionsPanel;
+    private javax.swing.JPanel productCategoryRow;
+    private javax.swing.JPanel productDescriptionRow;
+    private javax.swing.JScrollPane productDescriptionScroll;
+    private javax.swing.JPanel productFieldsPanel;
+    private javax.swing.JLabel productFormCaption;
+    private javax.swing.JPanel productFormHeading;
+    private javax.swing.JPanel productFormPanel;
+    private javax.swing.JLabel productFormTitle;
+    private javax.swing.JPanel productIdRow;
+    private javax.swing.JPanel productNameRow;
+    private javax.swing.JPanel productPriceRow;
+    private javax.swing.JPanel productRatingRow;
+    private javax.swing.JPanel productSearchPanel;
+    private javax.swing.JLabel productTableCaption;
+    private javax.swing.JPanel productTableHeading;
+    private javax.swing.JLabel productTableHint;
+    private javax.swing.JPanel productTablePanel;
+    private javax.swing.JScrollPane productTableScroll;
+    private javax.swing.JLabel productTableTitle;
+    private javax.swing.JPanel productTableTitleArea;
     private javax.swing.JLabel productsDescription;
     private javax.swing.JPanel productsDetailsPanel;
     private javax.swing.JLabel productsEyebrow;
@@ -2351,26 +2736,6 @@ public class MainDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel productsIntroPanel;
     private javax.swing.JLabel productsModuleStatus;
     private javax.swing.JPanel productsPage;
-    private javax.swing.JPanel productsTile1Panel;
-    private javax.swing.JLabel productsTile1Status;
-    private javax.swing.JLabel productsTile1Subtitle;
-    private javax.swing.JPanel productsTile1TextPanel;
-    private javax.swing.JLabel productsTile1Title;
-    private javax.swing.JPanel productsTile2Panel;
-    private javax.swing.JLabel productsTile2Status;
-    private javax.swing.JLabel productsTile2Subtitle;
-    private javax.swing.JPanel productsTile2TextPanel;
-    private javax.swing.JLabel productsTile2Title;
-    private javax.swing.JPanel productsTile3Panel;
-    private javax.swing.JLabel productsTile3Status;
-    private javax.swing.JLabel productsTile3Subtitle;
-    private javax.swing.JPanel productsTile3TextPanel;
-    private javax.swing.JLabel productsTile3Title;
-    private javax.swing.JPanel productsTile4Panel;
-    private javax.swing.JLabel productsTile4Status;
-    private javax.swing.JLabel productsTile4Subtitle;
-    private javax.swing.JPanel productsTile4TextPanel;
-    private javax.swing.JLabel productsTile4Title;
     private javax.swing.JPanel productsTilesPanel;
     private javax.swing.JPanel quickGridPanel;
     private javax.swing.JPanel quickHeadingPanel;
@@ -2427,7 +2792,13 @@ public class MainDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel reportsTilesPanel;
     private javax.swing.JLabel sidebarFooterLabel;
     private javax.swing.JPanel sidebarPanel;
+    private javax.swing.JSpinner spnEcoRating;
     private javax.swing.JLabel statusLabel;
+    private javax.swing.JTable tblProducts;
+    private javax.swing.JTextArea txtProductDescription;
+    private javax.swing.JTextField txtProductName;
+    private javax.swing.JTextField txtProductPrice;
+    private javax.swing.JTextField txtProductSearch;
     private javax.swing.JPanel workspacePanel;
     // End of variables declaration//GEN-END:variables
 }
