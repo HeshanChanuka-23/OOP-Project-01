@@ -20,6 +20,63 @@ public class EmailNotificationDAO {
             this.orderId=id;clientName=client;agentName=agent;dispatchedAt=dispatch;scheduledFor=scheduled;
         }
     }
+    /** Snapshot of the CURRENT assignment; earlier superseded events are never sent. */
+    public static final class AssignmentDetails {
+        public final int orderId;
+        public final String agentName, vehicleType, vehicleNumber;
+        public final String agentEmail;
+        public final Timestamp assignedAt, scheduledFor;
+        public final boolean cancelled;
+        public AssignmentDetails(int orderId, String agentName, String agentEmail,
+                String vehicleType, String vehicleNumber, Timestamp assignedAt,
+                Timestamp scheduledFor, boolean cancelled) {
+            this.orderId=orderId;this.agentName=agentName;this.agentEmail=agentEmail;
+            this.vehicleType=vehicleType;this.vehicleNumber=vehicleNumber;
+            this.assignedAt=assignedAt;this.scheduledFor=scheduledFor;this.cancelled=cancelled;
+        }
+    }
+    /** Used by the after-commit callback to process the EXACT new event, not a later reassignment event. */
+    public EmailNotification findById(int id)throws SQLException {
+        try(Connection c=DatabaseConnection.getConnection();
+            PreparedStatement p=c.prepareStatement("SELECT * FROM email_notifications WHERE notification_id=?")) {
+            p.setInt(1,id);try(ResultSet rs=p.executeQuery()){return rs.next()?map(rs):null;}
+        }
+    }
+    public EmailNotification latestAgentAssignment(int deliveryId)throws SQLException {
+        try(Connection c=DatabaseConnection.getConnection();
+            PreparedStatement p=c.prepareStatement("SELECT * FROM email_notifications WHERE delivery_id=? AND type='AGENT_ASSIGNED' ORDER BY notification_id DESC LIMIT 1")) {
+            p.setInt(1,deliveryId);try(ResultSet rs=p.executeQuery()){return rs.next()?map(rs):null;}
+        }
+    }
+    /** Retry agent outbox events, excluding superseded/cancelled assignments. */
+    public List<EmailNotification> listRetryableAgentNotifications()throws SQLException {
+        List<EmailNotification> out=new ArrayList<>();
+        try(Connection c=DatabaseConnection.getConnection();
+            PreparedStatement p=c.prepareStatement("SELECT * FROM email_notifications " +
+                    "WHERE type='AGENT_ASSIGNED' AND status IN ('PENDING','FAILED') " +
+                    "AND (failure_reason IS NULL OR failure_reason NOT LIKE 'SUPERSEDED:%') " +
+                    "ORDER BY notification_id LIMIT 100");ResultSet rs=p.executeQuery()) {
+            while(rs.next())out.add(map(rs));
+        }
+        return out;
+    }
+    /** Uses the delivery's saved agent name, vehicle and assignment timestamp. */
+    public AssignmentDetails assignmentDetails(Connection c, int deliveryId)throws SQLException {
+        try(PreparedStatement p=c.prepareStatement(
+                "SELECT order_id,agent_name_at_assignment,agent_email_at_assignment,"+
+                "vehicle_type_at_assignment,vehicle_number_at_assignment,assigned_at,scheduled_for,status " +
+                "FROM deliveries WHERE delivery_id=?")) {
+            p.setInt(1,deliveryId);try(ResultSet rs=p.executeQuery()) {
+                if(!rs.next())throw new SQLException("Delivery assignment snapshot not found");
+                Timestamp assignedAt=rs.getTimestamp("assigned_at");
+                if(assignedAt==null)throw new SQLException("Delivery has no assignment timestamp");
+                return new AssignmentDetails(rs.getInt("order_id"),rs.getString("agent_name_at_assignment"),
+                        rs.getString("agent_email_at_assignment"),rs.getString("vehicle_type_at_assignment"),
+                        rs.getString("vehicle_number_at_assignment"),assignedAt,
+                        rs.getTimestamp("scheduled_for"),"CANCELLED".equals(rs.getString("status")));
+            }
+        }
+    }
     private static EmailNotification map(ResultSet rs)throws SQLException {
         EmailNotification n=new EmailNotification();
         n.setNotificationId(rs.getInt("notification_id"));n.setDeliveryId(rs.getInt("delivery_id"));
@@ -51,7 +108,7 @@ public class EmailNotificationDAO {
         }
         return out;
     }
-    /** Task 8 sends only CLIENT_DISPATCHED; Task 9 will enable agent assignment sending. */
+    /** Client dispatch retry queue (Task 8). */
     public List<EmailNotification> listRetryableClientNotifications()throws SQLException {
         List<EmailNotification> out=new ArrayList<>();
         try(Connection c=DatabaseConnection.getConnection();PreparedStatement p=c.prepareStatement(
