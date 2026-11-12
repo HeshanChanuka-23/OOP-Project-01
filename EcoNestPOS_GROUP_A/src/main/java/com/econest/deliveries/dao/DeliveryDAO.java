@@ -110,15 +110,24 @@ public class DeliveryDAO {
             }
         }
     }
-    /** Transactional outbox: later Tasks 8/9 send these events after commit, with retries. */
+    /** Transactional outbox: insert the PENDING event in the business transaction. */
     public void insertPendingNotification(Connection c,int deliveryId,String recipient,String type)throws SQLException {
+        insertPendingNotificationReturningId(c,deliveryId,recipient,type);
+    }
+    /** Returns the exact new event ID for Task 9's after-commit agent-email callback. */
+    public int insertPendingNotificationReturningId(Connection c,int deliveryId,String recipient,String type)throws SQLException {
         if(recipient==null||recipient.isBlank())throw new IllegalArgumentException("Notification recipient cannot be blank");
         String eventKey=type+"-"+deliveryId+"-"+UUID.randomUUID();
         try(PreparedStatement ps=c.prepareStatement(
-                "INSERT INTO email_notifications (delivery_id,event_key,recipient_email,type,status) VALUES(?,?,?,?,'PENDING')")) {
+                "INSERT INTO email_notifications (delivery_id,event_key,recipient_email,type,status) VALUES(?,?,?,?,'PENDING')",
+                Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1,deliveryId);ps.setString(2,eventKey);ps.setString(3,recipient);ps.setString(4,type);
             checkOne(ps.executeUpdate(),"Failed to record pending email notification");
+            try(ResultSet keys=ps.getGeneratedKeys()) {
+                if(keys.next())return keys.getInt(1);
+            }
         }
+        throw new SQLException("MariaDB did not return notification ID");
     }
     public Delivery getDeliveryByOrder(int orderId)throws SQLException {
         try(Connection c=DatabaseConnection.getConnection();
