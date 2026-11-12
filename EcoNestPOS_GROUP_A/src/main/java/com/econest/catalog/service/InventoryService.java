@@ -4,6 +4,9 @@ import com.econest.catalog.dao.InventoryDAO;
 import com.econest.catalog.dao.SupplierDAO;
 import com.econest.catalog.model.*;
 import com.econest.config.DatabaseConnection;
+import com.econest.orders.model.Order;
+import com.econest.orders.model.OrderStatus;
+import com.econest.orders.service.OrderService;
 import java.sql.*;
 import java.util.*;
 
@@ -111,12 +114,48 @@ public class InventoryService {
         return inventoryDAO.listMovements(500);
     }
 
-    // ----- Explicit integration hooks for Shanika's future Order module -----
-    // UML describes deductStockForOrder(Order) / restoreStock(Order). Since the
-    // Order Java class is not built yet, these transaction-aware hooks accept
-    // its persisted order ID. Shanika's OrderService must call them on the SAME
-    // JDBC Connection as order confirmation/cancellation, and commit ONCE.
-    // Do NOT call with autoCommit=true.
+    // ----- UML-compliant Order overloads -----
+    // These methods deliberately delegate to OrderService, which owns the entire
+    // order + inventory transaction. A separate JDBC transaction here would make
+    // stock and order statuses inconsistent if one half failed.
+
+    /**
+     * UML method. Confirming a persisted DRAFT order performs the stock deduction,
+     * SALE_OUT journal inserts and order status change in ONE transaction.
+     * For normal GUI use prefer OrderService.confirmOrder(orderId) directly.
+     */
+    public void deductStockForOrder(Order order) throws SQLException {
+        int id = requirePersistedOrder(order);
+        new OrderService().confirmOrder(id);
+    }
+
+    /**
+     * UML method. Cancelling a CONFIRMED order restores stock exactly once and
+     * journals CANCEL_RESTOCK in the SAME transaction as order cancellation.
+     * It also cancels any associated undispatched delivery when applicable.
+     * For normal GUI use prefer OrderService.cancelOrder(orderId) directly.
+     */
+    public void restoreStock(Order order) throws SQLException {
+        int id = requirePersistedOrder(order);
+        OrderService orders = new OrderService();
+        Order persisted = orders.getOrder(id);
+        if (persisted == null || persisted.getStatus() != OrderStatus.CONFIRMED)
+            throw new IllegalStateException("Only a confirmed order can have stock restored.");
+        // cancelOrder locks and re-checks the actual persisted status atomically;
+        // a stale Order object cannot bypass duplicate-restock protection.
+        orders.cancelOrder(id);
+    }
+
+    private static int requirePersistedOrder(Order order) {
+        if (order == null || order.getOrderId() <= 0)
+            throw new IllegalArgumentException("A saved order with a valid ID is required.");
+        return order.getOrderId();
+    }
+
+    // ----- Transaction-aware integration hooks -----
+    // OrderService calls these overloads with its ACTIVE JDBC Connection.
+    // Never commit/rollback here: only OrderService owns the transaction.
+    // These are implementation helpers in addition to the public UML methods.
 
     public void deductStockForOrder(Connection con, int orderId) throws SQLException {
         requireOrderTransaction(con, orderId);

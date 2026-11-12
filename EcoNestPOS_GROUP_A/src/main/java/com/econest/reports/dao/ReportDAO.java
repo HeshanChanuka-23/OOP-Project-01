@@ -107,17 +107,32 @@ public class ReportDAO {
                 }
             }
         }
-        // Products with zero movements must still be visible in reports with zero stock.
-        try(Connection c=DatabaseConnection.getConnection(); PreparedStatement ps=c.prepareStatement(
-                "SELECT product_id,name FROM products ORDER BY product_id"); ResultSet rs=ps.executeQuery()) {
-            while(rs.next()) {
-                int id=rs.getInt(1);
-                rows.putIfAbsent(id,new Object[]{id,rs.getString(2),0,0,0});
+        // Historical correctness: products.created_at does not exist in the schema.
+        // An existing product with no journal events could have been created AFTER
+        // the requested historical month. Never claim it existed back then.
+        // For the current month only, show today's existing zero-movement products.
+        if (includeCurrentZeroMovementProducts(month, YearMonth.now())) {
+            try(Connection c=DatabaseConnection.getConnection(); PreparedStatement ps=c.prepareStatement(
+                    "SELECT product_id,name FROM products ORDER BY product_id"); ResultSet rs=ps.executeQuery()) {
+                while(rs.next()) {
+                    int id=rs.getInt(1);
+                    rows.putIfAbsent(id,new Object[]{id,rs.getString(2),0,0,0});
+                }
             }
         }
         List<Object[]> result=new ArrayList<>(rows.values());
         result.sort(Comparator.comparingInt(v -> (Integer)v[0]));
         return result;
+    }
+
+    /**
+     * Reporting policy: only current-month zero-journal products are provably
+     * present now. Past/future reports require a journal entry before the
+     * report cutoff to establish historical existence. Explicit clock argument
+     * allows deterministic regression tests.
+     */
+    static boolean includeCurrentZeroMovementProducts(YearMonth reportMonth, YearMonth currentMonth) {
+        return reportMonth != null && reportMonth.equals(currentMonth);
     }
 
     /** Current low-stock levels rather than the report month's ending levels. */
