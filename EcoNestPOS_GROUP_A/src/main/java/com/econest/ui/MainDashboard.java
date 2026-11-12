@@ -29,6 +29,7 @@ public class MainDashboard extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         prepareProductTable();
         prepareInventoryTables();
+        prepareClientTable();
     }
 
     /** Show a panel that ALREADY EXISTS in the GUI Builder CardLayout. */
@@ -36,6 +37,7 @@ public class MainDashboard extends javax.swing.JFrame {
         ((CardLayout) contentPanel.getLayout()).show(contentPanel, pageKey);
         if ("products".equals(pageKey)) refreshProductTable();
         if ("inventory".equals(pageKey)) refreshInventoryData();
+        if ("clients".equals(pageKey)) refreshClientTable();
         switch (pageKey) {
             case "dashboard": headerTitleLabel.setText("Overview Dashboard"); break;
             case "products": headerTitleLabel.setText("Products"); break;
@@ -254,26 +256,47 @@ public class MainDashboard extends javax.swing.JFrame {
         clientsDescription = new javax.swing.JLabel();
         clientsDetailsPanel = new javax.swing.JPanel();
         clientsTilesPanel = new javax.swing.JPanel();
-        clientsTile1Panel = new javax.swing.JPanel();
-        clientsTile1TextPanel = new javax.swing.JPanel();
-        clientsTile1Title = new javax.swing.JLabel();
-        clientsTile1Subtitle = new javax.swing.JLabel();
-        clientsTile1Status = new javax.swing.JLabel();
-        clientsTile2Panel = new javax.swing.JPanel();
-        clientsTile2TextPanel = new javax.swing.JPanel();
-        clientsTile2Title = new javax.swing.JLabel();
-        clientsTile2Subtitle = new javax.swing.JLabel();
-        clientsTile2Status = new javax.swing.JLabel();
-        clientsTile3Panel = new javax.swing.JPanel();
-        clientsTile3TextPanel = new javax.swing.JPanel();
-        clientsTile3Title = new javax.swing.JLabel();
-        clientsTile3Subtitle = new javax.swing.JLabel();
-        clientsTile3Status = new javax.swing.JLabel();
-        clientsTile4Panel = new javax.swing.JPanel();
-        clientsTile4TextPanel = new javax.swing.JPanel();
-        clientsTile4Title = new javax.swing.JLabel();
-        clientsTile4Subtitle = new javax.swing.JLabel();
-        clientsTile4Status = new javax.swing.JLabel();
+        clientFormPanel = new javax.swing.JPanel();
+        clientFormHeading = new javax.swing.JPanel();
+        clientFormTitle = new javax.swing.JLabel();
+        clientFormCaption = new javax.swing.JLabel();
+        clientFieldsPanel = new javax.swing.JPanel();
+        clientNameRow = new javax.swing.JPanel();
+        lblClientName = new javax.swing.JLabel();
+        txtClientName = new javax.swing.JTextField();
+        clientTypeRow = new javax.swing.JPanel();
+        lblClientType = new javax.swing.JLabel();
+        cmbClientType = new javax.swing.JComboBox<>();
+        clientAddressRow = new javax.swing.JPanel();
+        lblClientAddress = new javax.swing.JLabel();
+        clientAddressScroll = new javax.swing.JScrollPane();
+        txtClientAddress = new javax.swing.JTextArea();
+        clientEmailRow = new javax.swing.JPanel();
+        lblClientEmail = new javax.swing.JLabel();
+        txtClientEmail = new javax.swing.JTextField();
+        clientPhoneRow = new javax.swing.JPanel();
+        lblClientPhone = new javax.swing.JLabel();
+        txtClientPhone = new javax.swing.JTextField();
+        clientIdRow = new javax.swing.JPanel();
+        lblCurrentClient = new javax.swing.JLabel();
+        lblSelectedClientId = new javax.swing.JLabel();
+        clientActionsPanel = new javax.swing.JPanel();
+        btnAddClient = new javax.swing.JButton();
+        btnUpdateClient = new javax.swing.JButton();
+        btnDeleteClient = new javax.swing.JButton();
+        btnClearClient = new javax.swing.JButton();
+        clientTablePanel = new javax.swing.JPanel();
+        clientTableHeading = new javax.swing.JPanel();
+        clientTableTitleArea = new javax.swing.JPanel();
+        clientTableTitle = new javax.swing.JLabel();
+        clientTableCaption = new javax.swing.JLabel();
+        clientSearchPanel = new javax.swing.JPanel();
+        txtClientSearch = new javax.swing.JTextField();
+        btnSearchClient = new javax.swing.JButton();
+        btnRefreshClients = new javax.swing.JButton();
+        clientTableScroll = new javax.swing.JScrollPane();
+        tblClients = new javax.swing.JTable();
+        clientTableHint = new javax.swing.JLabel();
         clientsModuleStatus = new javax.swing.JLabel();
         agentsPage = new javax.swing.JPanel();
         agentsIntroPanel = new javax.swing.JPanel();
@@ -1399,128 +1422,163 @@ public class MainDashboard extends javax.swing.JFrame {
         clientsDetailsPanel.setLayout(new java.awt.BorderLayout());
 
         clientsTilesPanel.setBackground(new java.awt.Color(246, 249, 247));
-        clientsTilesPanel.setLayout(new java.awt.GridLayout(2, 2, 17, 17));
+        clientsTilesPanel.setLayout(new java.awt.BorderLayout(13, 0));
 
-        clientsTile1Panel.setBackground(new java.awt.Color(255, 255, 255));
-        clientsTile1Panel.setBorder(javax.swing.BorderFactory.createEmptyBorder(17, 19, 17, 18));
-        clientsTile1Panel.setLayout(new java.awt.BorderLayout());
+        clientFormPanel.setBackground(new java.awt.Color(255, 255, 255));
+        clientFormPanel.setPreferredSize(new java.awt.Dimension(343, 445));
+        clientFormPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(16, 15, 15, 15));
+        clientFormPanel.setLayout(new java.awt.BorderLayout(0, 12));
 
-        clientsTile1TextPanel.setBackground(new java.awt.Color(255, 255, 255));
-        clientsTile1TextPanel.setPreferredSize(new java.awt.Dimension(330, 88));
-        clientsTile1TextPanel.setLayout(new java.awt.GridLayout(2, 1, 0, 6));
+        clientFormHeading.setBackground(new java.awt.Color(255, 255, 255));
+        clientFormHeading.setPreferredSize(new java.awt.Dimension(310, 50));
+        clientFormHeading.setLayout(new java.awt.GridLayout(2, 1, 0, 3));
+        clientFormTitle.setText("Client details");
+        clientFormTitle.setFont(new java.awt.Font("Segoe UI", 1, 17));
+        clientFormTitle.setForeground(new java.awt.Color(35, 55, 44));
+        clientFormHeading.add(clientFormTitle);
+        clientFormCaption.setText("Add or edit household / office clients");
+        clientFormCaption.setFont(new java.awt.Font("Segoe UI", 0, 11));
+        clientFormCaption.setForeground(new java.awt.Color(110, 128, 117));
+        clientFormHeading.add(clientFormCaption);
+        clientFormPanel.add(clientFormHeading, java.awt.BorderLayout.NORTH);
 
-        clientsTile1Title.setText("Client directory");
-        clientsTile1Title.setForeground(new java.awt.Color(35, 55, 44));
-        clientsTile1Title.setFont(new java.awt.Font("Segoe UI", 1, 16));
-        clientsTile1TextPanel.add(clientsTile1Title);
+        clientFieldsPanel.setBackground(new java.awt.Color(255, 255, 255));
+        clientFieldsPanel.setLayout(new java.awt.GridLayout(6, 1, 0, 10));
 
-        clientsTile1Subtitle.setText("Search and view customer records");
-        clientsTile1Subtitle.setForeground(new java.awt.Color(110, 128, 117));
-        clientsTile1Subtitle.setFont(new java.awt.Font("Segoe UI", 0, 12));
-        clientsTile1TextPanel.add(clientsTile1Subtitle);
+        clientNameRow.setBackground(new java.awt.Color(255, 255, 255));
+        clientNameRow.setLayout(new java.awt.BorderLayout(8, 0));
+        lblClientName.setText("Client name");
+        lblClientName.setPreferredSize(new java.awt.Dimension(105, 25));
+        clientNameRow.add(lblClientName, java.awt.BorderLayout.WEST);
+        clientNameRow.add(txtClientName, java.awt.BorderLayout.CENTER);
+        clientFieldsPanel.add(clientNameRow);
 
+        clientTypeRow.setBackground(new java.awt.Color(255, 255, 255));
+        clientTypeRow.setLayout(new java.awt.BorderLayout(8, 0));
+        lblClientType.setText("Client type");
+        lblClientType.setPreferredSize(new java.awt.Dimension(105, 25));
+        clientTypeRow.add(lblClientType, java.awt.BorderLayout.WEST);
+        cmbClientType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "HOUSEHOLD", "OFFICE" }));
+        clientTypeRow.add(cmbClientType, java.awt.BorderLayout.CENTER);
+        clientFieldsPanel.add(clientTypeRow);
 
-        clientsTile1Panel.add(clientsTile1TextPanel, java.awt.BorderLayout.NORTH);
+        clientAddressRow.setBackground(new java.awt.Color(255, 255, 255));
+        clientAddressRow.setLayout(new java.awt.BorderLayout(8, 0));
+        lblClientAddress.setText("Address");
+        lblClientAddress.setPreferredSize(new java.awt.Dimension(105, 25));
+        clientAddressRow.add(lblClientAddress, java.awt.BorderLayout.WEST);
+        txtClientAddress.setLineWrap(true);
+        txtClientAddress.setWrapStyleWord(true);
+        clientAddressScroll.setPreferredSize(new java.awt.Dimension(210, 57));
+        clientAddressScroll.setViewportView(txtClientAddress);
+        clientAddressRow.add(clientAddressScroll, java.awt.BorderLayout.CENTER);
+        clientFieldsPanel.add(clientAddressRow);
 
-        clientsTile1Status.setText("Module interface will be integrated here.");
-        clientsTile1Status.setForeground(new java.awt.Color(66, 130, 97));
-        clientsTile1Status.setFont(new java.awt.Font("Segoe UI", 0, 11));
-        clientsTile1Panel.add(clientsTile1Status, java.awt.BorderLayout.SOUTH);
+        clientEmailRow.setBackground(new java.awt.Color(255, 255, 255));
+        clientEmailRow.setLayout(new java.awt.BorderLayout(8, 0));
+        lblClientEmail.setText("Email");
+        lblClientEmail.setPreferredSize(new java.awt.Dimension(105, 25));
+        clientEmailRow.add(lblClientEmail, java.awt.BorderLayout.WEST);
+        clientEmailRow.add(txtClientEmail, java.awt.BorderLayout.CENTER);
+        clientFieldsPanel.add(clientEmailRow);
 
+        clientPhoneRow.setBackground(new java.awt.Color(255, 255, 255));
+        clientPhoneRow.setLayout(new java.awt.BorderLayout(8, 0));
+        lblClientPhone.setText("Phone");
+        lblClientPhone.setPreferredSize(new java.awt.Dimension(105, 25));
+        clientPhoneRow.add(lblClientPhone, java.awt.BorderLayout.WEST);
+        clientPhoneRow.add(txtClientPhone, java.awt.BorderLayout.CENTER);
+        clientFieldsPanel.add(clientPhoneRow);
 
-        clientsTilesPanel.add(clientsTile1Panel);
+        clientIdRow.setBackground(new java.awt.Color(255, 255, 255));
+        clientIdRow.setLayout(new java.awt.BorderLayout(8, 0));
+        lblCurrentClient.setText("Selected ID");
+        lblCurrentClient.setPreferredSize(new java.awt.Dimension(105, 25));
+        clientIdRow.add(lblCurrentClient, java.awt.BorderLayout.WEST);
+        lblSelectedClientId.setText("New client");
+        lblSelectedClientId.setFont(new java.awt.Font("Segoe UI", 1, 12));
+        lblSelectedClientId.setForeground(new java.awt.Color(66, 130, 97));
+        clientIdRow.add(lblSelectedClientId, java.awt.BorderLayout.CENTER);
+        clientFieldsPanel.add(clientIdRow);
+        clientFormPanel.add(clientFieldsPanel, java.awt.BorderLayout.CENTER);
 
-        clientsTile2Panel.setBackground(new java.awt.Color(255, 255, 255));
-        clientsTile2Panel.setBorder(javax.swing.BorderFactory.createEmptyBorder(17, 19, 17, 18));
-        clientsTile2Panel.setLayout(new java.awt.BorderLayout());
+        clientActionsPanel.setBackground(new java.awt.Color(255, 255, 255));
+        clientActionsPanel.setPreferredSize(new java.awt.Dimension(310, 98));
+        clientActionsPanel.setLayout(new java.awt.GridLayout(2, 2, 9, 9));
+        btnAddClient.setText("Add client");
+        btnAddClient.addActionListener(evt -> onAddClient(evt));
+        clientActionsPanel.add(btnAddClient);
+        btnUpdateClient.setText("Update");
+        btnUpdateClient.addActionListener(evt -> onUpdateClient(evt));
+        clientActionsPanel.add(btnUpdateClient);
+        btnDeleteClient.setText("Delete");
+        btnDeleteClient.addActionListener(evt -> onDeleteClient(evt));
+        clientActionsPanel.add(btnDeleteClient);
+        btnClearClient.setText("Clear fields");
+        btnClearClient.addActionListener(evt -> onClearClient(evt));
+        clientActionsPanel.add(btnClearClient);
+        clientFormPanel.add(clientActionsPanel, java.awt.BorderLayout.SOUTH);
+        clientsTilesPanel.add(clientFormPanel, java.awt.BorderLayout.WEST);
 
-        clientsTile2TextPanel.setBackground(new java.awt.Color(255, 255, 255));
-        clientsTile2TextPanel.setPreferredSize(new java.awt.Dimension(330, 88));
-        clientsTile2TextPanel.setLayout(new java.awt.GridLayout(2, 1, 0, 6));
+        clientTablePanel.setBackground(new java.awt.Color(255, 255, 255));
+        clientTablePanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(16, 15, 15, 15));
+        clientTablePanel.setLayout(new java.awt.BorderLayout(0, 10));
+        clientTableHeading.setBackground(new java.awt.Color(255, 255, 255));
+        clientTableHeading.setPreferredSize(new java.awt.Dimension(500, 93));
+        clientTableHeading.setLayout(new java.awt.BorderLayout(0, 6));
+        clientTableTitleArea.setBackground(new java.awt.Color(255, 255, 255));
+        clientTableTitleArea.setPreferredSize(new java.awt.Dimension(400, 44));
+        clientTableTitleArea.setLayout(new java.awt.GridLayout(2, 1, 0, 3));
+        clientTableTitle.setText("Registered clients");
+        clientTableTitle.setFont(new java.awt.Font("Segoe UI", 1, 17));
+        clientTableTitle.setForeground(new java.awt.Color(35, 55, 44));
+        clientTableTitleArea.add(clientTableTitle);
+        clientTableCaption.setText("Select a row to update or permanently delete a client");
+        clientTableCaption.setFont(new java.awt.Font("Segoe UI", 0, 11));
+        clientTableCaption.setForeground(new java.awt.Color(110, 128, 117));
+        clientTableTitleArea.add(clientTableCaption);
+        clientTableHeading.add(clientTableTitleArea, java.awt.BorderLayout.NORTH);
 
-        clientsTile2Title.setText("Contact details");
-        clientsTile2Title.setForeground(new java.awt.Color(35, 55, 44));
-        clientsTile2Title.setFont(new java.awt.Font("Segoe UI", 1, 16));
-        clientsTile2TextPanel.add(clientsTile2Title);
+        clientSearchPanel.setBackground(new java.awt.Color(255, 255, 255));
+        clientSearchPanel.setPreferredSize(new java.awt.Dimension(500, 38));
+        clientSearchPanel.setLayout(new java.awt.BorderLayout(8, 0));
+        clientSearchPanel.add(txtClientSearch, java.awt.BorderLayout.CENTER);
+        txtClientSearch.addActionListener(evt -> onSearchClient(evt));
+        btnSearchClient.setText("Search");
+        btnSearchClient.addActionListener(evt -> onSearchClient(evt));
+        clientSearchPanel.add(btnSearchClient, java.awt.BorderLayout.EAST);
+        btnRefreshClients.setText("Refresh");
+        btnRefreshClients.addActionListener(evt -> onRefreshClients(evt));
+        clientSearchPanel.add(btnRefreshClients, java.awt.BorderLayout.WEST);
+        clientTableHeading.add(clientSearchPanel, java.awt.BorderLayout.SOUTH);
+        clientTablePanel.add(clientTableHeading, java.awt.BorderLayout.NORTH);
 
-        clientsTile2Subtitle.setText("Update email, phone and address");
-        clientsTile2Subtitle.setForeground(new java.awt.Color(110, 128, 117));
-        clientsTile2Subtitle.setFont(new java.awt.Font("Segoe UI", 0, 12));
-        clientsTile2TextPanel.add(clientsTile2Subtitle);
+        tblClients.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {},
+            new String [] { "ID", "Name", "Type", "Email", "Phone", "Address" }
+        ) {
+            Class[] types = new Class[] { Integer.class, String.class, String.class, String.class, String.class, String.class };
+            boolean[] canEdit = new boolean[] { false, false, false, false, false, false };
+            public Class getColumnClass(int columnIndex) { return types[columnIndex]; }
+            public boolean isCellEditable(int rowIndex, int columnIndex) { return canEdit[columnIndex]; }
+        });
+        tblClients.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblClients.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) { onClientTableClick(evt); }
+        });
+        clientTableScroll.setViewportView(tblClients);
+        clientTablePanel.add(clientTableScroll, java.awt.BorderLayout.CENTER);
 
-
-        clientsTile2Panel.add(clientsTile2TextPanel, java.awt.BorderLayout.NORTH);
-
-        clientsTile2Status.setText("Module interface will be integrated here.");
-        clientsTile2Status.setForeground(new java.awt.Color(66, 130, 97));
-        clientsTile2Status.setFont(new java.awt.Font("Segoe UI", 0, 11));
-        clientsTile2Panel.add(clientsTile2Status, java.awt.BorderLayout.SOUTH);
-
-
-        clientsTilesPanel.add(clientsTile2Panel);
-
-        clientsTile3Panel.setBackground(new java.awt.Color(255, 255, 255));
-        clientsTile3Panel.setBorder(javax.swing.BorderFactory.createEmptyBorder(17, 19, 17, 18));
-        clientsTile3Panel.setLayout(new java.awt.BorderLayout());
-
-        clientsTile3TextPanel.setBackground(new java.awt.Color(255, 255, 255));
-        clientsTile3TextPanel.setPreferredSize(new java.awt.Dimension(330, 88));
-        clientsTile3TextPanel.setLayout(new java.awt.GridLayout(2, 1, 0, 6));
-
-        clientsTile3Title.setText("Customer types");
-        clientsTile3Title.setForeground(new java.awt.Color(35, 55, 44));
-        clientsTile3Title.setFont(new java.awt.Font("Segoe UI", 1, 16));
-        clientsTile3TextPanel.add(clientsTile3Title);
-
-        clientsTile3Subtitle.setText("Household and office clients");
-        clientsTile3Subtitle.setForeground(new java.awt.Color(110, 128, 117));
-        clientsTile3Subtitle.setFont(new java.awt.Font("Segoe UI", 0, 12));
-        clientsTile3TextPanel.add(clientsTile3Subtitle);
-
-
-        clientsTile3Panel.add(clientsTile3TextPanel, java.awt.BorderLayout.NORTH);
-
-        clientsTile3Status.setText("Module interface will be integrated here.");
-        clientsTile3Status.setForeground(new java.awt.Color(66, 130, 97));
-        clientsTile3Status.setFont(new java.awt.Font("Segoe UI", 0, 11));
-        clientsTile3Panel.add(clientsTile3Status, java.awt.BorderLayout.SOUTH);
-
-
-        clientsTilesPanel.add(clientsTile3Panel);
-
-        clientsTile4Panel.setBackground(new java.awt.Color(255, 255, 255));
-        clientsTile4Panel.setBorder(javax.swing.BorderFactory.createEmptyBorder(17, 19, 17, 18));
-        clientsTile4Panel.setLayout(new java.awt.BorderLayout());
-
-        clientsTile4TextPanel.setBackground(new java.awt.Color(255, 255, 255));
-        clientsTile4TextPanel.setPreferredSize(new java.awt.Dimension(330, 88));
-        clientsTile4TextPanel.setLayout(new java.awt.GridLayout(2, 1, 0, 6));
-
-        clientsTile4Title.setText("Order history");
-        clientsTile4Title.setForeground(new java.awt.Color(35, 55, 44));
-        clientsTile4Title.setFont(new java.awt.Font("Segoe UI", 1, 16));
-        clientsTile4TextPanel.add(clientsTile4Title);
-
-        clientsTile4Subtitle.setText("Keep client snapshots on past orders");
-        clientsTile4Subtitle.setForeground(new java.awt.Color(110, 128, 117));
-        clientsTile4Subtitle.setFont(new java.awt.Font("Segoe UI", 0, 12));
-        clientsTile4TextPanel.add(clientsTile4Subtitle);
-
-
-        clientsTile4Panel.add(clientsTile4TextPanel, java.awt.BorderLayout.NORTH);
-
-        clientsTile4Status.setText("Module interface will be integrated here.");
-        clientsTile4Status.setForeground(new java.awt.Color(66, 130, 97));
-        clientsTile4Status.setFont(new java.awt.Font("Segoe UI", 0, 11));
-        clientsTile4Panel.add(clientsTile4Status, java.awt.BorderLayout.SOUTH);
-
-
-        clientsTilesPanel.add(clientsTile4Panel);
-
+        clientTableHint.setText("Tip: Search clients or select a row to load the contact details.");
+        clientTableHint.setForeground(new java.awt.Color(110, 128, 117));
+        clientTableHint.setFont(new java.awt.Font("Segoe UI", 0, 11));
+        clientTableHint.setPreferredSize(new java.awt.Dimension(500, 25));
+        clientTablePanel.add(clientTableHint, java.awt.BorderLayout.SOUTH);
+        clientsTilesPanel.add(clientTablePanel, java.awt.BorderLayout.CENTER);
 
         clientsDetailsPanel.add(clientsTilesPanel, java.awt.BorderLayout.CENTER);
 
-        clientsModuleStatus.setText("Assigned developer: Piyathissa   |   Placeholder screen - no database changes");
+        clientsModuleStatus.setText("Piyathissa | Task 2 - Clients  |  Ready for database operations");
         clientsModuleStatus.setForeground(new java.awt.Color(110, 128, 117));
         clientsModuleStatus.setFont(new java.awt.Font("Segoe UI", 0, 11));
         clientsModuleStatus.setPreferredSize(new java.awt.Dimension(700, 47));
@@ -2805,6 +2863,158 @@ public class MainDashboard extends javax.swing.JFrame {
         loadSelectedProductIntoForm();
     }
 
+    // ===== Task 2: Client Management. Business logic lives outside initComponents(). =====
+    private final com.econest.clients.service.ClientService clientService =
+            new com.econest.clients.service.ClientService();
+    private Integer selectedClientId;
+    private javax.swing.table.TableRowSorter<javax.swing.table.DefaultTableModel> clientSorter;
+
+    private void prepareClientTable() {
+        javax.swing.table.DefaultTableModel model =
+                (javax.swing.table.DefaultTableModel) tblClients.getModel();
+        clientSorter = new javax.swing.table.TableRowSorter<>(model);
+        tblClients.setRowSorter(clientSorter);
+        tblClients.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblClients.setRowHeight(27);
+        tblClients.getColumnModel().getColumn(0).setPreferredWidth(45);
+        tblClients.getColumnModel().getColumn(1).setPreferredWidth(140);
+        tblClients.getColumnModel().getColumn(2).setPreferredWidth(95);
+        tblClients.getColumnModel().getColumn(3).setPreferredWidth(170);
+        tblClients.getColumnModel().getColumn(4).setPreferredWidth(110);
+        tblClients.getColumnModel().getColumn(5).setPreferredWidth(175);
+        tblClients.getSelectionModel().addListSelectionListener(event -> {
+            if (!event.getValueIsAdjusting()) loadSelectedClientIntoForm();
+        });
+        txtClientSearch.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            public void insertUpdate(javax.swing.event.DocumentEvent e) { applyClientSearch(); }
+            public void removeUpdate(javax.swing.event.DocumentEvent e) { applyClientSearch(); }
+            public void changedUpdate(javax.swing.event.DocumentEvent e) { applyClientSearch(); }
+        });
+    }
+
+    private void refreshClientTable() {
+        if (clientSorter == null) return;
+        javax.swing.table.DefaultTableModel model =
+                (javax.swing.table.DefaultTableModel) tblClients.getModel();
+        try {
+            java.util.List<com.econest.clients.model.Client> clients = clientService.listClients();
+            tblClients.clearSelection();
+            model.setRowCount(0);
+            for (com.econest.clients.model.Client client : clients) {
+                model.addRow(new Object[] {client.getClientId(), client.getName(),
+                    client.getType().name(), client.getEmail(), client.getPhone(), client.getAddress()});
+            }
+            selectedClientId = null;
+            lblSelectedClientId.setText("New client");
+            clientsModuleStatus.setText("Clients loaded: " + clients.size()
+                    + " | Piyathissa - Client Management (Task 2)");
+            applyClientSearch();
+        } catch (java.sql.SQLException | RuntimeException ex) {
+            clientsModuleStatus.setText("Unable to load clients: " + ex.getMessage());
+            javax.swing.JOptionPane.showMessageDialog(this, ex.getMessage(),
+                    "Client database error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private com.econest.clients.model.Client readClientForm() {
+        return new com.econest.clients.model.Client(
+                txtClientName.getText(),
+                com.econest.clients.model.ClientType.valueOf(
+                        (String) cmbClientType.getSelectedItem()),
+                txtClientEmail.getText(), txtClientPhone.getText(), txtClientAddress.getText());
+    }
+
+    private void loadSelectedClientIntoForm() {
+        int row = tblClients.getSelectedRow();
+        if (row < 0) return;
+        int index = tblClients.convertRowIndexToModel(row); // Essential with table sorting/filtering.
+        javax.swing.table.DefaultTableModel model =
+                (javax.swing.table.DefaultTableModel) tblClients.getModel();
+        selectedClientId = ((Number) model.getValueAt(index, 0)).intValue();
+        lblSelectedClientId.setText(String.valueOf(selectedClientId));
+        txtClientName.setText((String) model.getValueAt(index, 1));
+        cmbClientType.setSelectedItem((String) model.getValueAt(index, 2));
+        txtClientEmail.setText((String) model.getValueAt(index, 3));
+        txtClientPhone.setText((String) model.getValueAt(index, 4));
+        txtClientAddress.setText((String) model.getValueAt(index, 5));
+    }
+
+    private void clearClientFields() {
+        tblClients.clearSelection();
+        selectedClientId = null;
+        lblSelectedClientId.setText("New client");
+        txtClientName.setText("");
+        cmbClientType.setSelectedIndex(0);
+        txtClientEmail.setText("");
+        txtClientPhone.setText("");
+        txtClientAddress.setText("");
+    }
+
+    private void applyClientSearch() {
+        if (clientSorter == null) return;
+        String keyword = txtClientSearch.getText().trim();
+        if (keyword.isEmpty()) clientSorter.setRowFilter(null);
+        else clientSorter.setRowFilter(javax.swing.RowFilter.regexFilter(
+                "(?i)" + java.util.regex.Pattern.quote(keyword)));
+        // A filtered-out row must not remain the target for Update or Delete.
+        tblClients.clearSelection();
+        selectedClientId = null;
+        lblSelectedClientId.setText("New client");
+    }
+
+    private void showClientError(String operation, Exception ex) {
+        javax.swing.JOptionPane.showMessageDialog(this, operation + ": " + ex.getMessage(),
+                "EcoNest Clients", javax.swing.JOptionPane.ERROR_MESSAGE);
+    }
+
+    private void onAddClient(java.awt.event.ActionEvent evt) {
+        try {
+            int id = clientService.addClient(readClientForm());
+            clearClientFields();
+            refreshClientTable();
+            javax.swing.JOptionPane.showMessageDialog(this, "Client #" + id + " added.");
+        } catch (java.sql.SQLException | RuntimeException ex) { showClientError("Add failed", ex); }
+    }
+
+    private void onUpdateClient(java.awt.event.ActionEvent evt) {
+        if (selectedClientId == null) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Select a client from the table first.");
+            return;
+        }
+        try {
+            com.econest.clients.model.Client client = readClientForm();
+            client.setClientId(selectedClientId);
+            clientService.updateClient(client);
+            clearClientFields();
+            refreshClientTable();
+            javax.swing.JOptionPane.showMessageDialog(this, "Client updated.");
+        } catch (java.sql.SQLException | RuntimeException ex) { showClientError("Update failed", ex); }
+    }
+
+    private void onDeleteClient(java.awt.event.ActionEvent evt) {
+        if (selectedClientId == null) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Select a client from the table first.");
+            return;
+        }
+        int choice = javax.swing.JOptionPane.showConfirmDialog(this,
+                "Permanently delete client #" + selectedClientId + "?\n"
+                + "Past orders keep their client snapshots; this record cannot be recovered.",
+                "Confirm permanent deletion", javax.swing.JOptionPane.YES_NO_OPTION,
+                javax.swing.JOptionPane.WARNING_MESSAGE);
+        if (choice != javax.swing.JOptionPane.YES_OPTION) return;
+        try {
+            clientService.deleteClient(selectedClientId);
+            clearClientFields();
+            refreshClientTable();
+            javax.swing.JOptionPane.showMessageDialog(this, "Client permanently deleted.");
+        } catch (java.sql.SQLException | RuntimeException ex) { showClientError("Delete failed", ex); }
+    }
+
+    private void onClearClient(java.awt.event.ActionEvent evt) { clearClientFields(); }
+    private void onSearchClient(java.awt.event.ActionEvent evt) { applyClientSearch(); }
+    private void onRefreshClients(java.awt.event.ActionEvent evt) { refreshClientTable(); }
+    private void onClientTableClick(java.awt.event.MouseEvent evt) { loadSelectedClientIntoForm(); }
+
     public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -3001,26 +3211,47 @@ public class MainDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel clientsDescription;
     private javax.swing.JPanel clientsDetailsPanel;
     private javax.swing.JPanel clientsTilesPanel;
-    private javax.swing.JPanel clientsTile1Panel;
-    private javax.swing.JPanel clientsTile1TextPanel;
-    private javax.swing.JLabel clientsTile1Title;
-    private javax.swing.JLabel clientsTile1Subtitle;
-    private javax.swing.JLabel clientsTile1Status;
-    private javax.swing.JPanel clientsTile2Panel;
-    private javax.swing.JPanel clientsTile2TextPanel;
-    private javax.swing.JLabel clientsTile2Title;
-    private javax.swing.JLabel clientsTile2Subtitle;
-    private javax.swing.JLabel clientsTile2Status;
-    private javax.swing.JPanel clientsTile3Panel;
-    private javax.swing.JPanel clientsTile3TextPanel;
-    private javax.swing.JLabel clientsTile3Title;
-    private javax.swing.JLabel clientsTile3Subtitle;
-    private javax.swing.JLabel clientsTile3Status;
-    private javax.swing.JPanel clientsTile4Panel;
-    private javax.swing.JPanel clientsTile4TextPanel;
-    private javax.swing.JLabel clientsTile4Title;
-    private javax.swing.JLabel clientsTile4Subtitle;
-    private javax.swing.JLabel clientsTile4Status;
+    private javax.swing.JPanel clientFormPanel;
+    private javax.swing.JPanel clientFormHeading;
+    private javax.swing.JLabel clientFormTitle;
+    private javax.swing.JLabel clientFormCaption;
+    private javax.swing.JPanel clientFieldsPanel;
+    private javax.swing.JPanel clientNameRow;
+    private javax.swing.JLabel lblClientName;
+    private javax.swing.JTextField txtClientName;
+    private javax.swing.JPanel clientTypeRow;
+    private javax.swing.JLabel lblClientType;
+    private javax.swing.JComboBox<String> cmbClientType;
+    private javax.swing.JPanel clientAddressRow;
+    private javax.swing.JLabel lblClientAddress;
+    private javax.swing.JScrollPane clientAddressScroll;
+    private javax.swing.JTextArea txtClientAddress;
+    private javax.swing.JPanel clientEmailRow;
+    private javax.swing.JLabel lblClientEmail;
+    private javax.swing.JTextField txtClientEmail;
+    private javax.swing.JPanel clientPhoneRow;
+    private javax.swing.JLabel lblClientPhone;
+    private javax.swing.JTextField txtClientPhone;
+    private javax.swing.JPanel clientIdRow;
+    private javax.swing.JLabel lblCurrentClient;
+    private javax.swing.JLabel lblSelectedClientId;
+    private javax.swing.JPanel clientActionsPanel;
+    private javax.swing.JButton btnAddClient;
+    private javax.swing.JButton btnUpdateClient;
+    private javax.swing.JButton btnDeleteClient;
+    private javax.swing.JButton btnClearClient;
+    private javax.swing.JPanel clientTablePanel;
+    private javax.swing.JPanel clientTableHeading;
+    private javax.swing.JPanel clientTableTitleArea;
+    private javax.swing.JLabel clientTableTitle;
+    private javax.swing.JLabel clientTableCaption;
+    private javax.swing.JPanel clientSearchPanel;
+    private javax.swing.JTextField txtClientSearch;
+    private javax.swing.JButton btnSearchClient;
+    private javax.swing.JButton btnRefreshClients;
+    private javax.swing.JScrollPane clientTableScroll;
+    private javax.swing.JTable tblClients;
+    private javax.swing.JLabel clientTableHint;
     private javax.swing.JLabel clientsModuleStatus;
     private javax.swing.JPanel agentsPage;
     private javax.swing.JPanel agentsIntroPanel;
