@@ -427,6 +427,11 @@ public class MainDashboard extends javax.swing.JFrame {
         btnDashboard.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         btnDashboard.setForeground(new java.awt.Color(228, 238, 229));
         btnDashboard.setText("   Dashboard");
+        btnDashboard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDashboardActionPerformed(evt);
+            }
+        });
         navigationPanel.add(btnDashboard);
 
         btnProducts.setBackground(new java.awt.Color(24, 55, 45));
@@ -436,39 +441,44 @@ public class MainDashboard extends javax.swing.JFrame {
         navigationPanel.add(btnProducts);
 
         btnInventory.setBackground(new java.awt.Color(24, 55, 45));
-        btnInventory.setForeground(new java.awt.Color(228, 238, 229));
         btnInventory.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        btnInventory.setForeground(new java.awt.Color(228, 238, 229));
         btnInventory.setText("   Inventory");
         navigationPanel.add(btnInventory);
 
         btnClients.setBackground(new java.awt.Color(24, 55, 45));
-        btnClients.setForeground(new java.awt.Color(228, 238, 229));
         btnClients.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        btnClients.setForeground(new java.awt.Color(228, 238, 229));
         btnClients.setText("   Clients");
         navigationPanel.add(btnClients);
 
         btnDeliveryAgents.setBackground(new java.awt.Color(24, 55, 45));
-        btnDeliveryAgents.setForeground(new java.awt.Color(228, 238, 229));
         btnDeliveryAgents.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        btnDeliveryAgents.setForeground(new java.awt.Color(228, 238, 229));
         btnDeliveryAgents.setText("   Delivery Agents");
         navigationPanel.add(btnDeliveryAgents);
 
         btnOrders.setBackground(new java.awt.Color(24, 55, 45));
-        btnOrders.setForeground(new java.awt.Color(228, 238, 229));
         btnOrders.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        btnOrders.setForeground(new java.awt.Color(228, 238, 229));
         btnOrders.setText("   Orders");
         navigationPanel.add(btnOrders);
 
         btnDeliveries.setBackground(new java.awt.Color(24, 55, 45));
-        btnDeliveries.setForeground(new java.awt.Color(228, 238, 229));
         btnDeliveries.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        btnDeliveries.setForeground(new java.awt.Color(228, 238, 229));
         btnDeliveries.setText("   Deliveries");
         navigationPanel.add(btnDeliveries);
 
         btnReports.setBackground(new java.awt.Color(24, 55, 45));
-        btnReports.setForeground(new java.awt.Color(228, 238, 229));
         btnReports.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        btnReports.setForeground(new java.awt.Color(228, 238, 229));
         btnReports.setText("   Reports");
+        btnReports.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportsActionPerformed(evt);
+            }
+        });
         navigationPanel.add(btnReports);
 
         btnEmailNotifications.setBackground(new java.awt.Color(24, 55, 45));
@@ -528,6 +538,14 @@ public class MainDashboard extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnReportsActionPerformed
+
+    private void btnDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDashboardActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDashboardActionPerformed
 
     public static void main(String[] args) {
         try {
