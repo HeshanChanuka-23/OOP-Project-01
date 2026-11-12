@@ -33,6 +33,7 @@ public class MainDashboard extends javax.swing.JFrame {
         prepareAgentTable();
         prepareOrderTables();
         prepareDeliveryTables();
+        prepareReportTables();
     }
 
     /** Show a panel that ALREADY EXISTS in the GUI Builder CardLayout. */
@@ -472,26 +473,49 @@ public class MainDashboard extends javax.swing.JFrame {
         reportsDescription = new javax.swing.JLabel();
         reportsDetailsPanel = new javax.swing.JPanel();
         reportsTilesPanel = new javax.swing.JPanel();
-        reportsTile1Panel = new javax.swing.JPanel();
-        reportsTile1TextPanel = new javax.swing.JPanel();
-        reportsTile1Title = new javax.swing.JLabel();
-        reportsTile1Subtitle = new javax.swing.JLabel();
-        reportsTile1Status = new javax.swing.JLabel();
-        reportsTile2Panel = new javax.swing.JPanel();
-        reportsTile2TextPanel = new javax.swing.JPanel();
-        reportsTile2Title = new javax.swing.JLabel();
-        reportsTile2Subtitle = new javax.swing.JLabel();
-        reportsTile2Status = new javax.swing.JLabel();
-        reportsTile3Panel = new javax.swing.JPanel();
-        reportsTile3TextPanel = new javax.swing.JPanel();
-        reportsTile3Title = new javax.swing.JLabel();
-        reportsTile3Subtitle = new javax.swing.JLabel();
-        reportsTile3Status = new javax.swing.JLabel();
-        reportsTile4Panel = new javax.swing.JPanel();
-        reportsTile4TextPanel = new javax.swing.JPanel();
-        reportsTile4Title = new javax.swing.JLabel();
-        reportsTile4Subtitle = new javax.swing.JLabel();
-        reportsTile4Status = new javax.swing.JLabel();
+        reportToolbarPanel = new javax.swing.JPanel();
+        reportPickerPanel = new javax.swing.JPanel();
+        lblReportMonth = new javax.swing.JLabel();
+        cmbReportMonth = new javax.swing.JComboBox();
+        lblReportYear = new javax.swing.JLabel();
+        txtReportYear = new javax.swing.JTextField();
+        btnGenerateReport = new javax.swing.JButton();
+        reportBodyPanel = new javax.swing.JPanel();
+        reportMetricsPanel = new javax.swing.JPanel();
+        reportCardGross = new javax.swing.JPanel();
+        reportCardTitleGross = new javax.swing.JLabel();
+        lblReportGross = new javax.swing.JLabel();
+        reportCardCancelled = new javax.swing.JPanel();
+        reportCardTitleCancelled = new javax.swing.JLabel();
+        lblReportCancelled = new javax.swing.JLabel();
+        reportCardNet = new javax.swing.JPanel();
+        reportCardTitleNet = new javax.swing.JLabel();
+        lblReportNet = new javax.swing.JLabel();
+        reportCardOrderCount = new javax.swing.JPanel();
+        reportCardTitleOrderCount = new javax.swing.JLabel();
+        lblReportOrderCount = new javax.swing.JLabel();
+        reportCardEndUnits = new javax.swing.JPanel();
+        reportCardTitleEndUnits = new javax.swing.JLabel();
+        lblReportEndUnits = new javax.swing.JLabel();
+        reportCardStockIn = new javax.swing.JPanel();
+        reportCardTitleStockIn = new javax.swing.JLabel();
+        lblReportStockIn = new javax.swing.JLabel();
+        reportCardStockOut = new javax.swing.JPanel();
+        reportCardTitleStockOut = new javax.swing.JLabel();
+        lblReportStockOut = new javax.swing.JLabel();
+        reportCardLowCount = new javax.swing.JPanel();
+        reportCardTitleLowCount = new javax.swing.JLabel();
+        lblReportLowCount = new javax.swing.JLabel();
+        reportTablesPanel = new javax.swing.JPanel();
+        reportFlowPanel = new javax.swing.JPanel();
+        lblReportFlowHeading = new javax.swing.JLabel();
+        reportFlowScroll = new javax.swing.JScrollPane();
+        tblReportMonthlyStock = new javax.swing.JTable();
+        reportLowPanel = new javax.swing.JPanel();
+        lblReportLowHeading = new javax.swing.JLabel();
+        reportLowScroll = new javax.swing.JScrollPane();
+        tblReportLowStock = new javax.swing.JTable();
+        lblReportNotice = new javax.swing.JLabel();
         reportsModuleStatus = new javax.swing.JLabel();
         emailsPage = new javax.swing.JPanel();
         emailsIntroPanel = new javax.swing.JPanel();
@@ -2331,128 +2355,183 @@ public class MainDashboard extends javax.swing.JFrame {
         reportsDetailsPanel.setLayout(new java.awt.BorderLayout());
 
         reportsTilesPanel.setBackground(new java.awt.Color(246, 249, 247));
-        reportsTilesPanel.setLayout(new java.awt.GridLayout(2, 2, 17, 17));
-
-        reportsTile1Panel.setBackground(new java.awt.Color(255, 255, 255));
-        reportsTile1Panel.setBorder(javax.swing.BorderFactory.createEmptyBorder(17, 19, 17, 18));
-        reportsTile1Panel.setLayout(new java.awt.BorderLayout());
-
-        reportsTile1TextPanel.setBackground(new java.awt.Color(255, 255, 255));
-        reportsTile1TextPanel.setPreferredSize(new java.awt.Dimension(330, 88));
-        reportsTile1TextPanel.setLayout(new java.awt.GridLayout(2, 1, 0, 6));
-
-        reportsTile1Title.setText("Monthly sales");
-        reportsTile1Title.setForeground(new java.awt.Color(35, 55, 44));
-        reportsTile1Title.setFont(new java.awt.Font("Segoe UI", 1, 16));
-        reportsTile1TextPanel.add(reportsTile1Title);
-
-        reportsTile1Subtitle.setText("Confirmed sales minus cancellations");
-        reportsTile1Subtitle.setForeground(new java.awt.Color(110, 128, 117));
-        reportsTile1Subtitle.setFont(new java.awt.Font("Segoe UI", 0, 12));
-        reportsTile1TextPanel.add(reportsTile1Subtitle);
-
-
-        reportsTile1Panel.add(reportsTile1TextPanel, java.awt.BorderLayout.NORTH);
-
-        reportsTile1Status.setText("Module interface will be integrated here.");
-        reportsTile1Status.setForeground(new java.awt.Color(66, 130, 97));
-        reportsTile1Status.setFont(new java.awt.Font("Segoe UI", 0, 11));
-        reportsTile1Panel.add(reportsTile1Status, java.awt.BorderLayout.SOUTH);
-
-
-        reportsTilesPanel.add(reportsTile1Panel);
-
-        reportsTile2Panel.setBackground(new java.awt.Color(255, 255, 255));
-        reportsTile2Panel.setBorder(javax.swing.BorderFactory.createEmptyBorder(17, 19, 17, 18));
-        reportsTile2Panel.setLayout(new java.awt.BorderLayout());
-
-        reportsTile2TextPanel.setBackground(new java.awt.Color(255, 255, 255));
-        reportsTile2TextPanel.setPreferredSize(new java.awt.Dimension(330, 88));
-        reportsTile2TextPanel.setLayout(new java.awt.GridLayout(2, 1, 0, 6));
-
-        reportsTile2Title.setText("Inventory positions");
-        reportsTile2Title.setForeground(new java.awt.Color(35, 55, 44));
-        reportsTile2Title.setFont(new java.awt.Font("Segoe UI", 1, 16));
-        reportsTile2TextPanel.add(reportsTile2Title);
-
-        reportsTile2Subtitle.setText("Compute month-end stock quantities");
-        reportsTile2Subtitle.setForeground(new java.awt.Color(110, 128, 117));
-        reportsTile2Subtitle.setFont(new java.awt.Font("Segoe UI", 0, 12));
-        reportsTile2TextPanel.add(reportsTile2Subtitle);
-
-
-        reportsTile2Panel.add(reportsTile2TextPanel, java.awt.BorderLayout.NORTH);
-
-        reportsTile2Status.setText("Module interface will be integrated here.");
-        reportsTile2Status.setForeground(new java.awt.Color(66, 130, 97));
-        reportsTile2Status.setFont(new java.awt.Font("Segoe UI", 0, 11));
-        reportsTile2Panel.add(reportsTile2Status, java.awt.BorderLayout.SOUTH);
-
-
-        reportsTilesPanel.add(reportsTile2Panel);
-
-        reportsTile3Panel.setBackground(new java.awt.Color(255, 255, 255));
-        reportsTile3Panel.setBorder(javax.swing.BorderFactory.createEmptyBorder(17, 19, 17, 18));
-        reportsTile3Panel.setLayout(new java.awt.BorderLayout());
-
-        reportsTile3TextPanel.setBackground(new java.awt.Color(255, 255, 255));
-        reportsTile3TextPanel.setPreferredSize(new java.awt.Dimension(330, 88));
-        reportsTile3TextPanel.setLayout(new java.awt.GridLayout(2, 1, 0, 6));
-
-        reportsTile3Title.setText("Low-stock listings");
-        reportsTile3Title.setForeground(new java.awt.Color(35, 55, 44));
-        reportsTile3Title.setFont(new java.awt.Font("Segoe UI", 1, 16));
-        reportsTile3TextPanel.add(reportsTile3Title);
-
-        reportsTile3Subtitle.setText("Detect products at reorder level");
-        reportsTile3Subtitle.setForeground(new java.awt.Color(110, 128, 117));
-        reportsTile3Subtitle.setFont(new java.awt.Font("Segoe UI", 0, 12));
-        reportsTile3TextPanel.add(reportsTile3Subtitle);
-
-
-        reportsTile3Panel.add(reportsTile3TextPanel, java.awt.BorderLayout.NORTH);
-
-        reportsTile3Status.setText("Module interface will be integrated here.");
-        reportsTile3Status.setForeground(new java.awt.Color(66, 130, 97));
-        reportsTile3Status.setFont(new java.awt.Font("Segoe UI", 0, 11));
-        reportsTile3Panel.add(reportsTile3Status, java.awt.BorderLayout.SOUTH);
-
-
-        reportsTilesPanel.add(reportsTile3Panel);
-
-        reportsTile4Panel.setBackground(new java.awt.Color(255, 255, 255));
-        reportsTile4Panel.setBorder(javax.swing.BorderFactory.createEmptyBorder(17, 19, 17, 18));
-        reportsTile4Panel.setLayout(new java.awt.BorderLayout());
-
-        reportsTile4TextPanel.setBackground(new java.awt.Color(255, 255, 255));
-        reportsTile4TextPanel.setPreferredSize(new java.awt.Dimension(330, 88));
-        reportsTile4TextPanel.setLayout(new java.awt.GridLayout(2, 1, 0, 6));
-
-        reportsTile4Title.setText("Export and review");
-        reportsTile4Title.setForeground(new java.awt.Color(35, 55, 44));
-        reportsTile4Title.setFont(new java.awt.Font("Segoe UI", 1, 16));
-        reportsTile4TextPanel.add(reportsTile4Title);
-
-        reportsTile4Subtitle.setText("Present generated report results");
-        reportsTile4Subtitle.setForeground(new java.awt.Color(110, 128, 117));
-        reportsTile4Subtitle.setFont(new java.awt.Font("Segoe UI", 0, 12));
-        reportsTile4TextPanel.add(reportsTile4Subtitle);
-
-
-        reportsTile4Panel.add(reportsTile4TextPanel, java.awt.BorderLayout.NORTH);
-
-        reportsTile4Status.setText("Module interface will be integrated here.");
-        reportsTile4Status.setForeground(new java.awt.Color(66, 130, 97));
-        reportsTile4Status.setFont(new java.awt.Font("Segoe UI", 0, 11));
-        reportsTile4Panel.add(reportsTile4Status, java.awt.BorderLayout.SOUTH);
-
-
-        reportsTilesPanel.add(reportsTile4Panel);
-
-
+        reportsTilesPanel.setLayout(new java.awt.BorderLayout(0, 9));
+        reportToolbarPanel.setBackground(new java.awt.Color(255, 255, 255));
+        reportToolbarPanel.setPreferredSize(new java.awt.Dimension(810, 62));
+        reportToolbarPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(8, 14, 8, 14));
+        reportToolbarPanel.setLayout(new java.awt.BorderLayout(6, 0));
+        reportPickerPanel.setBackground(new java.awt.Color(255, 255, 255));
+        reportPickerPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 9, 6));
+        lblReportMonth.setText("MONTH");
+        lblReportMonth.setForeground(new java.awt.Color(37, 61, 48));
+        lblReportMonth.setFont(new java.awt.Font("Segoe UI", 1, 11));
+        reportPickerPanel.add(lblReportMonth);
+        cmbReportMonth.setPreferredSize(new java.awt.Dimension(190, 32));
+        cmbReportMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
+        reportPickerPanel.add(cmbReportMonth);
+        lblReportYear.setText("YEAR");
+        lblReportYear.setForeground(new java.awt.Color(37, 61, 48));
+        lblReportYear.setFont(new java.awt.Font("Segoe UI", 1, 11));
+        reportPickerPanel.add(lblReportYear);
+        txtReportYear.setPreferredSize(new java.awt.Dimension(84, 30));
+        reportPickerPanel.add(txtReportYear);
+        reportToolbarPanel.add(reportPickerPanel, java.awt.BorderLayout.WEST);
+        btnGenerateReport.setText("GENERATE REPORT");
+        btnGenerateReport.setBackground(new java.awt.Color(39, 111, 80));
+        btnGenerateReport.setForeground(new java.awt.Color(255, 255, 255));
+        btnGenerateReport.setFont(new java.awt.Font("Segoe UI", 1, 12));
+        btnGenerateReport.setPreferredSize(new java.awt.Dimension(180, 36));
+        btnGenerateReport.addActionListener(evt -> onGenerateReport(evt));
+        reportToolbarPanel.add(btnGenerateReport, java.awt.BorderLayout.EAST);
+        reportsTilesPanel.add(reportToolbarPanel, java.awt.BorderLayout.NORTH);
+        reportBodyPanel.setBackground(new java.awt.Color(246, 249, 247));
+        reportBodyPanel.setLayout(new java.awt.BorderLayout(0, 9));
+        reportMetricsPanel.setBackground(new java.awt.Color(246, 249, 247));
+        reportMetricsPanel.setPreferredSize(new java.awt.Dimension(810, 140));
+        reportMetricsPanel.setLayout(new java.awt.GridLayout(2, 4, 9, 8));
+        reportCardGross.setBackground(new java.awt.Color(255, 255, 255));
+        reportCardGross.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 12, 9, 8));
+        reportCardGross.setLayout(new java.awt.BorderLayout(0, 3));
+        reportCardTitleGross.setText("GROSS CONFIRMED");
+        reportCardTitleGross.setForeground(new java.awt.Color(91, 119, 103));
+        reportCardTitleGross.setFont(new java.awt.Font("Segoe UI", 1, 10));
+        reportCardGross.add(reportCardTitleGross, java.awt.BorderLayout.NORTH);
+        lblReportGross.setText("—");
+        lblReportGross.setForeground(new java.awt.Color(29, 71, 48));
+        lblReportGross.setFont(new java.awt.Font("Segoe UI", 1, 17));
+        reportCardGross.add(lblReportGross, java.awt.BorderLayout.CENTER);
+        reportMetricsPanel.add(reportCardGross);
+        reportCardCancelled.setBackground(new java.awt.Color(255, 255, 255));
+        reportCardCancelled.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 12, 9, 8));
+        reportCardCancelled.setLayout(new java.awt.BorderLayout(0, 3));
+        reportCardTitleCancelled.setText("CANCELLATION AMOUNT");
+        reportCardTitleCancelled.setForeground(new java.awt.Color(91, 119, 103));
+        reportCardTitleCancelled.setFont(new java.awt.Font("Segoe UI", 1, 10));
+        reportCardCancelled.add(reportCardTitleCancelled, java.awt.BorderLayout.NORTH);
+        lblReportCancelled.setText("—");
+        lblReportCancelled.setForeground(new java.awt.Color(29, 71, 48));
+        lblReportCancelled.setFont(new java.awt.Font("Segoe UI", 1, 17));
+        reportCardCancelled.add(lblReportCancelled, java.awt.BorderLayout.CENTER);
+        reportMetricsPanel.add(reportCardCancelled);
+        reportCardNet.setBackground(new java.awt.Color(255, 255, 255));
+        reportCardNet.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 12, 9, 8));
+        reportCardNet.setLayout(new java.awt.BorderLayout(0, 3));
+        reportCardTitleNet.setText("NET REVENUE");
+        reportCardTitleNet.setForeground(new java.awt.Color(91, 119, 103));
+        reportCardTitleNet.setFont(new java.awt.Font("Segoe UI", 1, 10));
+        reportCardNet.add(reportCardTitleNet, java.awt.BorderLayout.NORTH);
+        lblReportNet.setText("—");
+        lblReportNet.setForeground(new java.awt.Color(29, 71, 48));
+        lblReportNet.setFont(new java.awt.Font("Segoe UI", 1, 17));
+        reportCardNet.add(lblReportNet, java.awt.BorderLayout.CENTER);
+        reportMetricsPanel.add(reportCardNet);
+        reportCardOrderCount.setBackground(new java.awt.Color(255, 255, 255));
+        reportCardOrderCount.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 12, 9, 8));
+        reportCardOrderCount.setLayout(new java.awt.BorderLayout(0, 3));
+        reportCardTitleOrderCount.setText("CONFIRMED / CANCELLED");
+        reportCardTitleOrderCount.setForeground(new java.awt.Color(91, 119, 103));
+        reportCardTitleOrderCount.setFont(new java.awt.Font("Segoe UI", 1, 10));
+        reportCardOrderCount.add(reportCardTitleOrderCount, java.awt.BorderLayout.NORTH);
+        lblReportOrderCount.setText("—");
+        lblReportOrderCount.setForeground(new java.awt.Color(29, 71, 48));
+        lblReportOrderCount.setFont(new java.awt.Font("Segoe UI", 1, 17));
+        reportCardOrderCount.add(lblReportOrderCount, java.awt.BorderLayout.CENTER);
+        reportMetricsPanel.add(reportCardOrderCount);
+        reportCardEndUnits.setBackground(new java.awt.Color(255, 255, 255));
+        reportCardEndUnits.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 12, 9, 8));
+        reportCardEndUnits.setLayout(new java.awt.BorderLayout(0, 3));
+        reportCardTitleEndUnits.setText("MONTH-END UNITS");
+        reportCardTitleEndUnits.setForeground(new java.awt.Color(91, 119, 103));
+        reportCardTitleEndUnits.setFont(new java.awt.Font("Segoe UI", 1, 10));
+        reportCardEndUnits.add(reportCardTitleEndUnits, java.awt.BorderLayout.NORTH);
+        lblReportEndUnits.setText("—");
+        lblReportEndUnits.setForeground(new java.awt.Color(29, 71, 48));
+        lblReportEndUnits.setFont(new java.awt.Font("Segoe UI", 1, 17));
+        reportCardEndUnits.add(lblReportEndUnits, java.awt.BorderLayout.CENTER);
+        reportMetricsPanel.add(reportCardEndUnits);
+        reportCardStockIn.setBackground(new java.awt.Color(255, 255, 255));
+        reportCardStockIn.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 12, 9, 8));
+        reportCardStockIn.setLayout(new java.awt.BorderLayout(0, 3));
+        reportCardTitleStockIn.setText("UNITS IN");
+        reportCardTitleStockIn.setForeground(new java.awt.Color(91, 119, 103));
+        reportCardTitleStockIn.setFont(new java.awt.Font("Segoe UI", 1, 10));
+        reportCardStockIn.add(reportCardTitleStockIn, java.awt.BorderLayout.NORTH);
+        lblReportStockIn.setText("—");
+        lblReportStockIn.setForeground(new java.awt.Color(29, 71, 48));
+        lblReportStockIn.setFont(new java.awt.Font("Segoe UI", 1, 17));
+        reportCardStockIn.add(lblReportStockIn, java.awt.BorderLayout.CENTER);
+        reportMetricsPanel.add(reportCardStockIn);
+        reportCardStockOut.setBackground(new java.awt.Color(255, 255, 255));
+        reportCardStockOut.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 12, 9, 8));
+        reportCardStockOut.setLayout(new java.awt.BorderLayout(0, 3));
+        reportCardTitleStockOut.setText("UNITS OUT");
+        reportCardTitleStockOut.setForeground(new java.awt.Color(91, 119, 103));
+        reportCardTitleStockOut.setFont(new java.awt.Font("Segoe UI", 1, 10));
+        reportCardStockOut.add(reportCardTitleStockOut, java.awt.BorderLayout.NORTH);
+        lblReportStockOut.setText("—");
+        lblReportStockOut.setForeground(new java.awt.Color(29, 71, 48));
+        lblReportStockOut.setFont(new java.awt.Font("Segoe UI", 1, 17));
+        reportCardStockOut.add(lblReportStockOut, java.awt.BorderLayout.CENTER);
+        reportMetricsPanel.add(reportCardStockOut);
+        reportCardLowCount.setBackground(new java.awt.Color(255, 255, 255));
+        reportCardLowCount.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 12, 9, 8));
+        reportCardLowCount.setLayout(new java.awt.BorderLayout(0, 3));
+        reportCardTitleLowCount.setText("LOW STOCK NOW");
+        reportCardTitleLowCount.setForeground(new java.awt.Color(91, 119, 103));
+        reportCardTitleLowCount.setFont(new java.awt.Font("Segoe UI", 1, 10));
+        reportCardLowCount.add(reportCardTitleLowCount, java.awt.BorderLayout.NORTH);
+        lblReportLowCount.setText("—");
+        lblReportLowCount.setForeground(new java.awt.Color(29, 71, 48));
+        lblReportLowCount.setFont(new java.awt.Font("Segoe UI", 1, 17));
+        reportCardLowCount.add(lblReportLowCount, java.awt.BorderLayout.CENTER);
+        reportMetricsPanel.add(reportCardLowCount);
+        reportBodyPanel.add(reportMetricsPanel, java.awt.BorderLayout.NORTH);
+        reportTablesPanel.setBackground(new java.awt.Color(246, 249, 247));
+        reportTablesPanel.setLayout(new java.awt.GridLayout(2, 1, 0, 9));
+        reportFlowPanel.setBackground(new java.awt.Color(255, 255, 255));
+        reportFlowPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(8, 12, 8, 12));
+        reportFlowPanel.setLayout(new java.awt.BorderLayout(0, 5));
+        lblReportFlowHeading.setText("MONTHLY PRODUCT STOCK MOVEMENTS AND MONTH-END BALANCES");
+        lblReportFlowHeading.setForeground(new java.awt.Color(32, 74, 51));
+        lblReportFlowHeading.setFont(new java.awt.Font("Segoe UI", 1, 12));
+        reportFlowPanel.add(lblReportFlowHeading, java.awt.BorderLayout.NORTH);
+        tblReportMonthlyStock.setModel(new javax.swing.table.DefaultTableModel(
+                new Object[][] {}, new String[] {"Product ID", "Product", "Units In", "Units Out", "Month-end"}) {
+            Class[] types = new Class[] {java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class};
+            boolean[] canEdit = new boolean[] {false, false, false, false, false};
+            public Class getColumnClass(int columnIndex) { return types[columnIndex]; }
+            public boolean isCellEditable(int rowIndex, int columnIndex) { return canEdit[columnIndex]; }
+        });
+        reportFlowScroll.setViewportView(tblReportMonthlyStock);
+        reportFlowPanel.add(reportFlowScroll, java.awt.BorderLayout.CENTER);
+        reportTablesPanel.add(reportFlowPanel);
+        reportLowPanel.setBackground(new java.awt.Color(255, 255, 255));
+        reportLowPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(8, 12, 8, 12));
+        reportLowPanel.setLayout(new java.awt.BorderLayout(0, 5));
+        lblReportLowHeading.setText("CURRENT LOW-STOCK ALERTS (AS OF GENERATION)");
+        lblReportLowHeading.setForeground(new java.awt.Color(32, 74, 51));
+        lblReportLowHeading.setFont(new java.awt.Font("Segoe UI", 1, 12));
+        reportLowPanel.add(lblReportLowHeading, java.awt.BorderLayout.NORTH);
+        tblReportLowStock.setModel(new javax.swing.table.DefaultTableModel(
+                new Object[][] {}, new String[] {"Product ID", "Product", "On hand", "Reorder level"}) {
+            Class[] types = new Class[] {java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class};
+            boolean[] canEdit = new boolean[] {false, false, false, false};
+            public Class getColumnClass(int columnIndex) { return types[columnIndex]; }
+            public boolean isCellEditable(int rowIndex, int columnIndex) { return canEdit[columnIndex]; }
+        });
+        reportLowScroll.setViewportView(tblReportLowStock);
+        reportLowPanel.add(reportLowScroll, java.awt.BorderLayout.CENTER);
+        reportTablesPanel.add(reportLowPanel);
+        reportBodyPanel.add(reportTablesPanel, java.awt.BorderLayout.CENTER);
+        reportsTilesPanel.add(reportBodyPanel, java.awt.BorderLayout.CENTER);
+        lblReportNotice.setText("Choose a month and year, then press GENERATE REPORT.");
+        lblReportNotice.setForeground(new java.awt.Color(91, 119, 103));
+        lblReportNotice.setFont(new java.awt.Font("Segoe UI", 0, 11));
+        lblReportNotice.setPreferredSize(new java.awt.Dimension(800, 25));
+        reportsTilesPanel.add(lblReportNotice, java.awt.BorderLayout.SOUTH);
         reportsDetailsPanel.add(reportsTilesPanel, java.awt.BorderLayout.CENTER);
 
-        reportsModuleStatus.setText("Assigned developer: Methsindu   |   Placeholder screen - no database changes");
+        reportsModuleStatus.setText("Methsindu | Task 7 — Derived monthly reports and current low-stock alerts");
         reportsModuleStatus.setForeground(new java.awt.Color(110, 128, 117));
         reportsModuleStatus.setFont(new java.awt.Font("Segoe UI", 0, 11));
         reportsModuleStatus.setPreferredSize(new java.awt.Dimension(700, 47));
@@ -2646,6 +2725,72 @@ public class MainDashboard extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+
+    // ===== Task 7 | Reporting; no business logic inside initComponents() =====
+    private final com.econest.reports.service.ReportService reportService =
+            new com.econest.reports.service.ReportService();
+
+    private void prepareReportTables() {
+        java.time.YearMonth current = java.time.YearMonth.now();
+        cmbReportMonth.setSelectedIndex(current.getMonthValue() - 1);
+        txtReportYear.setText(Integer.toString(current.getYear()));
+        tblReportMonthlyStock.setAutoCreateRowSorter(true);
+        tblReportLowStock.setAutoCreateRowSorter(true);
+    }
+
+    private void onGenerateReport(java.awt.event.ActionEvent evt) {
+        final java.time.YearMonth month;
+        try {
+            int year = Integer.parseInt(txtReportYear.getText().trim());
+            if (year < 2000 || year > 9999) throw new IllegalArgumentException("Choose a year between 2000 and 9999.");
+            month = java.time.YearMonth.of(year, cmbReportMonth.getSelectedIndex() + 1);
+        } catch (RuntimeException ex) {
+            javax.swing.JOptionPane.showMessageDialog(this,"Enter a valid year (2000–9999).", "Report period", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        btnGenerateReport.setEnabled(false);
+        lblReportNotice.setText("Generating " + month + " from MariaDB ...");
+        // JDBC runs off the Swing event thread to keep the interface responsive.
+        new javax.swing.SwingWorker<Object[],Void>() {
+            @Override protected Object[] doInBackground() {
+                com.econest.reports.model.SalesReport sales=reportService.generateMonthlySalesReport(month);
+                com.econest.reports.model.InventoryReport inventory=reportService.generateMonthlyInventoryReport(month);
+                java.util.List<Object[]> flow=reportService.getMonthlyStockRows(month);
+                java.util.List<Object[]> low=reportService.getCurrentLowStockRows();
+                return new Object[]{sales,inventory,flow,low};
+            }
+            @Override protected void done() {
+                btnGenerateReport.setEnabled(true);
+                try {
+                    Object[] data=get();
+                    com.econest.reports.model.SalesReport sales=(com.econest.reports.model.SalesReport)data[0];
+                    com.econest.reports.model.InventoryReport inv=(com.econest.reports.model.InventoryReport)data[1];
+                    lblReportGross.setText(sales.getGrossConfirmedRevenue().toPlainString());
+                    lblReportCancelled.setText(sales.getCancellationAmount().toPlainString());
+                    lblReportNet.setText(sales.getTotalRevenue().toPlainString());
+                    lblReportOrderCount.setText(sales.getConfirmedOrderCount()+" / "+sales.getCancelledOrderCount());
+                    lblReportEndUnits.setText(Integer.toString(inv.getMonthEndTotalUnits()));
+                    lblReportStockIn.setText(Integer.toString(inv.getStockInUnits()));
+                    lblReportStockOut.setText(Integer.toString(inv.getStockOutUnits()));
+                    lblReportLowCount.setText(Integer.toString(inv.getCurrentLowStockCount()));
+                    fillReportTable(tblReportMonthlyStock,(java.util.List<Object[]>)data[2]);
+                    fillReportTable(tblReportLowStock,(java.util.List<Object[]>)data[3]);
+                    lblReportNotice.setText("Report: "+month+" | Current low-stock is as of now; month-end is historical.");
+                } catch (Exception ex) {
+                    Throwable cause=ex.getCause()==null?ex:ex.getCause();
+                    lblReportNotice.setText("Could not generate report — check MariaDB and try again.");
+                    javax.swing.JOptionPane.showMessageDialog(MainDashboard.this,cause.getMessage(),
+                            "Report error",javax.swing.JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }.execute();
+    }
+    private static void fillReportTable(javax.swing.JTable target, java.util.List<Object[]> records) {
+        javax.swing.table.DefaultTableModel model=(javax.swing.table.DefaultTableModel)target.getModel();
+        model.setRowCount(0);
+        for(Object[] record:records) model.addRow(record);
+    }
 
     private void onBtnDashboardActionPerformed(java.awt.event.ActionEvent evt) {
         showPage("dashboard");
@@ -4161,26 +4306,49 @@ public class MainDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel reportsDescription;
     private javax.swing.JPanel reportsDetailsPanel;
     private javax.swing.JPanel reportsTilesPanel;
-    private javax.swing.JPanel reportsTile1Panel;
-    private javax.swing.JPanel reportsTile1TextPanel;
-    private javax.swing.JLabel reportsTile1Title;
-    private javax.swing.JLabel reportsTile1Subtitle;
-    private javax.swing.JLabel reportsTile1Status;
-    private javax.swing.JPanel reportsTile2Panel;
-    private javax.swing.JPanel reportsTile2TextPanel;
-    private javax.swing.JLabel reportsTile2Title;
-    private javax.swing.JLabel reportsTile2Subtitle;
-    private javax.swing.JLabel reportsTile2Status;
-    private javax.swing.JPanel reportsTile3Panel;
-    private javax.swing.JPanel reportsTile3TextPanel;
-    private javax.swing.JLabel reportsTile3Title;
-    private javax.swing.JLabel reportsTile3Subtitle;
-    private javax.swing.JLabel reportsTile3Status;
-    private javax.swing.JPanel reportsTile4Panel;
-    private javax.swing.JPanel reportsTile4TextPanel;
-    private javax.swing.JLabel reportsTile4Title;
-    private javax.swing.JLabel reportsTile4Subtitle;
-    private javax.swing.JLabel reportsTile4Status;
+    private javax.swing.JPanel reportToolbarPanel;
+    private javax.swing.JPanel reportPickerPanel;
+    private javax.swing.JLabel lblReportMonth;
+    private javax.swing.JComboBox<String> cmbReportMonth;
+    private javax.swing.JLabel lblReportYear;
+    private javax.swing.JTextField txtReportYear;
+    private javax.swing.JButton btnGenerateReport;
+    private javax.swing.JPanel reportBodyPanel;
+    private javax.swing.JPanel reportMetricsPanel;
+    private javax.swing.JPanel reportCardGross;
+    private javax.swing.JLabel reportCardTitleGross;
+    private javax.swing.JLabel lblReportGross;
+    private javax.swing.JPanel reportCardCancelled;
+    private javax.swing.JLabel reportCardTitleCancelled;
+    private javax.swing.JLabel lblReportCancelled;
+    private javax.swing.JPanel reportCardNet;
+    private javax.swing.JLabel reportCardTitleNet;
+    private javax.swing.JLabel lblReportNet;
+    private javax.swing.JPanel reportCardOrderCount;
+    private javax.swing.JLabel reportCardTitleOrderCount;
+    private javax.swing.JLabel lblReportOrderCount;
+    private javax.swing.JPanel reportCardEndUnits;
+    private javax.swing.JLabel reportCardTitleEndUnits;
+    private javax.swing.JLabel lblReportEndUnits;
+    private javax.swing.JPanel reportCardStockIn;
+    private javax.swing.JLabel reportCardTitleStockIn;
+    private javax.swing.JLabel lblReportStockIn;
+    private javax.swing.JPanel reportCardStockOut;
+    private javax.swing.JLabel reportCardTitleStockOut;
+    private javax.swing.JLabel lblReportStockOut;
+    private javax.swing.JPanel reportCardLowCount;
+    private javax.swing.JLabel reportCardTitleLowCount;
+    private javax.swing.JLabel lblReportLowCount;
+    private javax.swing.JPanel reportTablesPanel;
+    private javax.swing.JPanel reportFlowPanel;
+    private javax.swing.JLabel lblReportFlowHeading;
+    private javax.swing.JScrollPane reportFlowScroll;
+    private javax.swing.JTable tblReportMonthlyStock;
+    private javax.swing.JPanel reportLowPanel;
+    private javax.swing.JLabel lblReportLowHeading;
+    private javax.swing.JScrollPane reportLowScroll;
+    private javax.swing.JTable tblReportLowStock;
+    private javax.swing.JLabel lblReportNotice;
     private javax.swing.JLabel reportsModuleStatus;
     private javax.swing.JPanel emailsPage;
     private javax.swing.JPanel emailsIntroPanel;
