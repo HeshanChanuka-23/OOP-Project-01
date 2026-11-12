@@ -31,6 +31,7 @@ public class MainDashboard extends javax.swing.JFrame {
         prepareInventoryTables();
         prepareClientTable();
         prepareAgentTable();
+        prepareOrderTables();
     }
 
     /** Show a panel that ALREADY EXISTS in the GUI Builder CardLayout. */
@@ -40,6 +41,7 @@ public class MainDashboard extends javax.swing.JFrame {
         if ("inventory".equals(pageKey)) refreshInventoryData();
         if ("clients".equals(pageKey)) refreshClientTable();
         if ("agents".equals(pageKey)) refreshAgentTable();
+        if ("orders".equals(pageKey)) refreshOrdersData();
         switch (pageKey) {
             case "dashboard": headerTitleLabel.setText("Overview Dashboard"); break;
             case "products": headerTitleLabel.setText("Products"); break;
@@ -356,26 +358,54 @@ public class MainDashboard extends javax.swing.JFrame {
         ordersDescription = new javax.swing.JLabel();
         ordersDetailsPanel = new javax.swing.JPanel();
         ordersTilesPanel = new javax.swing.JPanel();
-        ordersTile1Panel = new javax.swing.JPanel();
-        ordersTile1TextPanel = new javax.swing.JPanel();
-        ordersTile1Title = new javax.swing.JLabel();
-        ordersTile1Subtitle = new javax.swing.JLabel();
-        ordersTile1Status = new javax.swing.JLabel();
-        ordersTile2Panel = new javax.swing.JPanel();
-        ordersTile2TextPanel = new javax.swing.JPanel();
-        ordersTile2Title = new javax.swing.JLabel();
-        ordersTile2Subtitle = new javax.swing.JLabel();
-        ordersTile2Status = new javax.swing.JLabel();
-        ordersTile3Panel = new javax.swing.JPanel();
-        ordersTile3TextPanel = new javax.swing.JPanel();
-        ordersTile3Title = new javax.swing.JLabel();
-        ordersTile3Subtitle = new javax.swing.JLabel();
-        ordersTile3Status = new javax.swing.JLabel();
-        ordersTile4Panel = new javax.swing.JPanel();
-        ordersTile4TextPanel = new javax.swing.JPanel();
-        ordersTile4Title = new javax.swing.JLabel();
-        ordersTile4Subtitle = new javax.swing.JLabel();
-        ordersTile4Status = new javax.swing.JLabel();
+        ordControlsPanel = new javax.swing.JPanel();
+        ordControlsHeading = new javax.swing.JLabel();
+        ordControlsScroll = new javax.swing.JScrollPane();
+        ordInputsPanel = new javax.swing.JPanel();
+        ordClientRow = new javax.swing.JPanel();
+        lblOrdClient = new javax.swing.JLabel();
+        cmbOrdClient = new javax.swing.JComboBox();
+        ordProductRow = new javax.swing.JPanel();
+        lblOrdProduct = new javax.swing.JLabel();
+        cmbOrdProduct = new javax.swing.JComboBox();
+        ordQtyRow = new javax.swing.JPanel();
+        lblOrdQty = new javax.swing.JLabel();
+        spnOrdQty = new javax.swing.JSpinner();
+        btnAddOrderItem = new javax.swing.JButton();
+        ordLineCountRow = new javax.swing.JPanel();
+        lblOrdLineCount = new javax.swing.JLabel();
+        spnOrdLineCount = new javax.swing.JSpinner();
+        btnRemoveOrderItem = new javax.swing.JButton();
+        ordStockRow = new javax.swing.JPanel();
+        lblOrdStock = new javax.swing.JLabel();
+        spnOrdStock = new javax.swing.JSpinner();
+        ordTotalRow = new javax.swing.JPanel();
+        lblOrdTotal = new javax.swing.JLabel();
+        txtOrdTotal = new javax.swing.JTextField();
+        btnConfirmOrder = new javax.swing.JButton();
+        lblOrdDetailsHeading = new javax.swing.JLabel();
+        ordSearchRow = new javax.swing.JPanel();
+        lblOrdSearch = new javax.swing.JLabel();
+        txtOrdSearch = new javax.swing.JTextField();
+        ordOrderIdRow = new javax.swing.JPanel();
+        lblOrdSelectedOrder = new javax.swing.JLabel();
+        txtOrdSelectedOrder = new javax.swing.JTextField();
+        ordOrderStatusRow = new javax.swing.JPanel();
+        lblOrdStatus = new javax.swing.JLabel();
+        txtOrdStatus = new javax.swing.JTextField();
+        btnCancelOrder = new javax.swing.JButton();
+        ordDataPanel = new javax.swing.JPanel();
+        ordOrdersToolbar = new javax.swing.JPanel();
+        lblOrdersTable = new javax.swing.JLabel();
+        btnCreateOrder = new javax.swing.JButton();
+        btnCalculateOrderTotal = new javax.swing.JButton();
+        btnRefreshOrders = new javax.swing.JButton();
+        ordOrdersScroll = new javax.swing.JScrollPane();
+        tblOrders = new javax.swing.JTable();
+        ordItemsPanel = new javax.swing.JPanel();
+        lblOrderItems = new javax.swing.JLabel();
+        ordItemsScroll = new javax.swing.JScrollPane();
+        tblOrderItems = new javax.swing.JTable();
         ordersModuleStatus = new javax.swing.JLabel();
         deliveriesPage = new javax.swing.JPanel();
         deliveriesIntroPanel = new javax.swing.JPanel();
@@ -1828,12 +1858,12 @@ public class MainDashboard extends javax.swing.JFrame {
         ordersEyebrow.setFont(new java.awt.Font("Segoe UI", 1, 11));
         ordersIntroPanel.add(ordersEyebrow);
 
-        ordersHeading.setText("Client Order Processing");
+        ordersHeading.setText("Client Order Management");
         ordersHeading.setForeground(new java.awt.Color(35, 55, 44));
         ordersHeading.setFont(new java.awt.Font("Segoe UI", 1, 25));
         ordersIntroPanel.add(ordersHeading);
 
-        ordersDescription.setText("Create, confirm and cancel client orders with consistent inventory transactions.");
+        ordersDescription.setText("Create orders for clients, manage items and confirm sales with safe stock deduction.");
         ordersDescription.setForeground(new java.awt.Color(110, 128, 117));
         ordersDescription.setFont(new java.awt.Font("Segoe UI", 0, 12));
         ordersIntroPanel.add(ordersDescription);
@@ -1845,128 +1875,177 @@ public class MainDashboard extends javax.swing.JFrame {
         ordersDetailsPanel.setLayout(new java.awt.BorderLayout());
 
         ordersTilesPanel.setBackground(new java.awt.Color(246, 249, 247));
-        ordersTilesPanel.setLayout(new java.awt.GridLayout(2, 2, 17, 17));
+        ordersTilesPanel.setLayout(new java.awt.BorderLayout(12, 0));
+        ordControlsPanel.setBackground(new java.awt.Color(255, 255, 255));
+        ordControlsPanel.setPreferredSize(new java.awt.Dimension(350, 480));
+        ordControlsPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(12, 11, 12, 11));
+        ordControlsPanel.setLayout(new java.awt.BorderLayout(0, 6));
+        ordControlsHeading.setText("Order creation and actions");
+        ordControlsHeading.setFont(new java.awt.Font("Segoe UI", 1, 15));
+        ordControlsHeading.setPreferredSize(new java.awt.Dimension(330, 38));
+        ordControlsPanel.add(ordControlsHeading, java.awt.BorderLayout.NORTH);
 
-        ordersTile1Panel.setBackground(new java.awt.Color(255, 255, 255));
-        ordersTile1Panel.setBorder(javax.swing.BorderFactory.createEmptyBorder(17, 19, 17, 18));
-        ordersTile1Panel.setLayout(new java.awt.BorderLayout());
+        ordInputsPanel.setBackground(new java.awt.Color(255, 255, 255));
+        ordInputsPanel.setLayout(new java.awt.GridLayout(14, 1, 0, 4));
+        ordClientRow.setBackground(new java.awt.Color(255, 255, 255));
+        ordClientRow.setPreferredSize(new java.awt.Dimension(270, 34));
+        ordClientRow.setLayout(new java.awt.BorderLayout(5, 0));
+        lblOrdClient.setText("Client");
+        lblOrdClient.setPreferredSize(new java.awt.Dimension(105, 28));
+        ordClientRow.add(lblOrdClient, java.awt.BorderLayout.WEST);
 
-        ordersTile1TextPanel.setBackground(new java.awt.Color(255, 255, 255));
-        ordersTile1TextPanel.setPreferredSize(new java.awt.Dimension(330, 88));
-        ordersTile1TextPanel.setLayout(new java.awt.GridLayout(2, 1, 0, 6));
+        ordClientRow.add(cmbOrdClient, java.awt.BorderLayout.CENTER);
+        ordInputsPanel.add(ordClientRow);
+        ordProductRow.setBackground(new java.awt.Color(255, 255, 255));
+        ordProductRow.setPreferredSize(new java.awt.Dimension(270, 34));
+        ordProductRow.setLayout(new java.awt.BorderLayout(5, 0));
+        lblOrdProduct.setText("Product");
+        lblOrdProduct.setPreferredSize(new java.awt.Dimension(105, 28));
+        ordProductRow.add(lblOrdProduct, java.awt.BorderLayout.WEST);
 
-        ordersTile1Title.setText("New client order");
-        ordersTile1Title.setForeground(new java.awt.Color(35, 55, 44));
-        ordersTile1Title.setFont(new java.awt.Font("Segoe UI", 1, 16));
-        ordersTile1TextPanel.add(ordersTile1Title);
+        ordProductRow.add(cmbOrdProduct, java.awt.BorderLayout.CENTER);
+        ordInputsPanel.add(ordProductRow);
+        ordQtyRow.setBackground(new java.awt.Color(255, 255, 255));
+        ordQtyRow.setPreferredSize(new java.awt.Dimension(270, 34));
+        ordQtyRow.setLayout(new java.awt.BorderLayout(5, 0));
+        lblOrdQty.setText("Quantity");
+        lblOrdQty.setPreferredSize(new java.awt.Dimension(105, 28));
+        ordQtyRow.add(lblOrdQty, java.awt.BorderLayout.WEST);
 
-        ordersTile1Subtitle.setText("Choose customer and products");
-        ordersTile1Subtitle.setForeground(new java.awt.Color(110, 128, 117));
-        ordersTile1Subtitle.setFont(new java.awt.Font("Segoe UI", 0, 12));
-        ordersTile1TextPanel.add(ordersTile1Subtitle);
+        spnOrdQty.setModel(new javax.swing.SpinnerNumberModel(1, 1, 999999, 1));
+        ordQtyRow.add(spnOrdQty, java.awt.BorderLayout.CENTER);
+        ordInputsPanel.add(ordQtyRow);
+        btnAddOrderItem.setText("ADD ITEM");
+        btnAddOrderItem.addActionListener(evt -> onAddOrderItem(evt));
+        ordInputsPanel.add(btnAddOrderItem);
+        ordLineCountRow.setBackground(new java.awt.Color(255, 255, 255));
+        ordLineCountRow.setPreferredSize(new java.awt.Dimension(270, 34));
+        ordLineCountRow.setLayout(new java.awt.BorderLayout(5, 0));
+        lblOrdLineCount.setText("Order lines");
+        lblOrdLineCount.setPreferredSize(new java.awt.Dimension(105, 28));
+        ordLineCountRow.add(lblOrdLineCount, java.awt.BorderLayout.WEST);
 
+        spnOrdLineCount.setEnabled(false);
+        ordLineCountRow.add(spnOrdLineCount, java.awt.BorderLayout.CENTER);
+        ordInputsPanel.add(ordLineCountRow);
+        btnRemoveOrderItem.setText("REMOVE SELECTED ITEM");
+        btnRemoveOrderItem.addActionListener(evt -> onRemoveOrderItem(evt));
+        ordInputsPanel.add(btnRemoveOrderItem);
+        ordStockRow.setBackground(new java.awt.Color(255, 255, 255));
+        ordStockRow.setPreferredSize(new java.awt.Dimension(270, 34));
+        ordStockRow.setLayout(new java.awt.BorderLayout(5, 0));
+        lblOrdStock.setText("Available stock");
+        lblOrdStock.setPreferredSize(new java.awt.Dimension(105, 28));
+        ordStockRow.add(lblOrdStock, java.awt.BorderLayout.WEST);
 
-        ordersTile1Panel.add(ordersTile1TextPanel, java.awt.BorderLayout.NORTH);
+        spnOrdStock.setEnabled(false);
+        ordStockRow.add(spnOrdStock, java.awt.BorderLayout.CENTER);
+        ordInputsPanel.add(ordStockRow);
+        ordTotalRow.setBackground(new java.awt.Color(255, 255, 255));
+        ordTotalRow.setPreferredSize(new java.awt.Dimension(270, 34));
+        ordTotalRow.setLayout(new java.awt.BorderLayout(5, 0));
+        lblOrdTotal.setText("Order total");
+        lblOrdTotal.setPreferredSize(new java.awt.Dimension(105, 28));
+        ordTotalRow.add(lblOrdTotal, java.awt.BorderLayout.WEST);
 
-        ordersTile1Status.setText("Module interface will be integrated here.");
-        ordersTile1Status.setForeground(new java.awt.Color(66, 130, 97));
-        ordersTile1Status.setFont(new java.awt.Font("Segoe UI", 0, 11));
-        ordersTile1Panel.add(ordersTile1Status, java.awt.BorderLayout.SOUTH);
+        txtOrdTotal.setEditable(false);
+        ordTotalRow.add(txtOrdTotal, java.awt.BorderLayout.CENTER);
+        ordInputsPanel.add(ordTotalRow);
+        btnConfirmOrder.setText("CONFIRM ORDER");
+        btnConfirmOrder.addActionListener(evt -> onConfirmOrder(evt));
+        ordInputsPanel.add(btnConfirmOrder);
+        lblOrdDetailsHeading.setText("SELECTED ORDER / SEARCH");
+        lblOrdDetailsHeading.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        ordInputsPanel.add(lblOrdDetailsHeading);
+        ordSearchRow.setBackground(new java.awt.Color(255, 255, 255));
+        ordSearchRow.setPreferredSize(new java.awt.Dimension(270, 34));
+        ordSearchRow.setLayout(new java.awt.BorderLayout(5, 0));
+        lblOrdSearch.setText("Search");
+        lblOrdSearch.setPreferredSize(new java.awt.Dimension(105, 28));
+        ordSearchRow.add(lblOrdSearch, java.awt.BorderLayout.WEST);
 
+        ordSearchRow.add(txtOrdSearch, java.awt.BorderLayout.CENTER);
+        ordInputsPanel.add(ordSearchRow);
+        ordOrderIdRow.setBackground(new java.awt.Color(255, 255, 255));
+        ordOrderIdRow.setPreferredSize(new java.awt.Dimension(270, 34));
+        ordOrderIdRow.setLayout(new java.awt.BorderLayout(5, 0));
+        lblOrdSelectedOrder.setText("Order ID");
+        lblOrdSelectedOrder.setPreferredSize(new java.awt.Dimension(105, 28));
+        ordOrderIdRow.add(lblOrdSelectedOrder, java.awt.BorderLayout.WEST);
 
-        ordersTilesPanel.add(ordersTile1Panel);
+        txtOrdSelectedOrder.setEditable(false);
+        ordOrderIdRow.add(txtOrdSelectedOrder, java.awt.BorderLayout.CENTER);
+        ordInputsPanel.add(ordOrderIdRow);
+        ordOrderStatusRow.setBackground(new java.awt.Color(255, 255, 255));
+        ordOrderStatusRow.setPreferredSize(new java.awt.Dimension(270, 34));
+        ordOrderStatusRow.setLayout(new java.awt.BorderLayout(5, 0));
+        lblOrdStatus.setText("Status");
+        lblOrdStatus.setPreferredSize(new java.awt.Dimension(105, 28));
+        ordOrderStatusRow.add(lblOrdStatus, java.awt.BorderLayout.WEST);
 
-        ordersTile2Panel.setBackground(new java.awt.Color(255, 255, 255));
-        ordersTile2Panel.setBorder(javax.swing.BorderFactory.createEmptyBorder(17, 19, 17, 18));
-        ordersTile2Panel.setLayout(new java.awt.BorderLayout());
+        txtOrdStatus.setEditable(false);
+        ordOrderStatusRow.add(txtOrdStatus, java.awt.BorderLayout.CENTER);
+        ordInputsPanel.add(ordOrderStatusRow);
+        btnCancelOrder.setText("CANCEL ORDER");
+        btnCancelOrder.addActionListener(evt -> onCancelOrder(evt));
+        ordInputsPanel.add(btnCancelOrder);
+        ordControlsScroll.setViewportView(ordInputsPanel);
+        ordControlsPanel.add(ordControlsScroll, java.awt.BorderLayout.CENTER);
+        ordersTilesPanel.add(ordControlsPanel, java.awt.BorderLayout.WEST);
+        ordDataPanel.setBackground(new java.awt.Color(246, 249, 247));
+        ordDataPanel.setLayout(new java.awt.BorderLayout(0, 10));
+        ordOrdersToolbar.setBackground(new java.awt.Color(246, 249, 247));
+        ordOrdersToolbar.setPreferredSize(new java.awt.Dimension(700, 40));
+        ordOrdersToolbar.setLayout(new java.awt.GridLayout(1, 4, 5, 0));
+        lblOrdersTable.setText("CLIENT ORDERS");
+        lblOrdersTable.setFont(new java.awt.Font("Segoe UI", 1, 14));
+        ordOrdersToolbar.add(lblOrdersTable);
+        btnCreateOrder.setText("Create draft");
+        btnCreateOrder.addActionListener(evt -> onCreateOrder(evt));
+        ordOrdersToolbar.add(btnCreateOrder);
+        btnCalculateOrderTotal.setText("Calculate total");
+        btnCalculateOrderTotal.addActionListener(evt -> onCalculateOrderTotal(evt));
+        ordOrdersToolbar.add(btnCalculateOrderTotal);
+        btnRefreshOrders.setText("Refresh");
+        btnRefreshOrders.addActionListener(evt -> onRefreshOrders(evt));
+        ordOrdersToolbar.add(btnRefreshOrders);
+        ordDataPanel.add(ordOrdersToolbar, java.awt.BorderLayout.NORTH);
 
-        ordersTile2TextPanel.setBackground(new java.awt.Color(255, 255, 255));
-        ordersTile2TextPanel.setPreferredSize(new java.awt.Dimension(330, 88));
-        ordersTile2TextPanel.setLayout(new java.awt.GridLayout(2, 1, 0, 6));
+        tblOrders.setModel(new javax.swing.table.DefaultTableModel(
+                new Object[][] {}, new String[] {"Order ID", "Client", "Status", "Lines", "Total", "Created"}) {
+            Class[] types = new Class[] {java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.math.BigDecimal.class, java.lang.String.class};
+            boolean[] canEdit = new boolean[] {false, false, false, false, false, false};
+            public Class getColumnClass(int columnIndex) { return types[columnIndex]; }
+            public boolean isCellEditable(int rowIndex, int columnIndex) { return canEdit[columnIndex]; }
+        });
+        tblOrders.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override public void mouseClicked(java.awt.event.MouseEvent evt) { onOrderRowClick(evt); }
+        });
+        ordOrdersScroll.setViewportView(tblOrders);
+        ordDataPanel.add(ordOrdersScroll, java.awt.BorderLayout.CENTER);
+        ordItemsPanel.setBackground(new java.awt.Color(255, 255, 255));
+        ordItemsPanel.setPreferredSize(new java.awt.Dimension(700, 235));
+        ordItemsPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 8, 7, 8));
+        ordItemsPanel.setLayout(new java.awt.BorderLayout(0, 5));
+        lblOrderItems.setText("ORDER ITEMS - Select a line to remove");
+        lblOrderItems.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        ordItemsPanel.add(lblOrderItems, java.awt.BorderLayout.NORTH);
 
-        ordersTile2Title.setText("Order items");
-        ordersTile2Title.setForeground(new java.awt.Color(35, 55, 44));
-        ordersTile2Title.setFont(new java.awt.Font("Segoe UI", 1, 16));
-        ordersTile2TextPanel.add(ordersTile2Title);
-
-        ordersTile2Subtitle.setText("Quantity and captured selling price");
-        ordersTile2Subtitle.setForeground(new java.awt.Color(110, 128, 117));
-        ordersTile2Subtitle.setFont(new java.awt.Font("Segoe UI", 0, 12));
-        ordersTile2TextPanel.add(ordersTile2Subtitle);
-
-
-        ordersTile2Panel.add(ordersTile2TextPanel, java.awt.BorderLayout.NORTH);
-
-        ordersTile2Status.setText("Module interface will be integrated here.");
-        ordersTile2Status.setForeground(new java.awt.Color(66, 130, 97));
-        ordersTile2Status.setFont(new java.awt.Font("Segoe UI", 0, 11));
-        ordersTile2Panel.add(ordersTile2Status, java.awt.BorderLayout.SOUTH);
-
-
-        ordersTilesPanel.add(ordersTile2Panel);
-
-        ordersTile3Panel.setBackground(new java.awt.Color(255, 255, 255));
-        ordersTile3Panel.setBorder(javax.swing.BorderFactory.createEmptyBorder(17, 19, 17, 18));
-        ordersTile3Panel.setLayout(new java.awt.BorderLayout());
-
-        ordersTile3TextPanel.setBackground(new java.awt.Color(255, 255, 255));
-        ordersTile3TextPanel.setPreferredSize(new java.awt.Dimension(330, 88));
-        ordersTile3TextPanel.setLayout(new java.awt.GridLayout(2, 1, 0, 6));
-
-        ordersTile3Title.setText("Order totals");
-        ordersTile3Title.setForeground(new java.awt.Color(35, 55, 44));
-        ordersTile3Title.setFont(new java.awt.Font("Segoe UI", 1, 16));
-        ordersTile3TextPanel.add(ordersTile3Title);
-
-        ordersTile3Subtitle.setText("Calculate and confirm order totals");
-        ordersTile3Subtitle.setForeground(new java.awt.Color(110, 128, 117));
-        ordersTile3Subtitle.setFont(new java.awt.Font("Segoe UI", 0, 12));
-        ordersTile3TextPanel.add(ordersTile3Subtitle);
-
-
-        ordersTile3Panel.add(ordersTile3TextPanel, java.awt.BorderLayout.NORTH);
-
-        ordersTile3Status.setText("Module interface will be integrated here.");
-        ordersTile3Status.setForeground(new java.awt.Color(66, 130, 97));
-        ordersTile3Status.setFont(new java.awt.Font("Segoe UI", 0, 11));
-        ordersTile3Panel.add(ordersTile3Status, java.awt.BorderLayout.SOUTH);
-
-
-        ordersTilesPanel.add(ordersTile3Panel);
-
-        ordersTile4Panel.setBackground(new java.awt.Color(255, 255, 255));
-        ordersTile4Panel.setBorder(javax.swing.BorderFactory.createEmptyBorder(17, 19, 17, 18));
-        ordersTile4Panel.setLayout(new java.awt.BorderLayout());
-
-        ordersTile4TextPanel.setBackground(new java.awt.Color(255, 255, 255));
-        ordersTile4TextPanel.setPreferredSize(new java.awt.Dimension(330, 88));
-        ordersTile4TextPanel.setLayout(new java.awt.GridLayout(2, 1, 0, 6));
-
-        ordersTile4Title.setText("Cancel and restore");
-        ordersTile4Title.setForeground(new java.awt.Color(35, 55, 44));
-        ordersTile4Title.setFont(new java.awt.Font("Segoe UI", 1, 16));
-        ordersTile4TextPanel.add(ordersTile4Title);
-
-        ordersTile4Subtitle.setText("Restore stock exactly once");
-        ordersTile4Subtitle.setForeground(new java.awt.Color(110, 128, 117));
-        ordersTile4Subtitle.setFont(new java.awt.Font("Segoe UI", 0, 12));
-        ordersTile4TextPanel.add(ordersTile4Subtitle);
-
-
-        ordersTile4Panel.add(ordersTile4TextPanel, java.awt.BorderLayout.NORTH);
-
-        ordersTile4Status.setText("Module interface will be integrated here.");
-        ordersTile4Status.setForeground(new java.awt.Color(66, 130, 97));
-        ordersTile4Status.setFont(new java.awt.Font("Segoe UI", 0, 11));
-        ordersTile4Panel.add(ordersTile4Status, java.awt.BorderLayout.SOUTH);
-
-
-        ordersTilesPanel.add(ordersTile4Panel);
-
+        tblOrderItems.setModel(new javax.swing.table.DefaultTableModel(
+                new Object[][] {}, new String[] {"Product ID", "Product name", "Qty", "Unit price", "Subtotal"}) {
+            Class[] types = new Class[] {java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.math.BigDecimal.class, java.math.BigDecimal.class};
+            boolean[] canEdit = new boolean[] {false, false, false, false, false};
+            public Class getColumnClass(int columnIndex) { return types[columnIndex]; }
+            public boolean isCellEditable(int rowIndex, int columnIndex) { return canEdit[columnIndex]; }
+        });
+        ordItemsScroll.setViewportView(tblOrderItems);
+        ordItemsPanel.add(ordItemsScroll, java.awt.BorderLayout.CENTER);
+        ordDataPanel.add(ordItemsPanel, java.awt.BorderLayout.SOUTH);
+        ordersTilesPanel.add(ordDataPanel, java.awt.BorderLayout.CENTER);
 
         ordersDetailsPanel.add(ordersTilesPanel, java.awt.BorderLayout.CENTER);
 
-        ordersModuleStatus.setText("Assigned developer: Shanika   |   Placeholder screen - no database changes");
+        ordersModuleStatus.setText("Shanika | Task 5 - Client Orders | Draft, item snapshots, confirm and cancel");
         ordersModuleStatus.setForeground(new java.awt.Color(110, 128, 117));
         ordersModuleStatus.setFont(new java.awt.Font("Segoe UI", 0, 11));
         ordersModuleStatus.setPreferredSize(new java.awt.Dimension(700, 47));
@@ -3222,6 +3301,171 @@ public class MainDashboard extends javax.swing.JFrame {
     private void onRefreshAgents(java.awt.event.ActionEvent evt) { refreshAgentTable(); }
     private void onAgentTableClick(java.awt.event.MouseEvent evt) { loadSelectedAgentIntoForm(); }
 
+    // ===== TASK 5: Order Management — GUI event logic (never edit initComponents()) =====
+    private final com.econest.orders.service.OrderService orderService = new com.econest.orders.service.OrderService();
+    private final com.econest.clients.service.ClientService orderClients = new com.econest.clients.service.ClientService();
+    private final com.econest.catalog.service.ProductService orderProducts = new com.econest.catalog.service.ProductService();
+    private final com.econest.catalog.service.InventoryService orderInventory = new com.econest.catalog.service.InventoryService();
+    private Integer selectedOrderId = null;
+    private javax.swing.table.TableRowSorter<javax.swing.table.DefaultTableModel> orderSorter;
+    private static final class OrderChoice {
+        final int id; final String title;
+        OrderChoice(int id,String title){this.id=id;this.title=title;}
+        @Override public String toString(){return title;}
+    }
+    private int selectedOrderChoice(javax.swing.JComboBox combo){
+        Object v=combo.getSelectedItem();return v instanceof OrderChoice?((OrderChoice)v).id:0;
+    }
+    private void prepareOrderTables(){
+        javax.swing.table.DefaultTableModel model=(javax.swing.table.DefaultTableModel)tblOrders.getModel();
+        orderSorter=new javax.swing.table.TableRowSorter<>(model);tblOrders.setRowSorter(orderSorter);
+        tblOrders.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblOrderItems.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblOrders.setRowHeight(26);tblOrderItems.setRowHeight(26);
+        txtOrdTotal.setEditable(false);txtOrdSelectedOrder.setEditable(false);txtOrdStatus.setEditable(false);
+        spnOrdLineCount.setEnabled(false);spnOrdStock.setEnabled(false);
+        spnOrdQty.setModel(new javax.swing.SpinnerNumberModel(1,1,999999,1));
+        tblOrders.getSelectionModel().addListSelectionListener(e->{
+            if(!e.getValueIsAdjusting()&&tblOrders.getSelectedRow()>=0)loadSelectedOrder();
+        });
+        txtOrdSearch.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
+            public void insertUpdate(javax.swing.event.DocumentEvent e){applyOrderSearch();}
+            public void removeUpdate(javax.swing.event.DocumentEvent e){applyOrderSearch();}
+            public void changedUpdate(javax.swing.event.DocumentEvent e){applyOrderSearch();}
+        });
+        cmbOrdProduct.addActionListener(e->refreshOrderSelectedStock());
+        clearOrderSelection();
+    }
+    private void applyOrderSearch(){
+        if(orderSorter==null)return;
+        String search=txtOrdSearch.getText().trim();
+        orderSorter.setRowFilter(search.isEmpty()?null:javax.swing.RowFilter.regexFilter("(?i)"+java.util.regex.Pattern.quote(search)));
+    }
+    private void refreshOrderChoices(){
+        int clientId=selectedOrderChoice(cmbOrdClient),productId=selectedOrderChoice(cmbOrdProduct);
+        try{
+            cmbOrdClient.removeAllItems();cmbOrdClient.addItem(new OrderChoice(0,"Select a client"));
+            for(com.econest.clients.model.Client c:orderClients.listClients())
+                cmbOrdClient.addItem(new OrderChoice(c.getClientId(),"#"+c.getClientId()+"  "+c.getName()+" ("+c.getType()+")"));
+            cmbOrdProduct.removeAllItems();cmbOrdProduct.addItem(new OrderChoice(0,"Select a product"));
+            for(com.econest.catalog.model.Product p:orderProducts.listProducts())
+                cmbOrdProduct.addItem(new OrderChoice(p.getProductId(),"#"+p.getProductId()+"  "+p.getName()+" — "+p.getUnitPrice()));
+            for(int i=0;i<cmbOrdClient.getItemCount();i++)
+                if(((OrderChoice)cmbOrdClient.getItemAt(i)).id==clientId)cmbOrdClient.setSelectedIndex(i);
+            for(int i=0;i<cmbOrdProduct.getItemCount();i++)
+                if(((OrderChoice)cmbOrdProduct.getItemAt(i)).id==productId)cmbOrdProduct.setSelectedIndex(i);
+        }catch(Exception ex){showOrderError("Loading clients/products",ex);}
+        refreshOrderSelectedStock();
+    }
+    private void refreshOrderSelectedStock(){
+        int pid=selectedOrderChoice(cmbOrdProduct);
+        try{spnOrdStock.setValue(pid>0?orderInventory.getAvailableStock(pid):0);}
+        catch(Exception e){spnOrdStock.setValue(0);}
+    }
+    private void refreshOrdersData(){
+        if(orderSorter==null)return;
+        refreshOrderChoices();
+        javax.swing.table.DefaultTableModel model=(javax.swing.table.DefaultTableModel)tblOrders.getModel();
+        try{
+            java.util.List<com.econest.orders.model.Order> orders=orderService.listOrders();
+            model.setRowCount(0);
+            for(com.econest.orders.model.Order o:orders)model.addRow(new Object[]{
+                o.getOrderId(),o.getClientNameAtOrder(),o.getStatus().name(),o.getItems().size(),
+                o.getTotalAmount(),o.getCreatedAt()==null?"":o.getCreatedAt().toString().replace('T',' ')});
+            // Only DRAFT is editable; restored selection follows underlying order ID.
+            if(selectedOrderId!=null){
+                boolean found=false;
+                for(int i=0;i<model.getRowCount();i++){
+                    if(((Number)model.getValueAt(i,0)).intValue()==selectedOrderId){
+                        int view=tblOrders.convertRowIndexToView(i);
+                        if(view>=0){tblOrders.setRowSelectionInterval(view,view);found=true;}break;
+                    }
+                }
+                if(!found){selectedOrderId=null;clearOrderFields();}
+            }
+            refreshOrderItems();
+        }catch(Exception e){showOrderError("Loading orders",e);}
+    }
+    private void loadSelectedOrder(){
+        int view=tblOrders.getSelectedRow();if(view<0)return;
+        int modelRow=tblOrders.convertRowIndexToModel(view);
+        selectedOrderId=((Number)tblOrders.getModel().getValueAt(modelRow,0)).intValue();
+        refreshOrderItems();
+    }
+    private void refreshOrderItems(){
+        javax.swing.table.DefaultTableModel items=(javax.swing.table.DefaultTableModel)tblOrderItems.getModel();
+        items.setRowCount(0);
+        if(selectedOrderId==null){clearOrderFields();return;}
+        try{
+            com.econest.orders.model.Order order=orderService.getOrder(selectedOrderId);
+            if(order==null){selectedOrderId=null;clearOrderFields();return;}
+            txtOrdSelectedOrder.setText("#"+order.getOrderId());txtOrdStatus.setText(order.getStatus().name());
+            txtOrdTotal.setText(order.getTotalAmount().toPlainString());
+            spnOrdLineCount.setValue(order.getItems().size());
+            for(com.econest.orders.model.OrderItem item:order.getItems())items.addRow(new Object[]{
+                item.getProductIdAtOrder(),item.getProductNameAtOrder(),item.getQuantity(),
+                item.getUnitPriceAtOrder(),item.calculateSubtotal()});
+        }catch(Exception ex){showOrderError("Loading order items",ex);}
+    }
+    private void clearOrderFields(){
+        txtOrdSelectedOrder.setText("New order");txtOrdStatus.setText("DRAFT");txtOrdTotal.setText("0.00");
+        spnOrdLineCount.setValue(0);((javax.swing.table.DefaultTableModel)tblOrderItems.getModel()).setRowCount(0);
+    }
+    private void clearOrderSelection(){
+        selectedOrderId=null;tblOrders.clearSelection();clearOrderFields();spnOrdQty.setValue(1);
+    }
+    private void showOrderError(String title,Exception ex){
+        javax.swing.JOptionPane.showMessageDialog(this,ex.getMessage(),title,javax.swing.JOptionPane.ERROR_MESSAGE);
+    }
+    private void onCreateOrder(java.awt.event.ActionEvent evt){
+        int clientId=selectedOrderChoice(cmbOrdClient);
+        if(clientId<=0){javax.swing.JOptionPane.showMessageDialog(this,"Select a client first.");return;}
+        try{
+            com.econest.orders.model.Order created=orderService.createOrder(clientId);
+            selectedOrderId=created.getOrderId();refreshOrdersData();
+            javax.swing.JOptionPane.showMessageDialog(this,"Draft order #"+selectedOrderId+" created. Add products before confirming.");
+        }catch(Exception ex){showOrderError("Create order failed",ex);}
+    }
+    private void onAddOrderItem(java.awt.event.ActionEvent evt){
+        if(selectedOrderId==null){javax.swing.JOptionPane.showMessageDialog(this,"Create/select a DRAFT order first.");return;}
+        int productId=selectedOrderChoice(cmbOrdProduct),qty=((Number)spnOrdQty.getValue()).intValue();
+        if(productId<=0){javax.swing.JOptionPane.showMessageDialog(this,"Select a product.");return;}
+        try{orderService.addOrderItem(selectedOrderId,productId,qty);refreshOrdersData();}
+        catch(Exception ex){showOrderError("Add item failed",ex);}
+    }
+    private void onRemoveOrderItem(java.awt.event.ActionEvent evt){
+        int row=tblOrderItems.getSelectedRow();
+        if(selectedOrderId==null||row<0){javax.swing.JOptionPane.showMessageDialog(this,"Select an item row to remove.");return;}
+        int pid=((Number)tblOrderItems.getValueAt(row,0)).intValue();
+        try{orderService.removeOrderItem(selectedOrderId,pid);refreshOrdersData();}
+        catch(Exception ex){showOrderError("Remove item failed",ex);}
+    }
+    private void onConfirmOrder(java.awt.event.ActionEvent evt){
+        if(selectedOrderId==null){javax.swing.JOptionPane.showMessageDialog(this,"Select an order.");return;}
+        if(javax.swing.JOptionPane.showConfirmDialog(this,"Confirm order #"+selectedOrderId+" and deduct stock?",
+                "Confirm order",javax.swing.JOptionPane.YES_NO_OPTION)!=javax.swing.JOptionPane.YES_OPTION)return;
+        try{orderService.confirmOrder(selectedOrderId);refreshOrdersData();refreshInventoryData();
+            javax.swing.JOptionPane.showMessageDialog(this,"Order confirmed. Stock deducted and journalled.");}
+        catch(Exception ex){showOrderError("Confirmation failed",ex);}
+    }
+    private void onCancelOrder(java.awt.event.ActionEvent evt){
+        if(selectedOrderId==null){javax.swing.JOptionPane.showMessageDialog(this,"Select an order.");return;}
+        if(javax.swing.JOptionPane.showConfirmDialog(this,"Cancel order #"+selectedOrderId+"? Confirmed orders will restore stock.",
+                "Cancel order",javax.swing.JOptionPane.YES_NO_OPTION)!=javax.swing.JOptionPane.YES_OPTION)return;
+        try{orderService.cancelOrder(selectedOrderId);refreshOrdersData();refreshInventoryData();
+            javax.swing.JOptionPane.showMessageDialog(this,"Order cancelled successfully.");}
+        catch(Exception ex){showOrderError("Cancel failed",ex);}
+    }
+    private void onCalculateOrderTotal(java.awt.event.ActionEvent evt){
+        if(selectedOrderId==null){javax.swing.JOptionPane.showMessageDialog(this,"Select an order first.");return;}
+        try{
+            java.math.BigDecimal total=orderService.calculateOrderTotal(selectedOrderId);
+            txtOrdTotal.setText(total.toPlainString());
+            javax.swing.JOptionPane.showMessageDialog(this,"Calculated total: "+total.toPlainString());
+        }catch(Exception ex){showOrderError("Calculate total failed",ex);}
+    }
+    private void onRefreshOrders(java.awt.event.ActionEvent evt){refreshOrdersData();}
+    private void onOrderRowClick(java.awt.event.MouseEvent evt){loadSelectedOrder();}
     public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -3516,26 +3760,54 @@ public class MainDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel ordersDescription;
     private javax.swing.JPanel ordersDetailsPanel;
     private javax.swing.JPanel ordersTilesPanel;
-    private javax.swing.JPanel ordersTile1Panel;
-    private javax.swing.JPanel ordersTile1TextPanel;
-    private javax.swing.JLabel ordersTile1Title;
-    private javax.swing.JLabel ordersTile1Subtitle;
-    private javax.swing.JLabel ordersTile1Status;
-    private javax.swing.JPanel ordersTile2Panel;
-    private javax.swing.JPanel ordersTile2TextPanel;
-    private javax.swing.JLabel ordersTile2Title;
-    private javax.swing.JLabel ordersTile2Subtitle;
-    private javax.swing.JLabel ordersTile2Status;
-    private javax.swing.JPanel ordersTile3Panel;
-    private javax.swing.JPanel ordersTile3TextPanel;
-    private javax.swing.JLabel ordersTile3Title;
-    private javax.swing.JLabel ordersTile3Subtitle;
-    private javax.swing.JLabel ordersTile3Status;
-    private javax.swing.JPanel ordersTile4Panel;
-    private javax.swing.JPanel ordersTile4TextPanel;
-    private javax.swing.JLabel ordersTile4Title;
-    private javax.swing.JLabel ordersTile4Subtitle;
-    private javax.swing.JLabel ordersTile4Status;
+    private javax.swing.JPanel ordControlsPanel;
+    private javax.swing.JLabel ordControlsHeading;
+    private javax.swing.JScrollPane ordControlsScroll;
+    private javax.swing.JPanel ordInputsPanel;
+    private javax.swing.JPanel ordClientRow;
+    private javax.swing.JLabel lblOrdClient;
+    private javax.swing.JComboBox cmbOrdClient;
+    private javax.swing.JPanel ordProductRow;
+    private javax.swing.JLabel lblOrdProduct;
+    private javax.swing.JComboBox cmbOrdProduct;
+    private javax.swing.JPanel ordQtyRow;
+    private javax.swing.JLabel lblOrdQty;
+    private javax.swing.JSpinner spnOrdQty;
+    private javax.swing.JButton btnAddOrderItem;
+    private javax.swing.JPanel ordLineCountRow;
+    private javax.swing.JLabel lblOrdLineCount;
+    private javax.swing.JSpinner spnOrdLineCount;
+    private javax.swing.JButton btnRemoveOrderItem;
+    private javax.swing.JPanel ordStockRow;
+    private javax.swing.JLabel lblOrdStock;
+    private javax.swing.JSpinner spnOrdStock;
+    private javax.swing.JPanel ordTotalRow;
+    private javax.swing.JLabel lblOrdTotal;
+    private javax.swing.JTextField txtOrdTotal;
+    private javax.swing.JButton btnConfirmOrder;
+    private javax.swing.JLabel lblOrdDetailsHeading;
+    private javax.swing.JPanel ordSearchRow;
+    private javax.swing.JLabel lblOrdSearch;
+    private javax.swing.JTextField txtOrdSearch;
+    private javax.swing.JPanel ordOrderIdRow;
+    private javax.swing.JLabel lblOrdSelectedOrder;
+    private javax.swing.JTextField txtOrdSelectedOrder;
+    private javax.swing.JPanel ordOrderStatusRow;
+    private javax.swing.JLabel lblOrdStatus;
+    private javax.swing.JTextField txtOrdStatus;
+    private javax.swing.JButton btnCancelOrder;
+    private javax.swing.JPanel ordDataPanel;
+    private javax.swing.JPanel ordOrdersToolbar;
+    private javax.swing.JLabel lblOrdersTable;
+    private javax.swing.JButton btnCreateOrder;
+    private javax.swing.JButton btnCalculateOrderTotal;
+    private javax.swing.JButton btnRefreshOrders;
+    private javax.swing.JScrollPane ordOrdersScroll;
+    private javax.swing.JTable tblOrders;
+    private javax.swing.JPanel ordItemsPanel;
+    private javax.swing.JLabel lblOrderItems;
+    private javax.swing.JScrollPane ordItemsScroll;
+    private javax.swing.JTable tblOrderItems;
     private javax.swing.JLabel ordersModuleStatus;
     private javax.swing.JPanel deliveriesPage;
     private javax.swing.JPanel deliveriesIntroPanel;
