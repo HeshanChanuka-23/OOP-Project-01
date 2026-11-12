@@ -64,7 +64,7 @@ public class MainDashboard extends javax.swing.JFrame {
         headerSubtitleLabel.setText("dashboard".equals(pageKey)
                 ? "Your sustainable retail workspace"
                 : "EcoNest POS / " + headerTitleLabel.getText());
-        statusLabel.setText("EcoNest POS  |  " + headerTitleLabel.getText() + "  |  Local workspace");
+        statusLabel.setText("EcoNest POS  |  " + headerTitleLabel.getText() + "  |  Store operations");
         btnDashboard.setBackground("dashboard".equals(pageKey) ? ACTIVE : FOREST);
         btnProducts.setBackground("products".equals(pageKey) ? ACTIVE : FOREST);
         btnInventory.setBackground("inventory".equals(pageKey) ? ACTIVE : FOREST);
@@ -215,6 +215,9 @@ public class MainDashboard extends javax.swing.JFrame {
         invControlsHeading = new javax.swing.JLabel();
         invControlsScroll = new javax.swing.JScrollPane();
         invInputsPanel = new javax.swing.JPanel();
+        lblInvWriteOffSection = new javax.swing.JLabel();
+        lblInvReorderSection = new javax.swing.JLabel();
+        lblInvReceiveSection = new javax.swing.JLabel();
         invProductRow = new javax.swing.JPanel();
         lblInvProductRow = new javax.swing.JLabel();
         cmbInvProduct = new javax.swing.JComboBox();
@@ -369,6 +372,9 @@ public class MainDashboard extends javax.swing.JFrame {
         ordControlsHeading = new javax.swing.JLabel();
         ordControlsScroll = new javax.swing.JScrollPane();
         ordInputsPanel = new javax.swing.JPanel();
+        lblOrdFinalizeSection = new javax.swing.JLabel();
+        lblOrdItemsSection = new javax.swing.JLabel();
+        lblOrdStartSection = new javax.swing.JLabel();
         ordClientRow = new javax.swing.JPanel();
         lblOrdClient = new javax.swing.JLabel();
         cmbOrdClient = new javax.swing.JComboBox();
@@ -425,6 +431,8 @@ public class MainDashboard extends javax.swing.JFrame {
         delControlsHeading = new javax.swing.JLabel();
         delControlsScroll = new javax.swing.JScrollPane();
         delInputsPanel = new javax.swing.JPanel();
+        lblDelScheduleSection = new javax.swing.JLabel();
+        lblDelAssignSection = new javax.swing.JLabel();
         delOrderRow = new javax.swing.JPanel();
         lblDelOrder = new javax.swing.JLabel();
         cmbDelOrder = new javax.swing.JComboBox();
@@ -561,7 +569,7 @@ public class MainDashboard extends javax.swing.JFrame {
         brandPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(16, 22, 7, 8));
         brandPanel.setLayout(new java.awt.GridLayout(2, 1, 0, 0));
 
-        brandTitleLabel.setText("EcoNest  •");
+        brandTitleLabel.setText("EcoNest");
         brandTitleLabel.setForeground(new java.awt.Color(239, 250, 241));
         brandTitleLabel.setFont(new java.awt.Font("Segoe UI", 1, 25));
         brandPanel.add(brandTitleLabel);
@@ -707,7 +715,7 @@ public class MainDashboard extends javax.swing.JFrame {
 
         sidebarPanel.add(navigationPanel, java.awt.BorderLayout.CENTER);
 
-        sidebarFooterLabel.setText("GROUP A  |  OOP PROJECT");
+        sidebarFooterLabel.setText("SUSTAINABLE RETAIL SOLUTIONS");
         sidebarFooterLabel.setForeground(new java.awt.Color(176, 213, 190));
         sidebarFooterLabel.setFont(new java.awt.Font("Segoe UI", 0, 11));
         sidebarFooterLabel.setPreferredSize(new java.awt.Dimension(235, 44));
@@ -741,7 +749,7 @@ public class MainDashboard extends javax.swing.JFrame {
 
         headerPanel.add(headerTitleBlock, java.awt.BorderLayout.CENTER);
 
-        headerModeLabel.setText("LOCAL WORKSPACE");
+        headerModeLabel.setText("STORE OPERATIONS");
         headerModeLabel.setForeground(new java.awt.Color(30, 100, 59));
         headerModeLabel.setFont(new java.awt.Font("Segoe UI", 1, 11));
         headerModeLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(9, 14, 9, 14));
@@ -1281,7 +1289,7 @@ public class MainDashboard extends javax.swing.JFrame {
 
         productsDetailsPanel.add(productsTilesPanel, java.awt.BorderLayout.CENTER);
 
-        productsModuleStatus.setText("Heshan | Products & Inventory  •  Catalogue ready");
+        productsModuleStatus.setText("Product catalogue | Create, update and manage product details");
         productsModuleStatus.setForeground(new java.awt.Color(110, 128, 117));
         productsModuleStatus.setFont(new java.awt.Font("Segoe UI", 0, 11));
         productsModuleStatus.setPreferredSize(new java.awt.Dimension(700, 47));
@@ -1312,7 +1320,7 @@ public class MainDashboard extends javax.swing.JFrame {
         inventoryHeading.setFont(new java.awt.Font("Segoe UI", 1, 25));
         inventoryIntroPanel.add(inventoryHeading);
 
-        inventoryDescription.setText("Track quantity on hand, reorder levels, suppliers and stock movement history.");
+        inventoryDescription.setText("Receive supplier stock, configure reorder levels and record stock losses.");
         inventoryDescription.setForeground(new java.awt.Color(110, 128, 117));
         inventoryDescription.setFont(new java.awt.Font("Segoe UI", 0, 12));
         inventoryIntroPanel.add(inventoryDescription);
@@ -1329,13 +1337,13 @@ public class MainDashboard extends javax.swing.JFrame {
         invControlsPanel.setPreferredSize(new java.awt.Dimension(350, 480));
         invControlsPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(12, 11, 12, 11));
         invControlsPanel.setLayout(new java.awt.BorderLayout(0, 6));
-        invControlsHeading.setText("Stock, suppliers and write-offs");
+        invControlsHeading.setText("Inventory operations");
         invControlsHeading.setFont(new java.awt.Font("Segoe UI", 1, 15));
         invControlsHeading.setPreferredSize(new java.awt.Dimension(330, 38));
         invControlsPanel.add(invControlsHeading, java.awt.BorderLayout.NORTH);
 
         invInputsPanel.setBackground(new java.awt.Color(255, 255, 255));
-        invInputsPanel.setLayout(new java.awt.GridLayout(14, 1, 0, 4));
+        invInputsPanel.setLayout(new java.awt.GridLayout(17, 1, 0, 5));
         invProductRow.setBackground(new java.awt.Color(255, 255, 255));
         invProductRow.setPreferredSize(new java.awt.Dimension(270, 34));
         invProductRow.setLayout(new java.awt.BorderLayout(5, 0));
@@ -1344,7 +1352,6 @@ public class MainDashboard extends javax.swing.JFrame {
         invProductRow.add(lblInvProductRow, java.awt.BorderLayout.WEST);
 
         invProductRow.add(cmbInvProduct, java.awt.BorderLayout.CENTER);
-        invInputsPanel.add(invProductRow);
         invSupplierRow.setBackground(new java.awt.Color(255, 255, 255));
         invSupplierRow.setPreferredSize(new java.awt.Dimension(270, 34));
         invSupplierRow.setLayout(new java.awt.BorderLayout(5, 0));
@@ -1353,7 +1360,6 @@ public class MainDashboard extends javax.swing.JFrame {
         invSupplierRow.add(lblInvSupplierRow, java.awt.BorderLayout.WEST);
 
         invSupplierRow.add(cmbInvSupplier, java.awt.BorderLayout.CENTER);
-        invInputsPanel.add(invSupplierRow);
         invReceiveQtyRow.setBackground(new java.awt.Color(255, 255, 255));
         invReceiveQtyRow.setPreferredSize(new java.awt.Dimension(270, 34));
         invReceiveQtyRow.setLayout(new java.awt.BorderLayout(5, 0));
@@ -1362,10 +1368,8 @@ public class MainDashboard extends javax.swing.JFrame {
         invReceiveQtyRow.add(lblInvReceiveQtyRow, java.awt.BorderLayout.WEST);
 
         invReceiveQtyRow.add(spnInvReceiveQty, java.awt.BorderLayout.CENTER);
-        invInputsPanel.add(invReceiveQtyRow);
         btnReceiveStock.setText("RECEIVE STOCK");
         btnReceiveStock.addActionListener(evt -> onReceiveStock(evt));
-        invInputsPanel.add(btnReceiveStock);
         invReorderRow.setBackground(new java.awt.Color(255, 255, 255));
         invReorderRow.setPreferredSize(new java.awt.Dimension(270, 34));
         invReorderRow.setLayout(new java.awt.BorderLayout(5, 0));
@@ -1374,10 +1378,8 @@ public class MainDashboard extends javax.swing.JFrame {
         invReorderRow.add(lblInvReorderRow, java.awt.BorderLayout.WEST);
 
         invReorderRow.add(spnInvReorder, java.awt.BorderLayout.CENTER);
-        invInputsPanel.add(invReorderRow);
         btnSetReorder.setText("SAVE REORDER LEVEL");
         btnSetReorder.addActionListener(evt -> onSetReorder(evt));
-        invInputsPanel.add(btnSetReorder);
         invWriteOffQtyRow.setBackground(new java.awt.Color(255, 255, 255));
         invWriteOffQtyRow.setPreferredSize(new java.awt.Dimension(270, 34));
         invWriteOffQtyRow.setLayout(new java.awt.BorderLayout(5, 0));
@@ -1386,7 +1388,6 @@ public class MainDashboard extends javax.swing.JFrame {
         invWriteOffQtyRow.add(lblInvWriteOffQtyRow, java.awt.BorderLayout.WEST);
 
         invWriteOffQtyRow.add(spnInvWriteOffQty, java.awt.BorderLayout.CENTER);
-        invInputsPanel.add(invWriteOffQtyRow);
         invReasonRow.setBackground(new java.awt.Color(255, 255, 255));
         invReasonRow.setPreferredSize(new java.awt.Dimension(270, 34));
         invReasonRow.setLayout(new java.awt.BorderLayout(5, 0));
@@ -1395,13 +1396,14 @@ public class MainDashboard extends javax.swing.JFrame {
         invReasonRow.add(lblInvReasonRow, java.awt.BorderLayout.WEST);
 
         invReasonRow.add(txtInvWriteOffReason, java.awt.BorderLayout.CENTER);
-        invInputsPanel.add(invReasonRow);
         btnWriteOff.setText("RECORD WRITE-OFF");
         btnWriteOff.addActionListener(evt -> onWriteOffStock(evt));
-        invInputsPanel.add(btnWriteOff);
-        lblRegisterSupplier.setText("REGISTER SUPPLIER");
-        lblRegisterSupplier.setFont(new java.awt.Font("Segoe UI", 1, 13));
-        invInputsPanel.add(lblRegisterSupplier);
+        lblRegisterSupplier.setText("04   REGISTER SUPPLIER");
+        lblRegisterSupplier.setOpaque(true);
+        lblRegisterSupplier.setBackground(new java.awt.Color(231, 243, 235));
+        lblRegisterSupplier.setForeground(new java.awt.Color(30, 94, 64));
+        lblRegisterSupplier.setFont(new java.awt.Font("Segoe UI", 1, 12));
+        lblRegisterSupplier.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 2));
         invSupplierNameRow.setBackground(new java.awt.Color(255, 255, 255));
         invSupplierNameRow.setPreferredSize(new java.awt.Dimension(270, 34));
         invSupplierNameRow.setLayout(new java.awt.BorderLayout(5, 0));
@@ -1410,7 +1412,6 @@ public class MainDashboard extends javax.swing.JFrame {
         invSupplierNameRow.add(lblInvSupplierNameRow, java.awt.BorderLayout.WEST);
 
         invSupplierNameRow.add(txtInvSupplierName, java.awt.BorderLayout.CENTER);
-        invInputsPanel.add(invSupplierNameRow);
         invSupplierPhoneRow.setBackground(new java.awt.Color(255, 255, 255));
         invSupplierPhoneRow.setPreferredSize(new java.awt.Dimension(270, 34));
         invSupplierPhoneRow.setLayout(new java.awt.BorderLayout(5, 0));
@@ -1419,7 +1420,6 @@ public class MainDashboard extends javax.swing.JFrame {
         invSupplierPhoneRow.add(lblInvSupplierPhoneRow, java.awt.BorderLayout.WEST);
 
         invSupplierPhoneRow.add(txtInvSupplierPhone, java.awt.BorderLayout.CENTER);
-        invInputsPanel.add(invSupplierPhoneRow);
         invSupplierEmailRow.setBackground(new java.awt.Color(255, 255, 255));
         invSupplierEmailRow.setPreferredSize(new java.awt.Dimension(270, 34));
         invSupplierEmailRow.setLayout(new java.awt.BorderLayout(5, 0));
@@ -1428,9 +1428,42 @@ public class MainDashboard extends javax.swing.JFrame {
         invSupplierEmailRow.add(lblInvSupplierEmailRow, java.awt.BorderLayout.WEST);
 
         invSupplierEmailRow.add(txtInvSupplierEmail, java.awt.BorderLayout.CENTER);
-        invInputsPanel.add(invSupplierEmailRow);
         btnRegisterSupplier.setText("ADD SUPPLIER");
         btnRegisterSupplier.addActionListener(evt -> onRegisterSupplier(evt));
+        lblInvReceiveSection.setText("01   RECEIVE STOCK");
+        lblInvReceiveSection.setOpaque(true);
+        lblInvReceiveSection.setBackground(new java.awt.Color(231, 243, 235));
+        lblInvReceiveSection.setForeground(new java.awt.Color(30, 94, 64));
+        lblInvReceiveSection.setFont(new java.awt.Font("Segoe UI", 1, 12));
+        lblInvReceiveSection.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 2));
+        invInputsPanel.add(lblInvReceiveSection);
+        invInputsPanel.add(invProductRow);
+        invInputsPanel.add(invSupplierRow);
+        invInputsPanel.add(invReceiveQtyRow);
+        invInputsPanel.add(btnReceiveStock);
+        lblInvReorderSection.setText("02   REORDER THRESHOLD");
+        lblInvReorderSection.setOpaque(true);
+        lblInvReorderSection.setBackground(new java.awt.Color(231, 243, 235));
+        lblInvReorderSection.setForeground(new java.awt.Color(30, 94, 64));
+        lblInvReorderSection.setFont(new java.awt.Font("Segoe UI", 1, 12));
+        lblInvReorderSection.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 2));
+        invInputsPanel.add(lblInvReorderSection);
+        invInputsPanel.add(invReorderRow);
+        invInputsPanel.add(btnSetReorder);
+        lblInvWriteOffSection.setText("03   RECORD STOCK LOSS");
+        lblInvWriteOffSection.setOpaque(true);
+        lblInvWriteOffSection.setBackground(new java.awt.Color(231, 243, 235));
+        lblInvWriteOffSection.setForeground(new java.awt.Color(30, 94, 64));
+        lblInvWriteOffSection.setFont(new java.awt.Font("Segoe UI", 1, 12));
+        lblInvWriteOffSection.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 2));
+        invInputsPanel.add(lblInvWriteOffSection);
+        invInputsPanel.add(invWriteOffQtyRow);
+        invInputsPanel.add(invReasonRow);
+        invInputsPanel.add(btnWriteOff);
+        invInputsPanel.add(lblRegisterSupplier);
+        invInputsPanel.add(invSupplierNameRow);
+        invInputsPanel.add(invSupplierPhoneRow);
+        invInputsPanel.add(invSupplierEmailRow);
         invInputsPanel.add(btnRegisterSupplier);
         invControlsScroll.setViewportView(invInputsPanel);
         invControlsPanel.add(invControlsScroll, java.awt.BorderLayout.CENTER);
@@ -1470,7 +1503,7 @@ public class MainDashboard extends javax.swing.JFrame {
         invHistoryPanel.setPreferredSize(new java.awt.Dimension(700, 235));
         invHistoryPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 8, 7, 8));
         invHistoryPanel.setLayout(new java.awt.BorderLayout(0, 5));
-        lblStockHistory.setText("STOCK MOVEMENT HISTORY (latest 500)");
+        lblStockHistory.setText("STOCK MOVEMENT HISTORY  •  Latest 500 entries");
         lblStockHistory.setFont(new java.awt.Font("Segoe UI", 1, 13));
         invHistoryPanel.add(lblStockHistory, java.awt.BorderLayout.NORTH);
 
@@ -1488,7 +1521,7 @@ public class MainDashboard extends javax.swing.JFrame {
 
         inventoryDetailsPanel.add(inventoryTilesPanel, java.awt.BorderLayout.CENTER);
 
-        inventoryModuleStatus.setText("Heshan | Inventory, suppliers and stock journal ready");
+        inventoryModuleStatus.setText("Inventory | Live stock levels and transaction history");
         inventoryModuleStatus.setForeground(new java.awt.Color(110, 128, 117));
         inventoryModuleStatus.setFont(new java.awt.Font("Segoe UI", 0, 11));
         inventoryModuleStatus.setPreferredSize(new java.awt.Dimension(700, 47));
@@ -1687,7 +1720,7 @@ public class MainDashboard extends javax.swing.JFrame {
 
         clientsDetailsPanel.add(clientsTilesPanel, java.awt.BorderLayout.CENTER);
 
-        clientsModuleStatus.setText("Piyathissa | Task 2 - Clients  |  Ready for database operations");
+        clientsModuleStatus.setText("Client records | Household and office customers");
         clientsModuleStatus.setForeground(new java.awt.Color(110, 128, 117));
         clientsModuleStatus.setFont(new java.awt.Font("Segoe UI", 0, 11));
         clientsModuleStatus.setPreferredSize(new java.awt.Dimension(700, 47));
@@ -1888,7 +1921,7 @@ public class MainDashboard extends javax.swing.JFrame {
 
         agentsDetailsPanel.add(agentsTilesPanel, java.awt.BorderLayout.CENTER);
 
-        agentsModuleStatus.setText("Piyathissa | Task 4 - Delivery Agents | Ready for database operations");
+        agentsModuleStatus.setText("Delivery personnel | Contact and vehicle records");
         agentsModuleStatus.setForeground(new java.awt.Color(110, 128, 117));
         agentsModuleStatus.setFont(new java.awt.Font("Segoe UI", 0, 11));
         agentsModuleStatus.setPreferredSize(new java.awt.Dimension(700, 47));
@@ -1919,7 +1952,7 @@ public class MainDashboard extends javax.swing.JFrame {
         ordersHeading.setFont(new java.awt.Font("Segoe UI", 1, 25));
         ordersIntroPanel.add(ordersHeading);
 
-        ordersDescription.setText("Create orders for clients, manage items and confirm sales with safe stock deduction.");
+        ordersDescription.setText("Create drafts, manage line items and confirm or cancel client orders.");
         ordersDescription.setForeground(new java.awt.Color(110, 128, 117));
         ordersDescription.setFont(new java.awt.Font("Segoe UI", 0, 12));
         ordersIntroPanel.add(ordersDescription);
@@ -1936,13 +1969,13 @@ public class MainDashboard extends javax.swing.JFrame {
         ordControlsPanel.setPreferredSize(new java.awt.Dimension(350, 480));
         ordControlsPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(12, 11, 12, 11));
         ordControlsPanel.setLayout(new java.awt.BorderLayout(0, 6));
-        ordControlsHeading.setText("Order creation and actions");
+        ordControlsHeading.setText("Order workflow");
         ordControlsHeading.setFont(new java.awt.Font("Segoe UI", 1, 15));
         ordControlsHeading.setPreferredSize(new java.awt.Dimension(330, 38));
         ordControlsPanel.add(ordControlsHeading, java.awt.BorderLayout.NORTH);
 
         ordInputsPanel.setBackground(new java.awt.Color(255, 255, 255));
-        ordInputsPanel.setLayout(new java.awt.GridLayout(14, 1, 0, 4));
+        ordInputsPanel.setLayout(new java.awt.GridLayout(19, 1, 0, 5));
         ordClientRow.setBackground(new java.awt.Color(255, 255, 255));
         ordClientRow.setPreferredSize(new java.awt.Dimension(270, 34));
         ordClientRow.setLayout(new java.awt.BorderLayout(5, 0));
@@ -1951,7 +1984,6 @@ public class MainDashboard extends javax.swing.JFrame {
         ordClientRow.add(lblOrdClient, java.awt.BorderLayout.WEST);
 
         ordClientRow.add(cmbOrdClient, java.awt.BorderLayout.CENTER);
-        ordInputsPanel.add(ordClientRow);
         ordProductRow.setBackground(new java.awt.Color(255, 255, 255));
         ordProductRow.setPreferredSize(new java.awt.Dimension(270, 34));
         ordProductRow.setLayout(new java.awt.BorderLayout(5, 0));
@@ -1960,7 +1992,6 @@ public class MainDashboard extends javax.swing.JFrame {
         ordProductRow.add(lblOrdProduct, java.awt.BorderLayout.WEST);
 
         ordProductRow.add(cmbOrdProduct, java.awt.BorderLayout.CENTER);
-        ordInputsPanel.add(ordProductRow);
         ordQtyRow.setBackground(new java.awt.Color(255, 255, 255));
         ordQtyRow.setPreferredSize(new java.awt.Dimension(270, 34));
         ordQtyRow.setLayout(new java.awt.BorderLayout(5, 0));
@@ -1970,10 +2001,8 @@ public class MainDashboard extends javax.swing.JFrame {
 
         spnOrdQty.setModel(new javax.swing.SpinnerNumberModel(1, 1, 999999, 1));
         ordQtyRow.add(spnOrdQty, java.awt.BorderLayout.CENTER);
-        ordInputsPanel.add(ordQtyRow);
         btnAddOrderItem.setText("ADD ITEM");
         btnAddOrderItem.addActionListener(evt -> onAddOrderItem(evt));
-        ordInputsPanel.add(btnAddOrderItem);
         ordLineCountRow.setBackground(new java.awt.Color(255, 255, 255));
         ordLineCountRow.setPreferredSize(new java.awt.Dimension(270, 34));
         ordLineCountRow.setLayout(new java.awt.BorderLayout(5, 0));
@@ -1983,10 +2012,8 @@ public class MainDashboard extends javax.swing.JFrame {
 
         spnOrdLineCount.setEnabled(false);
         ordLineCountRow.add(spnOrdLineCount, java.awt.BorderLayout.CENTER);
-        ordInputsPanel.add(ordLineCountRow);
         btnRemoveOrderItem.setText("REMOVE SELECTED ITEM");
         btnRemoveOrderItem.addActionListener(evt -> onRemoveOrderItem(evt));
-        ordInputsPanel.add(btnRemoveOrderItem);
         ordStockRow.setBackground(new java.awt.Color(255, 255, 255));
         ordStockRow.setPreferredSize(new java.awt.Dimension(270, 34));
         ordStockRow.setLayout(new java.awt.BorderLayout(5, 0));
@@ -1996,7 +2023,6 @@ public class MainDashboard extends javax.swing.JFrame {
 
         spnOrdStock.setEnabled(false);
         ordStockRow.add(spnOrdStock, java.awt.BorderLayout.CENTER);
-        ordInputsPanel.add(ordStockRow);
         ordTotalRow.setBackground(new java.awt.Color(255, 255, 255));
         ordTotalRow.setPreferredSize(new java.awt.Dimension(270, 34));
         ordTotalRow.setLayout(new java.awt.BorderLayout(5, 0));
@@ -2006,13 +2032,14 @@ public class MainDashboard extends javax.swing.JFrame {
 
         txtOrdTotal.setEditable(false);
         ordTotalRow.add(txtOrdTotal, java.awt.BorderLayout.CENTER);
-        ordInputsPanel.add(ordTotalRow);
         btnConfirmOrder.setText("CONFIRM ORDER");
         btnConfirmOrder.addActionListener(evt -> onConfirmOrder(evt));
-        ordInputsPanel.add(btnConfirmOrder);
-        lblOrdDetailsHeading.setText("SELECTED ORDER / SEARCH");
-        lblOrdDetailsHeading.setFont(new java.awt.Font("Segoe UI", 1, 13));
-        ordInputsPanel.add(lblOrdDetailsHeading);
+        lblOrdDetailsHeading.setText("04   FIND & CANCEL ORDER");
+        lblOrdDetailsHeading.setOpaque(true);
+        lblOrdDetailsHeading.setBackground(new java.awt.Color(231, 243, 235));
+        lblOrdDetailsHeading.setForeground(new java.awt.Color(30, 94, 64));
+        lblOrdDetailsHeading.setFont(new java.awt.Font("Segoe UI", 1, 12));
+        lblOrdDetailsHeading.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 2));
         ordSearchRow.setBackground(new java.awt.Color(255, 255, 255));
         ordSearchRow.setPreferredSize(new java.awt.Dimension(270, 34));
         ordSearchRow.setLayout(new java.awt.BorderLayout(5, 0));
@@ -2021,7 +2048,6 @@ public class MainDashboard extends javax.swing.JFrame {
         ordSearchRow.add(lblOrdSearch, java.awt.BorderLayout.WEST);
 
         ordSearchRow.add(txtOrdSearch, java.awt.BorderLayout.CENTER);
-        ordInputsPanel.add(ordSearchRow);
         ordOrderIdRow.setBackground(new java.awt.Color(255, 255, 255));
         ordOrderIdRow.setPreferredSize(new java.awt.Dimension(270, 34));
         ordOrderIdRow.setLayout(new java.awt.BorderLayout(5, 0));
@@ -2031,7 +2057,6 @@ public class MainDashboard extends javax.swing.JFrame {
 
         txtOrdSelectedOrder.setEditable(false);
         ordOrderIdRow.add(txtOrdSelectedOrder, java.awt.BorderLayout.CENTER);
-        ordInputsPanel.add(ordOrderIdRow);
         ordOrderStatusRow.setBackground(new java.awt.Color(255, 255, 255));
         ordOrderStatusRow.setPreferredSize(new java.awt.Dimension(270, 34));
         ordOrderStatusRow.setLayout(new java.awt.BorderLayout(5, 0));
@@ -2041,9 +2066,44 @@ public class MainDashboard extends javax.swing.JFrame {
 
         txtOrdStatus.setEditable(false);
         ordOrderStatusRow.add(txtOrdStatus, java.awt.BorderLayout.CENTER);
-        ordInputsPanel.add(ordOrderStatusRow);
         btnCancelOrder.setText("CANCEL ORDER");
         btnCancelOrder.addActionListener(evt -> onCancelOrder(evt));
+        lblOrdStartSection.setText("01   CREATE A CLIENT DRAFT");
+        lblOrdStartSection.setOpaque(true);
+        lblOrdStartSection.setBackground(new java.awt.Color(231, 243, 235));
+        lblOrdStartSection.setForeground(new java.awt.Color(30, 94, 64));
+        lblOrdStartSection.setFont(new java.awt.Font("Segoe UI", 1, 12));
+        lblOrdStartSection.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 2));
+        lblOrdItemsSection.setText("02   ADD OR REMOVE ITEMS");
+        lblOrdItemsSection.setOpaque(true);
+        lblOrdItemsSection.setBackground(new java.awt.Color(231, 243, 235));
+        lblOrdItemsSection.setForeground(new java.awt.Color(30, 94, 64));
+        lblOrdItemsSection.setFont(new java.awt.Font("Segoe UI", 1, 12));
+        lblOrdItemsSection.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 2));
+        lblOrdFinalizeSection.setText("03   REVIEW & CONFIRM");
+        lblOrdFinalizeSection.setOpaque(true);
+        lblOrdFinalizeSection.setBackground(new java.awt.Color(231, 243, 235));
+        lblOrdFinalizeSection.setForeground(new java.awt.Color(30, 94, 64));
+        lblOrdFinalizeSection.setFont(new java.awt.Font("Segoe UI", 1, 12));
+        lblOrdFinalizeSection.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 2));
+        ordInputsPanel.add(lblOrdStartSection);
+        ordInputsPanel.add(ordClientRow);
+        ordInputsPanel.add(btnCreateOrder);
+        ordInputsPanel.add(lblOrdItemsSection);
+        ordInputsPanel.add(ordProductRow);
+        ordInputsPanel.add(ordQtyRow);
+        ordInputsPanel.add(btnAddOrderItem);
+        ordInputsPanel.add(ordLineCountRow);
+        ordInputsPanel.add(btnRemoveOrderItem);
+        ordInputsPanel.add(lblOrdFinalizeSection);
+        ordInputsPanel.add(ordStockRow);
+        ordInputsPanel.add(ordTotalRow);
+        ordInputsPanel.add(btnCalculateOrderTotal);
+        ordInputsPanel.add(btnConfirmOrder);
+        ordInputsPanel.add(lblOrdDetailsHeading);
+        ordInputsPanel.add(ordSearchRow);
+        ordInputsPanel.add(ordOrderIdRow);
+        ordInputsPanel.add(ordOrderStatusRow);
         ordInputsPanel.add(btnCancelOrder);
         ordControlsScroll.setViewportView(ordInputsPanel);
         ordControlsPanel.add(ordControlsScroll, java.awt.BorderLayout.CENTER);
@@ -2052,16 +2112,16 @@ public class MainDashboard extends javax.swing.JFrame {
         ordDataPanel.setLayout(new java.awt.BorderLayout(0, 10));
         ordOrdersToolbar.setBackground(new java.awt.Color(246, 249, 247));
         ordOrdersToolbar.setPreferredSize(new java.awt.Dimension(700, 40));
-        ordOrdersToolbar.setLayout(new java.awt.GridLayout(1, 4, 5, 0));
-        lblOrdersTable.setText("CLIENT ORDERS");
+        ordOrdersToolbar.setLayout(new java.awt.GridLayout(1, 2, 5, 0));
+        lblOrdersTable.setText("CLIENT ORDERS  •  Select to manage");
         lblOrdersTable.setFont(new java.awt.Font("Segoe UI", 1, 14));
         ordOrdersToolbar.add(lblOrdersTable);
         btnCreateOrder.setText("Create draft");
         btnCreateOrder.addActionListener(evt -> onCreateOrder(evt));
-        ordOrdersToolbar.add(btnCreateOrder);
+
         btnCalculateOrderTotal.setText("Calculate total");
         btnCalculateOrderTotal.addActionListener(evt -> onCalculateOrderTotal(evt));
-        ordOrdersToolbar.add(btnCalculateOrderTotal);
+
         btnRefreshOrders.setText("Refresh");
         btnRefreshOrders.addActionListener(evt -> onRefreshOrders(evt));
         ordOrdersToolbar.add(btnRefreshOrders);
@@ -2083,7 +2143,7 @@ public class MainDashboard extends javax.swing.JFrame {
         ordItemsPanel.setPreferredSize(new java.awt.Dimension(700, 235));
         ordItemsPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 8, 7, 8));
         ordItemsPanel.setLayout(new java.awt.BorderLayout(0, 5));
-        lblOrderItems.setText("ORDER ITEMS - Select a line to remove");
+        lblOrderItems.setText("ORDER ITEMS  •  Select a line before removing it");
         lblOrderItems.setFont(new java.awt.Font("Segoe UI", 1, 13));
         ordItemsPanel.add(lblOrderItems, java.awt.BorderLayout.NORTH);
 
@@ -2101,7 +2161,7 @@ public class MainDashboard extends javax.swing.JFrame {
 
         ordersDetailsPanel.add(ordersTilesPanel, java.awt.BorderLayout.CENTER);
 
-        ordersModuleStatus.setText("Shanika | Task 5 - Client Orders | Draft, item snapshots, confirm and cancel");
+        ordersModuleStatus.setText("Order processing | Create drafts, confirm and manage order history");
         ordersModuleStatus.setForeground(new java.awt.Color(110, 128, 117));
         ordersModuleStatus.setFont(new java.awt.Font("Segoe UI", 0, 11));
         ordersModuleStatus.setPreferredSize(new java.awt.Dimension(700, 47));
@@ -2132,7 +2192,7 @@ public class MainDashboard extends javax.swing.JFrame {
         deliveriesHeading.setFont(new java.awt.Font("Segoe UI", 1, 25));
         deliveriesIntroPanel.add(deliveriesHeading);
 
-        deliveriesDescription.setText("Assign agents to confirmed orders, schedule dispatch and track fulfillment.");
+        deliveriesDescription.setText("Assign agents, schedule dispatches and monitor each shipment.");
         deliveriesDescription.setForeground(new java.awt.Color(110, 128, 117));
         deliveriesDescription.setFont(new java.awt.Font("Segoe UI", 0, 12));
         deliveriesIntroPanel.add(deliveriesDescription);
@@ -2149,14 +2209,14 @@ public class MainDashboard extends javax.swing.JFrame {
         delControlsPanel.setPreferredSize(new java.awt.Dimension(335, 480));
         delControlsPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(12, 11, 12, 11));
         delControlsPanel.setLayout(new java.awt.BorderLayout(0, 6));
-        delControlsHeading.setText("Delivery assignment and tracking");
+        delControlsHeading.setText("Delivery workflow");
         delControlsHeading.setFont(new java.awt.Font("Segoe UI", 1, 15));
         delControlsHeading.setPreferredSize(new java.awt.Dimension(305, 38));
         delControlsPanel.add(delControlsHeading, java.awt.BorderLayout.NORTH);
 
         delInputsPanel.setBackground(new java.awt.Color(255, 255, 255));
         delInputsPanel.setPreferredSize(new java.awt.Dimension(270, 620));
-        delInputsPanel.setLayout(new java.awt.GridLayout(14, 1, 0, 4));
+        delInputsPanel.setLayout(new java.awt.GridLayout(18, 1, 0, 5));
         delOrderRow.setBackground(new java.awt.Color(255, 255, 255));
         delOrderRow.setPreferredSize(new java.awt.Dimension(270, 34));
         delOrderRow.setLayout(new java.awt.BorderLayout(5, 0));
@@ -2165,7 +2225,6 @@ public class MainDashboard extends javax.swing.JFrame {
         delOrderRow.add(lblDelOrder, java.awt.BorderLayout.WEST);
 
         delOrderRow.add(cmbDelOrder, java.awt.BorderLayout.CENTER);
-        delInputsPanel.add(delOrderRow);
         delAgentRow.setBackground(new java.awt.Color(255, 255, 255));
         delAgentRow.setPreferredSize(new java.awt.Dimension(270, 34));
         delAgentRow.setLayout(new java.awt.BorderLayout(5, 0));
@@ -2174,7 +2233,6 @@ public class MainDashboard extends javax.swing.JFrame {
         delAgentRow.add(lblDelAgent, java.awt.BorderLayout.WEST);
 
         delAgentRow.add(cmbDelAgent, java.awt.BorderLayout.CENTER);
-        delInputsPanel.add(delAgentRow);
         delScheduleRow.setBackground(new java.awt.Color(255, 255, 255));
         delScheduleRow.setPreferredSize(new java.awt.Dimension(270, 34));
         delScheduleRow.setLayout(new java.awt.BorderLayout(5, 0));
@@ -2184,10 +2242,8 @@ public class MainDashboard extends javax.swing.JFrame {
 
         txtDelSchedule.setToolTipText("Example: 2026-11-15 14:30 (24-hour local time)");
         delScheduleRow.add(txtDelSchedule, java.awt.BorderLayout.CENTER);
-        delInputsPanel.add(delScheduleRow);
         btnDelAssign.setText("ASSIGN / REASSIGN");
         btnDelAssign.addActionListener(evt -> onAssignDelivery(evt));
-        delInputsPanel.add(btnDelAssign);
         delIdRow.setBackground(new java.awt.Color(255, 255, 255));
         delIdRow.setPreferredSize(new java.awt.Dimension(270, 34));
         delIdRow.setLayout(new java.awt.BorderLayout(5, 0));
@@ -2197,10 +2253,8 @@ public class MainDashboard extends javax.swing.JFrame {
 
         txtDelId.setEditable(false);
         delIdRow.add(txtDelId, java.awt.BorderLayout.CENTER);
-        delInputsPanel.add(delIdRow);
         btnDelSchedule.setText("SCHEDULE DELIVERY");
         btnDelSchedule.addActionListener(evt -> onScheduleDelivery(evt));
-        delInputsPanel.add(btnDelSchedule);
         delStatusRow.setBackground(new java.awt.Color(255, 255, 255));
         delStatusRow.setPreferredSize(new java.awt.Dimension(270, 34));
         delStatusRow.setLayout(new java.awt.BorderLayout(5, 0));
@@ -2210,7 +2264,6 @@ public class MainDashboard extends javax.swing.JFrame {
 
         txtDelStatus.setEditable(false);
         delStatusRow.add(txtDelStatus, java.awt.BorderLayout.CENTER);
-        delInputsPanel.add(delStatusRow);
         delReasonRow.setBackground(new java.awt.Color(255, 255, 255));
         delReasonRow.setPreferredSize(new java.awt.Dimension(270, 34));
         delReasonRow.setLayout(new java.awt.BorderLayout(5, 0));
@@ -2220,13 +2273,14 @@ public class MainDashboard extends javax.swing.JFrame {
 
         txtDelReason.setEditable(true);
         delReasonRow.add(txtDelReason, java.awt.BorderLayout.CENTER);
-        delInputsPanel.add(delReasonRow);
         btnDelDispatch.setText("DISPATCH DELIVERY");
         btnDelDispatch.addActionListener(evt -> onDispatchDelivery(evt));
-        delInputsPanel.add(btnDelDispatch);
-        lblDelActionsHeading.setText("TRACK / UPDATE STATUS");
-        lblDelActionsHeading.setFont(new java.awt.Font("Segoe UI", 1, 13));
-        delInputsPanel.add(lblDelActionsHeading);
+        lblDelActionsHeading.setText("03   MONITOR & RESOLVE");
+        lblDelActionsHeading.setOpaque(true);
+        lblDelActionsHeading.setBackground(new java.awt.Color(231, 243, 235));
+        lblDelActionsHeading.setForeground(new java.awt.Color(30, 94, 64));
+        lblDelActionsHeading.setFont(new java.awt.Font("Segoe UI", 1, 12));
+        lblDelActionsHeading.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 2));
         delSearchRow.setBackground(new java.awt.Color(255, 255, 255));
         delSearchRow.setPreferredSize(new java.awt.Dimension(270, 34));
         delSearchRow.setLayout(new java.awt.BorderLayout(5, 0));
@@ -2235,7 +2289,6 @@ public class MainDashboard extends javax.swing.JFrame {
         delSearchRow.add(lblDelSearch, java.awt.BorderLayout.WEST);
 
         delSearchRow.add(txtDelSearch, java.awt.BorderLayout.CENTER);
-        delInputsPanel.add(delSearchRow);
         delAgentInfoRow.setBackground(new java.awt.Color(255, 255, 255));
         delAgentInfoRow.setPreferredSize(new java.awt.Dimension(270, 34));
         delAgentInfoRow.setLayout(new java.awt.BorderLayout(5, 0));
@@ -2245,7 +2298,6 @@ public class MainDashboard extends javax.swing.JFrame {
 
         txtDelAgentInfo.setEditable(false);
         delAgentInfoRow.add(txtDelAgentInfo, java.awt.BorderLayout.CENTER);
-        delInputsPanel.add(delAgentInfoRow);
         delScheduleInfoRow.setBackground(new java.awt.Color(255, 255, 255));
         delScheduleInfoRow.setPreferredSize(new java.awt.Dimension(270, 34));
         delScheduleInfoRow.setLayout(new java.awt.BorderLayout(5, 0));
@@ -2255,9 +2307,37 @@ public class MainDashboard extends javax.swing.JFrame {
 
         txtDelScheduleInfo.setEditable(false);
         delScheduleInfoRow.add(txtDelScheduleInfo, java.awt.BorderLayout.CENTER);
-        delInputsPanel.add(delScheduleInfoRow);
         btnDelCancel.setText("CANCEL DELIVERY");
         btnDelCancel.addActionListener(evt -> onCancelDelivery(evt));
+        lblDelAssignSection.setText("01   ASSIGN AN AGENT");
+        lblDelAssignSection.setOpaque(true);
+        lblDelAssignSection.setBackground(new java.awt.Color(231, 243, 235));
+        lblDelAssignSection.setForeground(new java.awt.Color(30, 94, 64));
+        lblDelAssignSection.setFont(new java.awt.Font("Segoe UI", 1, 12));
+        lblDelAssignSection.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 2));
+        lblDelScheduleSection.setText("02   SCHEDULE & DISPATCH");
+        lblDelScheduleSection.setOpaque(true);
+        lblDelScheduleSection.setBackground(new java.awt.Color(231, 243, 235));
+        lblDelScheduleSection.setForeground(new java.awt.Color(30, 94, 64));
+        lblDelScheduleSection.setFont(new java.awt.Font("Segoe UI", 1, 12));
+        lblDelScheduleSection.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 2));
+        delInputsPanel.add(lblDelAssignSection);
+        delInputsPanel.add(delOrderRow);
+        delInputsPanel.add(delAgentRow);
+        delInputsPanel.add(btnDelAssign);
+        delInputsPanel.add(lblDelScheduleSection);
+        delInputsPanel.add(delIdRow);
+        delInputsPanel.add(delStatusRow);
+        delInputsPanel.add(delScheduleRow);
+        delInputsPanel.add(btnDelSchedule);
+        delInputsPanel.add(btnDelDispatch);
+        delInputsPanel.add(lblDelActionsHeading);
+        delInputsPanel.add(delSearchRow);
+        delInputsPanel.add(delAgentInfoRow);
+        delInputsPanel.add(delScheduleInfoRow);
+        delInputsPanel.add(delReasonRow);
+        delInputsPanel.add(btnDelDelivered);
+        delInputsPanel.add(btnDelFailed);
         delInputsPanel.add(btnDelCancel);
         delControlsScroll.setViewportView(delInputsPanel);
         delControlsPanel.add(delControlsScroll, java.awt.BorderLayout.CENTER);
@@ -2266,16 +2346,16 @@ public class MainDashboard extends javax.swing.JFrame {
         delDataPanel.setLayout(new java.awt.BorderLayout(0, 10));
         delDeliveriesToolbar.setBackground(new java.awt.Color(246, 249, 247));
         delDeliveriesToolbar.setPreferredSize(new java.awt.Dimension(700, 40));
-        delDeliveriesToolbar.setLayout(new java.awt.GridLayout(1, 4, 5, 0));
-        lblDeliveriesTable.setText("DELIVERIES");
+        delDeliveriesToolbar.setLayout(new java.awt.GridLayout(1, 2, 5, 0));
+        lblDeliveriesTable.setText("DELIVERIES  •  Select to update");
         lblDeliveriesTable.setFont(new java.awt.Font("Segoe UI", 1, 14));
         delDeliveriesToolbar.add(lblDeliveriesTable);
         btnDelDelivered.setText("Mark delivered");
         btnDelDelivered.addActionListener(evt -> onMarkDelivered(evt));
-        delDeliveriesToolbar.add(btnDelDelivered);
+
         btnDelFailed.setText("Mark failed");
         btnDelFailed.addActionListener(evt -> onMarkFailed(evt));
-        delDeliveriesToolbar.add(btnDelFailed);
+
         btnDelRefresh.setText("Refresh");
         btnDelRefresh.addActionListener(evt -> onRefreshDeliveries(evt));
         delDeliveriesToolbar.add(btnDelRefresh);
@@ -2298,7 +2378,7 @@ public class MainDashboard extends javax.swing.JFrame {
         delOrdersPanel.setPreferredSize(new java.awt.Dimension(700, 170));
         delOrdersPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 8, 7, 8));
         delOrdersPanel.setLayout(new java.awt.BorderLayout(0, 5));
-        lblDelOrders.setText("ORDERS — select a confirmed order for assignment");
+        lblDelOrders.setText("CONFIRMED ORDERS  •  Select one to assign an agent");
         lblDelOrders.setFont(new java.awt.Font("Segoe UI", 1, 13));
         delOrdersPanel.add(lblDelOrders, java.awt.BorderLayout.NORTH);
 
@@ -2316,7 +2396,7 @@ public class MainDashboard extends javax.swing.JFrame {
 
         deliveriesDetailsPanel.add(deliveriesTilesPanel, java.awt.BorderLayout.CENTER);
 
-        deliveriesModuleStatus.setText("Shanika | Task 6 - Delivery lifecycle and pending notification events");
+        deliveriesModuleStatus.setText("Delivery operations | Assign, schedule and monitor shipments");
         deliveriesModuleStatus.setForeground(new java.awt.Color(110, 128, 117));
         deliveriesModuleStatus.setFont(new java.awt.Font("Segoe UI", 0, 11));
         deliveriesModuleStatus.setPreferredSize(new java.awt.Dimension(700, 28));
@@ -2537,7 +2617,7 @@ public class MainDashboard extends javax.swing.JFrame {
         reportsTilesPanel.add(lblReportNotice, java.awt.BorderLayout.SOUTH);
         reportsDetailsPanel.add(reportsTilesPanel, java.awt.BorderLayout.CENTER);
 
-        reportsModuleStatus.setText("Methsindu | Task 7 — Derived monthly reports and current low-stock alerts");
+        reportsModuleStatus.setText("Business reports | Sales trends, inventory movements and stock alerts");
         reportsModuleStatus.setForeground(new java.awt.Color(110, 128, 117));
         reportsModuleStatus.setFont(new java.awt.Font("Segoe UI", 0, 11));
         reportsModuleStatus.setPreferredSize(new java.awt.Dimension(700, 28));
@@ -2563,7 +2643,7 @@ public class MainDashboard extends javax.swing.JFrame {
         emailsEyebrow.setFont(new java.awt.Font("Segoe UI", 1, 11));
         emailsIntroPanel.add(emailsEyebrow);
 
-        emailsHeading.setText("Email Notification Center");
+        emailsHeading.setText("Email Notifications");
         emailsHeading.setForeground(new java.awt.Color(35, 55, 44));
         emailsHeading.setFont(new java.awt.Font("Segoe UI", 1, 25));
         emailsIntroPanel.add(emailsHeading);
@@ -2588,7 +2668,7 @@ public class MainDashboard extends javax.swing.JFrame {
         emailToolbarTitlePanel.setBackground(new java.awt.Color(255, 255, 255));
         emailToolbarTitlePanel.setPreferredSize(new java.awt.Dimension(280, 70));
         emailToolbarTitlePanel.setLayout(new java.awt.GridLayout(2, 1, 0, 3));
-        lblEmailHeading.setText("CLIENT + AGENT EMAIL ALERTS");
+        lblEmailHeading.setText("NOTIFICATION DELIVERY");
         lblEmailHeading.setForeground(new java.awt.Color(24, 64, 44));
         lblEmailHeading.setFont(new java.awt.Font("Segoe UI", 1, 14));
         emailToolbarTitlePanel.add(lblEmailHeading);
@@ -2662,7 +2742,7 @@ public class MainDashboard extends javax.swing.JFrame {
         emailsTilesPanel.add(emailInfoPanel, java.awt.BorderLayout.SOUTH);
         emailsDetailsPanel.add(emailsTilesPanel, java.awt.BorderLayout.CENTER);
 
-        emailsModuleStatus.setText("Methsindu | Tasks 8 + 9 — Client dispatch and delivery agent assignment email notifications");
+        emailsModuleStatus.setText("Email delivery | Client dispatch alerts and agent assignment notifications");
         emailsModuleStatus.setForeground(new java.awt.Color(110, 128, 117));
         emailsModuleStatus.setFont(new java.awt.Font("Segoe UI", 0, 11));
         emailsModuleStatus.setPreferredSize(new java.awt.Dimension(700, 47));
@@ -2676,9 +2756,31 @@ public class MainDashboard extends javax.swing.JFrame {
         contentPanel.add(emailsPage, "emails");
 
 
+
+        // Context-sensitive action hints (editable in NetBeans Design > Properties).
+        cmbInvProduct.setToolTipText("Choose the product for receiving, reorder settings, or write-off.");
+        btnReceiveStock.setToolTipText("Adds supplier stock and records the receipt in movement history.");
+        btnSetReorder.setToolTipText("Changes only the low-stock alert threshold, not stock quantity.");
+        btnWriteOff.setToolTipText("Removes damaged or unusable units and records a permanent audit entry.");
+        btnRegisterSupplier.setToolTipText("Creates a supplier that can be selected for future stock receipts.");
+        cmbDelOrder.setToolTipText("Select a CONFIRMED order from the list.");
+        cmbDelAgent.setToolTipText("Select an agent before assigning a delivery.");
+        btnDelAssign.setToolTipText("Assigns an agent; reassignment is only possible before dispatch.");
+        btnDelSchedule.setToolTipText("Select an ASSIGNED delivery and enter yyyy-MM-dd HH:mm in 24-hour local time.");
+        btnDelDispatch.setToolTipText("Dispatches a scheduled delivery and queues a client email.");
+        btnDelCancel.setToolTipText("Cancels an eligible delivery assignment; the order remains confirmed.");
+        btnDelDelivered.setToolTipText("Mark the selected dispatched delivery as delivered.");
+        btnDelFailed.setToolTipText("Provide a failure reason, then mark the selected delivery as failed.");
+        txtDelReason.setToolTipText("Reason required when marking a delivery as failed.");
+        btnCreateOrder.setToolTipText("Select a client, then create a new draft order.");
+        btnAddOrderItem.setToolTipText("Select an existing DRAFT order, then choose product and quantity.");
+        btnConfirmOrder.setToolTipText("Confirms a draft order and deducts available inventory.");
+        btnCancelOrder.setToolTipText("Cancel the selected eligible order (before dispatch).");
+        btnRemoveOrderItem.setToolTipText("Remove the selected line from a DRAFT order only.");
+
         workspacePanel.add(contentPanel, java.awt.BorderLayout.CENTER);
 
-        statusLabel.setText("EcoNest POS  |  Dashboard  |  Local workspace");
+        statusLabel.setText("EcoNest POS  |  Dashboard  |  Store operations");
         statusLabel.setForeground(new java.awt.Color(110, 128, 117));
         statusLabel.setFont(new java.awt.Font("Segoe UI", 0, 11));
         statusLabel.setPreferredSize(new java.awt.Dimension(700, 34));
@@ -3112,7 +3214,7 @@ public class MainDashboard extends javax.swing.JFrame {
             long lowCount = all.stream().filter(com.econest.catalog.model.InventoryRow::isLowStock).count();
             long total = 0;
             for (com.econest.catalog.model.InventoryRow p : all) total+=p.getQuantityOnHand();
-            inventoryModuleStatus.setText("Heshan | " + all.size() + " products | "
+            inventoryModuleStatus.setText(all.size() + " products | "
                     + total + " units | " + lowCount + " low-stock items | "
                     + (lowStockOnly ? "Low-stock filter" : "All stock"));
             metricInventoryValue.setText(String.valueOf(total));
@@ -3282,7 +3384,7 @@ public class MainDashboard extends javax.swing.JFrame {
                 });
             }
             productsModuleStatus.setText(
-                    "Products loaded: " + products.size() + "  |  Heshan's catalogue module");
+                    "Products loaded: " + products.size() + "  |  Catalogue synchronized");
             applyProductSearch();
         } catch (java.sql.SQLException | RuntimeException ex) {
             productsModuleStatus.setText("Database unavailable: " + ex.getMessage());
@@ -3465,7 +3567,7 @@ public class MainDashboard extends javax.swing.JFrame {
             selectedClientId = null;
             lblSelectedClientId.setText("New client");
             clientsModuleStatus.setText("Clients loaded: " + clients.size()
-                    + " | Piyathissa - Client Management (Task 2)");
+                    + " | Customer directory updated");
             applyClientSearch();
         } catch (java.sql.SQLException | RuntimeException ex) {
             clientsModuleStatus.setText("Unable to load clients: " + ex.getMessage());
@@ -3615,7 +3717,7 @@ public class MainDashboard extends javax.swing.JFrame {
             selectedAgentId = null;
             lblSelectedAgentId.setText("New agent");
             agentsModuleStatus.setText("Delivery agents loaded: " + agents.size()
-                    + " | Piyathissa - Delivery Agent Management (Task 4)");
+                    + " | Fleet directory updated");
             applyAgentSearch();
         } catch (java.sql.SQLException | RuntimeException ex) {
             agentsModuleStatus.setText("Could not load agents: " + ex.getMessage());
@@ -4127,6 +4229,14 @@ public class MainDashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel lblOrdFinalizeSection;
+    private javax.swing.JLabel lblOrdItemsSection;
+    private javax.swing.JLabel lblOrdStartSection;
+    private javax.swing.JLabel lblDelScheduleSection;
+    private javax.swing.JLabel lblDelAssignSection;
+    private javax.swing.JLabel lblInvWriteOffSection;
+    private javax.swing.JLabel lblInvReorderSection;
+    private javax.swing.JLabel lblInvReceiveSection;
     private javax.swing.JPanel sidebarPanel;
     private javax.swing.JPanel brandPanel;
     private javax.swing.JLabel brandTitleLabel;
