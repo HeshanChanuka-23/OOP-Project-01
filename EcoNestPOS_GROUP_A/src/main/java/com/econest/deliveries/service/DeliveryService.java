@@ -65,14 +65,26 @@ public class DeliveryService {
         });
     }
     public void dispatchDelivery(int deliveryId)throws SQLException {
-        id(deliveryId,"delivery");transaction(c->{
+        id(deliveryId,"delivery");
+        final Delivery dispatched = transaction(c->{
             Delivery d=lock(c,deliveryId);
             if(d.getStatus()!=DeliveryStatus.SCHEDULED||d.getAgentId()==null||d.getScheduledFor()==null)
                 throw new IllegalStateException("Assign an agent and schedule the delivery before dispatch");
             dao.dispatch(c,deliveryId);
             dao.insertPendingNotification(c,deliveryId,dao.clientEmailAtOrder(c,d.getOrderId()),"CLIENT_DISPATCHED");
-            return null;
+            return dao.lockById(c,deliveryId);
         });
+        // The business transaction is COMMITTED before calling external SMTP.
+        // The outbox survives a crash/network failure; retry is available from the Email page.
+        Thread mailThread=new Thread(()->{
+            try {
+                com.econest.orders.model.Order order=
+                        new com.econest.orders.service.OrderService().getOrder(dispatched.getOrderId());
+                new com.econest.emails.service.EmailService().notifyClientDispatched(dispatched,order);
+            }catch(Exception ex){java.util.logging.Logger.getLogger(DeliveryService.class.getName())
+                    .log(java.util.logging.Level.WARNING,"Queued client-dispatch email could not be processed",ex);}
+        },"EcoNest-client-dispatch-email");
+        mailThread.setDaemon(true);mailThread.start();
     }
     public void completeDelivery(int deliveryId)throws SQLException {
         id(deliveryId,"delivery");transaction(c->{
