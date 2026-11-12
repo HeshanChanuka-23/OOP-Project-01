@@ -534,6 +534,7 @@ public class MainDashboard extends javax.swing.JFrame {
         cmbEmailFilter = new javax.swing.JComboBox();
         btnEmailRefresh = new javax.swing.JButton();
         btnEmailRetry = new javax.swing.JButton();
+        btnEmailRetryAgent = new javax.swing.JButton();
         emailTablePanel = new javax.swing.JPanel();
         lblEmailHistoryHeading = new javax.swing.JLabel();
         emailTableScroll = new javax.swing.JScrollPane();
@@ -2560,7 +2561,7 @@ public class MainDashboard extends javax.swing.JFrame {
         emailsHeading.setFont(new java.awt.Font("Segoe UI", 1, 25));
         emailsIntroPanel.add(emailsHeading);
 
-        emailsDescription.setText("Client dispatch alerts, pending email status and retry history.");
+        emailsDescription.setText("Client dispatch and agent assignment emails, delivery status, and retries.");
         emailsDescription.setForeground(new java.awt.Color(110, 128, 117));
         emailsDescription.setFont(new java.awt.Font("Segoe UI", 0, 12));
         emailsIntroPanel.add(emailsDescription);
@@ -2574,23 +2575,23 @@ public class MainDashboard extends javax.swing.JFrame {
         emailsTilesPanel.setBackground(new java.awt.Color(246, 249, 247));
         emailsTilesPanel.setLayout(new java.awt.BorderLayout(0, 10));
         emailToolbarPanel.setBackground(new java.awt.Color(255, 255, 255));
-        emailToolbarPanel.setPreferredSize(new java.awt.Dimension(790, 79));
+        emailToolbarPanel.setPreferredSize(new java.awt.Dimension(790, 102));
         emailToolbarPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(11, 13, 10, 13));
         emailToolbarPanel.setLayout(new java.awt.BorderLayout(0, 0));
         emailToolbarTitlePanel.setBackground(new java.awt.Color(255, 255, 255));
-        emailToolbarTitlePanel.setPreferredSize(new java.awt.Dimension(330, 58));
+        emailToolbarTitlePanel.setPreferredSize(new java.awt.Dimension(280, 70));
         emailToolbarTitlePanel.setLayout(new java.awt.GridLayout(2, 1, 0, 3));
-        lblEmailHeading.setText("CLIENT DISPATCH NOTIFICATIONS");
+        lblEmailHeading.setText("CLIENT + AGENT EMAIL ALERTS");
         lblEmailHeading.setForeground(new java.awt.Color(24, 64, 44));
         lblEmailHeading.setFont(new java.awt.Font("Segoe UI", 1, 14));
         emailToolbarTitlePanel.add(lblEmailHeading);
-        lblEmailSubtitle.setText("Persistent email outbox | Task 8");
+        lblEmailSubtitle.setText("Transactional outbox | Tasks 8 and 9");
         lblEmailSubtitle.setForeground(new java.awt.Color(93, 119, 106));
         lblEmailSubtitle.setFont(new java.awt.Font("Segoe UI", 0, 11));
         emailToolbarTitlePanel.add(lblEmailSubtitle);
         emailToolbarPanel.add(emailToolbarTitlePanel, java.awt.BorderLayout.WEST);
         emailButtonsPanel.setBackground(new java.awt.Color(255, 255, 255));
-        emailButtonsPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 6, 8));
+        emailButtonsPanel.setLayout(new java.awt.GridLayout(2, 2, 8, 6));
         cmbEmailFilter.setPreferredSize(new java.awt.Dimension(175, 32));
         cmbEmailFilter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All events", "Client dispatch", "Agent assignment", "Pending", "Sent", "Failed" }));
         cmbEmailFilter.addActionListener(evt -> onEmailFilterChanged(evt));
@@ -2599,16 +2600,23 @@ public class MainDashboard extends javax.swing.JFrame {
         btnEmailRefresh.setBackground(new java.awt.Color(39, 111, 80));
         btnEmailRefresh.setForeground(new java.awt.Color(255, 255, 255));
         btnEmailRefresh.setFont(new java.awt.Font("Segoe UI", 1, 12));
-        btnEmailRefresh.setPreferredSize(new java.awt.Dimension(180, 36));
+        btnEmailRefresh.setPreferredSize(new java.awt.Dimension(178, 36));
         btnEmailRefresh.addActionListener(evt -> onRefreshEmails(evt));
         emailButtonsPanel.add(btnEmailRefresh);
         btnEmailRetry.setText("RETRY CLIENT EMAILS");
         btnEmailRetry.setBackground(new java.awt.Color(39, 111, 80));
         btnEmailRetry.setForeground(new java.awt.Color(255, 255, 255));
         btnEmailRetry.setFont(new java.awt.Font("Segoe UI", 1, 12));
-        btnEmailRetry.setPreferredSize(new java.awt.Dimension(180, 36));
+        btnEmailRetry.setPreferredSize(new java.awt.Dimension(178, 36));
         btnEmailRetry.addActionListener(evt -> onRetryClientEmails(evt));
         emailButtonsPanel.add(btnEmailRetry);
+        btnEmailRetryAgent.setText("RETRY AGENT EMAILS");
+        btnEmailRetryAgent.setBackground(new java.awt.Color(39, 111, 80));
+        btnEmailRetryAgent.setForeground(new java.awt.Color(255, 255, 255));
+        btnEmailRetryAgent.setFont(new java.awt.Font("Segoe UI", 1, 12));
+        btnEmailRetryAgent.setPreferredSize(new java.awt.Dimension(178, 36));
+        btnEmailRetryAgent.addActionListener(evt -> onRetryAgentEmails(evt));
+        emailButtonsPanel.add(btnEmailRetryAgent);
         emailToolbarPanel.add(emailButtonsPanel, java.awt.BorderLayout.EAST);
         emailsTilesPanel.add(emailToolbarPanel, java.awt.BorderLayout.NORTH);
         emailTablePanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -2636,18 +2644,18 @@ public class MainDashboard extends javax.swing.JFrame {
         lblEmailConfig.setForeground(new java.awt.Color(37, 104, 76));
         lblEmailConfig.setFont(new java.awt.Font("Segoe UI", 1, 12));
         emailInfoPanel.add(lblEmailConfig);
-        lblEmailStats.setText("Client dispatch: pending 0 | sent 0 | failed 0");
+        lblEmailStats.setText("Clients: P0 / S0 / F0     Agents: P0 / S0 / F0");
         lblEmailStats.setForeground(new java.awt.Color(70, 96, 78));
         lblEmailStats.setFont(new java.awt.Font("Segoe UI", 0, 11));
         emailInfoPanel.add(lblEmailStats);
-        lblEmailNotice.setText("Client dispatch emails are queued; agent emails will be activated in Task 9.");
+        lblEmailNotice.setText("Client and agent email events are queued and retried independently.");
         lblEmailNotice.setForeground(new java.awt.Color(94, 119, 105));
         lblEmailNotice.setFont(new java.awt.Font("Segoe UI", 0, 11));
         emailInfoPanel.add(lblEmailNotice);
         emailsTilesPanel.add(emailInfoPanel, java.awt.BorderLayout.SOUTH);
         emailsDetailsPanel.add(emailsTilesPanel, java.awt.BorderLayout.CENTER);
 
-        emailsModuleStatus.setText("Methsindu | Task 8 — Client dispatch emails and durable outbox; agent email sending is Task 9");
+        emailsModuleStatus.setText("Methsindu | Tasks 8 + 9 — Client dispatch and delivery agent assignment email notifications");
         emailsModuleStatus.setForeground(new java.awt.Color(110, 128, 117));
         emailsModuleStatus.setFont(new java.awt.Font("Segoe UI", 0, 11));
         emailsModuleStatus.setPreferredSize(new java.awt.Dimension(700, 47));
@@ -2759,7 +2767,7 @@ public class MainDashboard extends javax.swing.JFrame {
         for(int col=0;col<sizes.length;col++)tblEmailNotifications.getColumnModel().getColumn(col).setPreferredWidth(sizes[col]);
         lblEmailConfig.setText(com.econest.emails.service.EmailService.isSmtpConfigured()
                 ? "SMTP configured from environment variables (TLS enabled)"
-                : "SMTP not configured: dispatch creates PENDING emails; set environment variables to send");
+                : "SMTP not configured: emails remain PENDING until SMTP credentials are configured");
     }
     private void refreshEmailTable() {
         btnEmailRefresh.setEnabled(false);
@@ -2772,7 +2780,7 @@ public class MainDashboard extends javax.swing.JFrame {
                 btnEmailRefresh.setEnabled(true);
                 try {
                     emailRows=get();applyEmailFilter();
-                    lblEmailNotice.setText("Loaded notification history. Agent email sending will be activated in Task 9.");
+                    lblEmailNotice.setText("Loaded client dispatch + agent assignment notification history.");
                 } catch(Exception ex) {
                     Throwable cause=ex.getCause()==null?ex:ex.getCause();
                     lblEmailNotice.setText("Cannot load email history; check MariaDB connection.");
@@ -2784,14 +2792,20 @@ public class MainDashboard extends javax.swing.JFrame {
     private void applyEmailFilter() {
         javax.swing.table.DefaultTableModel m=(javax.swing.table.DefaultTableModel)tblEmailNotifications.getModel();
         m.setRowCount(0);
-        int pending=0,sent=0,failed=0;
+        int cPending=0,cSent=0,cFailed=0,aPending=0,aSent=0,aFailed=0;
         String filter=String.valueOf(cmbEmailFilter.getSelectedItem());
         for(com.econest.emails.model.EmailNotification n:emailRows) {
             if(n.getType()==com.econest.emails.model.NotificationType.CLIENT_DISPATCHED) {
                 switch(n.getStatus()) {
-                    case PENDING:pending++;break;
-                    case SENT:sent++;break;
-                    case FAILED:failed++;break;
+                    case PENDING:cPending++;break;
+                    case SENT:cSent++;break;
+                    case FAILED:cFailed++;break;
+                }
+            } else if(n.getType()==com.econest.emails.model.NotificationType.AGENT_ASSIGNED) {
+                switch(n.getStatus()) {
+                    case PENDING:aPending++;break;
+                    case SENT:aSent++;break;
+                    case FAILED:aFailed++;break;
                 }
             }
             if("Client dispatch".equals(filter)&&n.getType()!=com.econest.emails.model.NotificationType.CLIENT_DISPATCHED)continue;
@@ -2804,7 +2818,8 @@ public class MainDashboard extends javax.swing.JFrame {
                     n.getCreatedAt()==null?"":n.getCreatedAt().toString(),
                     n.getSentAt()==null?"":n.getSentAt().toString(),n.getFailureReason()});
         }
-        lblEmailStats.setText("Client dispatch only:  " +pending+" pending  |  "+sent+" sent  |  "+failed+" failed");
+        lblEmailStats.setText("Clients: P"+cPending+" / S"+cSent+" / F"+cFailed+
+                "     Agents: P"+aPending+" / S"+aSent+" / F"+aFailed);
     }
     private void onEmailFilterChanged(java.awt.event.ActionEvent evt){applyEmailFilter();}
     private void onRefreshEmails(java.awt.event.ActionEvent evt){refreshEmailTable();}
@@ -2818,9 +2833,28 @@ public class MainDashboard extends javax.swing.JFrame {
         btnEmailRetry.setEnabled(false);
         lblEmailNotice.setText("Retrying pending / failed client emails in the background ...");
         new javax.swing.SwingWorker<Void,Void>() {
-            @Override protected Void doInBackground(){emailService.retryUnsentNotifications();return null;}
+            @Override protected Void doInBackground(){emailService.retryUnsentClientNotifications();return null;}
             @Override protected void done(){
                 btnEmailRetry.setEnabled(true);
+                refreshEmailTable();
+            }
+        }.execute();
+    }
+
+    /** Task 9: agent retry runs off the Swing event dispatch thread. */
+    private void onRetryAgentEmails(java.awt.event.ActionEvent evt) {
+        if(!com.econest.emails.service.EmailService.isSmtpConfigured()) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Configure the SMTP environment variables on this PC first. Do not store passwords in GitHub.",
+                    "SMTP settings required",javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        btnEmailRetryAgent.setEnabled(false);
+        lblEmailNotice.setText("Retrying pending / failed agent emails in the background ...");
+        new javax.swing.SwingWorker<Void,Void>() {
+            @Override protected Void doInBackground(){emailService.retryUnsentAgentNotifications();return null;}
+            @Override protected void done(){
+                btnEmailRetryAgent.setEnabled(true);
                 refreshEmailTable();
             }
         }.execute();
@@ -4399,6 +4433,7 @@ public class MainDashboard extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbEmailFilter;
     private javax.swing.JButton btnEmailRefresh;
     private javax.swing.JButton btnEmailRetry;
+    private javax.swing.JButton btnEmailRetryAgent;
     private javax.swing.JPanel emailTablePanel;
     private javax.swing.JLabel lblEmailHistoryHeading;
     private javax.swing.JScrollPane emailTableScroll;
