@@ -32,6 +32,7 @@ public class MainDashboard extends javax.swing.JFrame {
         prepareClientTable();
         prepareAgentTable();
         prepareOrderTables();
+        prepareDeliveryTables();
     }
 
     /** Show a panel that ALREADY EXISTS in the GUI Builder CardLayout. */
@@ -42,6 +43,7 @@ public class MainDashboard extends javax.swing.JFrame {
         if ("clients".equals(pageKey)) refreshClientTable();
         if ("agents".equals(pageKey)) refreshAgentTable();
         if ("orders".equals(pageKey)) refreshOrdersData();
+        if ("deliveries".equals(pageKey)) refreshDeliveriesData();
         switch (pageKey) {
             case "dashboard": headerTitleLabel.setText("Overview Dashboard"); break;
             case "products": headerTitleLabel.setText("Products"); break;
@@ -414,26 +416,54 @@ public class MainDashboard extends javax.swing.JFrame {
         deliveriesDescription = new javax.swing.JLabel();
         deliveriesDetailsPanel = new javax.swing.JPanel();
         deliveriesTilesPanel = new javax.swing.JPanel();
-        deliveriesTile1Panel = new javax.swing.JPanel();
-        deliveriesTile1TextPanel = new javax.swing.JPanel();
-        deliveriesTile1Title = new javax.swing.JLabel();
-        deliveriesTile1Subtitle = new javax.swing.JLabel();
-        deliveriesTile1Status = new javax.swing.JLabel();
-        deliveriesTile2Panel = new javax.swing.JPanel();
-        deliveriesTile2TextPanel = new javax.swing.JPanel();
-        deliveriesTile2Title = new javax.swing.JLabel();
-        deliveriesTile2Subtitle = new javax.swing.JLabel();
-        deliveriesTile2Status = new javax.swing.JLabel();
-        deliveriesTile3Panel = new javax.swing.JPanel();
-        deliveriesTile3TextPanel = new javax.swing.JPanel();
-        deliveriesTile3Title = new javax.swing.JLabel();
-        deliveriesTile3Subtitle = new javax.swing.JLabel();
-        deliveriesTile3Status = new javax.swing.JLabel();
-        deliveriesTile4Panel = new javax.swing.JPanel();
-        deliveriesTile4TextPanel = new javax.swing.JPanel();
-        deliveriesTile4Title = new javax.swing.JLabel();
-        deliveriesTile4Subtitle = new javax.swing.JLabel();
-        deliveriesTile4Status = new javax.swing.JLabel();
+        delControlsPanel = new javax.swing.JPanel();
+        delControlsHeading = new javax.swing.JLabel();
+        delControlsScroll = new javax.swing.JScrollPane();
+        delInputsPanel = new javax.swing.JPanel();
+        delOrderRow = new javax.swing.JPanel();
+        lblDelOrder = new javax.swing.JLabel();
+        cmbDelOrder = new javax.swing.JComboBox();
+        delAgentRow = new javax.swing.JPanel();
+        lblDelAgent = new javax.swing.JLabel();
+        cmbDelAgent = new javax.swing.JComboBox();
+        delScheduleRow = new javax.swing.JPanel();
+        lblDelSchedule = new javax.swing.JLabel();
+        txtDelSchedule = new javax.swing.JTextField();
+        btnDelAssign = new javax.swing.JButton();
+        delIdRow = new javax.swing.JPanel();
+        lblDelId = new javax.swing.JLabel();
+        txtDelId = new javax.swing.JTextField();
+        btnDelSchedule = new javax.swing.JButton();
+        delStatusRow = new javax.swing.JPanel();
+        lblDelStatus = new javax.swing.JLabel();
+        txtDelStatus = new javax.swing.JTextField();
+        delReasonRow = new javax.swing.JPanel();
+        lblDelReason = new javax.swing.JLabel();
+        txtDelReason = new javax.swing.JTextField();
+        btnDelDispatch = new javax.swing.JButton();
+        lblDelActionsHeading = new javax.swing.JLabel();
+        delSearchRow = new javax.swing.JPanel();
+        lblDelSearch = new javax.swing.JLabel();
+        txtDelSearch = new javax.swing.JTextField();
+        delAgentInfoRow = new javax.swing.JPanel();
+        lblDelAgentInfo = new javax.swing.JLabel();
+        txtDelAgentInfo = new javax.swing.JTextField();
+        delScheduleInfoRow = new javax.swing.JPanel();
+        lblDelScheduleInfo = new javax.swing.JLabel();
+        txtDelScheduleInfo = new javax.swing.JTextField();
+        btnDelCancel = new javax.swing.JButton();
+        delDataPanel = new javax.swing.JPanel();
+        delDeliveriesToolbar = new javax.swing.JPanel();
+        lblDeliveriesTable = new javax.swing.JLabel();
+        btnDelDelivered = new javax.swing.JButton();
+        btnDelFailed = new javax.swing.JButton();
+        btnDelRefresh = new javax.swing.JButton();
+        delDeliveriesScroll = new javax.swing.JScrollPane();
+        tblDeliveries = new javax.swing.JTable();
+        delOrdersPanel = new javax.swing.JPanel();
+        lblDelOrders = new javax.swing.JLabel();
+        delOrdersScroll = new javax.swing.JScrollPane();
+        tblDelOrders = new javax.swing.JTable();
         deliveriesModuleStatus = new javax.swing.JLabel();
         reportsPage = new javax.swing.JPanel();
         reportsIntroPanel = new javax.swing.JPanel();
@@ -2071,12 +2101,12 @@ public class MainDashboard extends javax.swing.JFrame {
         deliveriesEyebrow.setFont(new java.awt.Font("Segoe UI", 1, 11));
         deliveriesIntroPanel.add(deliveriesEyebrow);
 
-        deliveriesHeading.setText("Delivery Scheduling");
+        deliveriesHeading.setText("Delivery Assignment & Tracking");
         deliveriesHeading.setForeground(new java.awt.Color(35, 55, 44));
         deliveriesHeading.setFont(new java.awt.Font("Segoe UI", 1, 25));
         deliveriesIntroPanel.add(deliveriesHeading);
 
-        deliveriesDescription.setText("Assign agents to orders and track delivery state changes.");
+        deliveriesDescription.setText("Assign agents to confirmed orders, schedule dispatch and track fulfillment.");
         deliveriesDescription.setForeground(new java.awt.Color(110, 128, 117));
         deliveriesDescription.setFont(new java.awt.Font("Segoe UI", 0, 12));
         deliveriesIntroPanel.add(deliveriesDescription);
@@ -2088,128 +2118,177 @@ public class MainDashboard extends javax.swing.JFrame {
         deliveriesDetailsPanel.setLayout(new java.awt.BorderLayout());
 
         deliveriesTilesPanel.setBackground(new java.awt.Color(246, 249, 247));
-        deliveriesTilesPanel.setLayout(new java.awt.GridLayout(2, 2, 17, 17));
+        deliveriesTilesPanel.setLayout(new java.awt.BorderLayout(12, 0));
+        delControlsPanel.setBackground(new java.awt.Color(255, 255, 255));
+        delControlsPanel.setPreferredSize(new java.awt.Dimension(350, 480));
+        delControlsPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(12, 11, 12, 11));
+        delControlsPanel.setLayout(new java.awt.BorderLayout(0, 6));
+        delControlsHeading.setText("Delivery assignment and tracking");
+        delControlsHeading.setFont(new java.awt.Font("Segoe UI", 1, 15));
+        delControlsHeading.setPreferredSize(new java.awt.Dimension(330, 38));
+        delControlsPanel.add(delControlsHeading, java.awt.BorderLayout.NORTH);
 
-        deliveriesTile1Panel.setBackground(new java.awt.Color(255, 255, 255));
-        deliveriesTile1Panel.setBorder(javax.swing.BorderFactory.createEmptyBorder(17, 19, 17, 18));
-        deliveriesTile1Panel.setLayout(new java.awt.BorderLayout());
+        delInputsPanel.setBackground(new java.awt.Color(255, 255, 255));
+        delInputsPanel.setLayout(new java.awt.GridLayout(14, 1, 0, 4));
+        delOrderRow.setBackground(new java.awt.Color(255, 255, 255));
+        delOrderRow.setPreferredSize(new java.awt.Dimension(270, 34));
+        delOrderRow.setLayout(new java.awt.BorderLayout(5, 0));
+        lblDelOrder.setText("Order");
+        lblDelOrder.setPreferredSize(new java.awt.Dimension(105, 28));
+        delOrderRow.add(lblDelOrder, java.awt.BorderLayout.WEST);
 
-        deliveriesTile1TextPanel.setBackground(new java.awt.Color(255, 255, 255));
-        deliveriesTile1TextPanel.setPreferredSize(new java.awt.Dimension(330, 88));
-        deliveriesTile1TextPanel.setLayout(new java.awt.GridLayout(2, 1, 0, 6));
+        delOrderRow.add(cmbDelOrder, java.awt.BorderLayout.CENTER);
+        delInputsPanel.add(delOrderRow);
+        delAgentRow.setBackground(new java.awt.Color(255, 255, 255));
+        delAgentRow.setPreferredSize(new java.awt.Dimension(270, 34));
+        delAgentRow.setLayout(new java.awt.BorderLayout(5, 0));
+        lblDelAgent.setText("Delivery agent");
+        lblDelAgent.setPreferredSize(new java.awt.Dimension(105, 28));
+        delAgentRow.add(lblDelAgent, java.awt.BorderLayout.WEST);
 
-        deliveriesTile1Title.setText("Agent assignment");
-        deliveriesTile1Title.setForeground(new java.awt.Color(35, 55, 44));
-        deliveriesTile1Title.setFont(new java.awt.Font("Segoe UI", 1, 16));
-        deliveriesTile1TextPanel.add(deliveriesTile1Title);
+        delAgentRow.add(cmbDelAgent, java.awt.BorderLayout.CENTER);
+        delInputsPanel.add(delAgentRow);
+        delScheduleRow.setBackground(new java.awt.Color(255, 255, 255));
+        delScheduleRow.setPreferredSize(new java.awt.Dimension(270, 34));
+        delScheduleRow.setLayout(new java.awt.BorderLayout(5, 0));
+        lblDelSchedule.setText("Schedule (local)");
+        lblDelSchedule.setPreferredSize(new java.awt.Dimension(105, 28));
+        delScheduleRow.add(lblDelSchedule, java.awt.BorderLayout.WEST);
 
-        deliveriesTile1Subtitle.setText("Assign or reassign delivery agents");
-        deliveriesTile1Subtitle.setForeground(new java.awt.Color(110, 128, 117));
-        deliveriesTile1Subtitle.setFont(new java.awt.Font("Segoe UI", 0, 12));
-        deliveriesTile1TextPanel.add(deliveriesTile1Subtitle);
+        txtDelSchedule.setToolTipText("yyyy-MM-dd HH:mm");
+        delScheduleRow.add(txtDelSchedule, java.awt.BorderLayout.CENTER);
+        delInputsPanel.add(delScheduleRow);
+        btnDelAssign.setText("ASSIGN / REASSIGN");
+        btnDelAssign.addActionListener(evt -> onAssignDelivery(evt));
+        delInputsPanel.add(btnDelAssign);
+        delIdRow.setBackground(new java.awt.Color(255, 255, 255));
+        delIdRow.setPreferredSize(new java.awt.Dimension(270, 34));
+        delIdRow.setLayout(new java.awt.BorderLayout(5, 0));
+        lblDelId.setText("Delivery ID");
+        lblDelId.setPreferredSize(new java.awt.Dimension(105, 28));
+        delIdRow.add(lblDelId, java.awt.BorderLayout.WEST);
 
+        txtDelId.setEditable(false);
+        delIdRow.add(txtDelId, java.awt.BorderLayout.CENTER);
+        delInputsPanel.add(delIdRow);
+        btnDelSchedule.setText("SCHEDULE DELIVERY");
+        btnDelSchedule.addActionListener(evt -> onScheduleDelivery(evt));
+        delInputsPanel.add(btnDelSchedule);
+        delStatusRow.setBackground(new java.awt.Color(255, 255, 255));
+        delStatusRow.setPreferredSize(new java.awt.Dimension(270, 34));
+        delStatusRow.setLayout(new java.awt.BorderLayout(5, 0));
+        lblDelStatus.setText("Status");
+        lblDelStatus.setPreferredSize(new java.awt.Dimension(105, 28));
+        delStatusRow.add(lblDelStatus, java.awt.BorderLayout.WEST);
 
-        deliveriesTile1Panel.add(deliveriesTile1TextPanel, java.awt.BorderLayout.NORTH);
+        txtDelStatus.setEditable(false);
+        delStatusRow.add(txtDelStatus, java.awt.BorderLayout.CENTER);
+        delInputsPanel.add(delStatusRow);
+        delReasonRow.setBackground(new java.awt.Color(255, 255, 255));
+        delReasonRow.setPreferredSize(new java.awt.Dimension(270, 34));
+        delReasonRow.setLayout(new java.awt.BorderLayout(5, 0));
+        lblDelReason.setText("Failure reason");
+        lblDelReason.setPreferredSize(new java.awt.Dimension(105, 28));
+        delReasonRow.add(lblDelReason, java.awt.BorderLayout.WEST);
 
-        deliveriesTile1Status.setText("Module interface will be integrated here.");
-        deliveriesTile1Status.setForeground(new java.awt.Color(66, 130, 97));
-        deliveriesTile1Status.setFont(new java.awt.Font("Segoe UI", 0, 11));
-        deliveriesTile1Panel.add(deliveriesTile1Status, java.awt.BorderLayout.SOUTH);
+        txtDelReason.setEditable(true);
+        delReasonRow.add(txtDelReason, java.awt.BorderLayout.CENTER);
+        delInputsPanel.add(delReasonRow);
+        btnDelDispatch.setText("DISPATCH DELIVERY");
+        btnDelDispatch.addActionListener(evt -> onDispatchDelivery(evt));
+        delInputsPanel.add(btnDelDispatch);
+        lblDelActionsHeading.setText("TRACK / UPDATE STATUS");
+        lblDelActionsHeading.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        delInputsPanel.add(lblDelActionsHeading);
+        delSearchRow.setBackground(new java.awt.Color(255, 255, 255));
+        delSearchRow.setPreferredSize(new java.awt.Dimension(270, 34));
+        delSearchRow.setLayout(new java.awt.BorderLayout(5, 0));
+        lblDelSearch.setText("Search");
+        lblDelSearch.setPreferredSize(new java.awt.Dimension(105, 28));
+        delSearchRow.add(lblDelSearch, java.awt.BorderLayout.WEST);
 
+        delSearchRow.add(txtDelSearch, java.awt.BorderLayout.CENTER);
+        delInputsPanel.add(delSearchRow);
+        delAgentInfoRow.setBackground(new java.awt.Color(255, 255, 255));
+        delAgentInfoRow.setPreferredSize(new java.awt.Dimension(270, 34));
+        delAgentInfoRow.setLayout(new java.awt.BorderLayout(5, 0));
+        lblDelAgentInfo.setText("Assigned agent");
+        lblDelAgentInfo.setPreferredSize(new java.awt.Dimension(105, 28));
+        delAgentInfoRow.add(lblDelAgentInfo, java.awt.BorderLayout.WEST);
 
-        deliveriesTilesPanel.add(deliveriesTile1Panel);
+        txtDelAgentInfo.setEditable(false);
+        delAgentInfoRow.add(txtDelAgentInfo, java.awt.BorderLayout.CENTER);
+        delInputsPanel.add(delAgentInfoRow);
+        delScheduleInfoRow.setBackground(new java.awt.Color(255, 255, 255));
+        delScheduleInfoRow.setPreferredSize(new java.awt.Dimension(270, 34));
+        delScheduleInfoRow.setLayout(new java.awt.BorderLayout(5, 0));
+        lblDelScheduleInfo.setText("Scheduled for");
+        lblDelScheduleInfo.setPreferredSize(new java.awt.Dimension(105, 28));
+        delScheduleInfoRow.add(lblDelScheduleInfo, java.awt.BorderLayout.WEST);
 
-        deliveriesTile2Panel.setBackground(new java.awt.Color(255, 255, 255));
-        deliveriesTile2Panel.setBorder(javax.swing.BorderFactory.createEmptyBorder(17, 19, 17, 18));
-        deliveriesTile2Panel.setLayout(new java.awt.BorderLayout());
+        txtDelScheduleInfo.setEditable(false);
+        delScheduleInfoRow.add(txtDelScheduleInfo, java.awt.BorderLayout.CENTER);
+        delInputsPanel.add(delScheduleInfoRow);
+        btnDelCancel.setText("CANCEL DELIVERY");
+        btnDelCancel.addActionListener(evt -> onCancelDelivery(evt));
+        delInputsPanel.add(btnDelCancel);
+        delControlsScroll.setViewportView(delInputsPanel);
+        delControlsPanel.add(delControlsScroll, java.awt.BorderLayout.CENTER);
+        deliveriesTilesPanel.add(delControlsPanel, java.awt.BorderLayout.WEST);
+        delDataPanel.setBackground(new java.awt.Color(246, 249, 247));
+        delDataPanel.setLayout(new java.awt.BorderLayout(0, 10));
+        delDeliveriesToolbar.setBackground(new java.awt.Color(246, 249, 247));
+        delDeliveriesToolbar.setPreferredSize(new java.awt.Dimension(700, 40));
+        delDeliveriesToolbar.setLayout(new java.awt.GridLayout(1, 4, 5, 0));
+        lblDeliveriesTable.setText("DELIVERIES");
+        lblDeliveriesTable.setFont(new java.awt.Font("Segoe UI", 1, 14));
+        delDeliveriesToolbar.add(lblDeliveriesTable);
+        btnDelDelivered.setText("Mark delivered");
+        btnDelDelivered.addActionListener(evt -> onMarkDelivered(evt));
+        delDeliveriesToolbar.add(btnDelDelivered);
+        btnDelFailed.setText("Mark failed");
+        btnDelFailed.addActionListener(evt -> onMarkFailed(evt));
+        delDeliveriesToolbar.add(btnDelFailed);
+        btnDelRefresh.setText("Refresh");
+        btnDelRefresh.addActionListener(evt -> onRefreshDeliveries(evt));
+        delDeliveriesToolbar.add(btnDelRefresh);
+        delDataPanel.add(delDeliveriesToolbar, java.awt.BorderLayout.NORTH);
 
-        deliveriesTile2TextPanel.setBackground(new java.awt.Color(255, 255, 255));
-        deliveriesTile2TextPanel.setPreferredSize(new java.awt.Dimension(330, 88));
-        deliveriesTile2TextPanel.setLayout(new java.awt.GridLayout(2, 1, 0, 6));
+        tblDeliveries.setModel(new javax.swing.table.DefaultTableModel(
+                new Object[][] {}, new String[] {"Delivery ID", "Order ID", "Agent", "Status", "Scheduled for", "Dispatched at", "Delivered at", "Failure"}) {
+            Class[] types = new Class[] {java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class};
+            boolean[] canEdit = new boolean[] {false, false, false, false, false, false, false, false};
+            public Class getColumnClass(int columnIndex) {return types[columnIndex];}
+            public boolean isCellEditable(int rowIndex, int columnIndex) {return canEdit[columnIndex];}
+        });
+        tblDeliveries.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override public void mouseClicked(java.awt.event.MouseEvent evt) { onDeliveryRowClick(evt); }
+        });
+        delDeliveriesScroll.setViewportView(tblDeliveries);
+        delDataPanel.add(delDeliveriesScroll, java.awt.BorderLayout.CENTER);
+        delOrdersPanel.setBackground(new java.awt.Color(255, 255, 255));
+        delOrdersPanel.setPreferredSize(new java.awt.Dimension(700, 235));
+        delOrdersPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 8, 7, 8));
+        delOrdersPanel.setLayout(new java.awt.BorderLayout(0, 5));
+        lblDelOrders.setText("ORDERS — select a confirmed order for assignment");
+        lblDelOrders.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        delOrdersPanel.add(lblDelOrders, java.awt.BorderLayout.NORTH);
 
-        deliveriesTile2Title.setText("Delivery schedule");
-        deliveriesTile2Title.setForeground(new java.awt.Color(35, 55, 44));
-        deliveriesTile2Title.setFont(new java.awt.Font("Segoe UI", 1, 16));
-        deliveriesTile2TextPanel.add(deliveriesTile2Title);
-
-        deliveriesTile2Subtitle.setText("Record planned dispatch and delivery");
-        deliveriesTile2Subtitle.setForeground(new java.awt.Color(110, 128, 117));
-        deliveriesTile2Subtitle.setFont(new java.awt.Font("Segoe UI", 0, 12));
-        deliveriesTile2TextPanel.add(deliveriesTile2Subtitle);
-
-
-        deliveriesTile2Panel.add(deliveriesTile2TextPanel, java.awt.BorderLayout.NORTH);
-
-        deliveriesTile2Status.setText("Module interface will be integrated here.");
-        deliveriesTile2Status.setForeground(new java.awt.Color(66, 130, 97));
-        deliveriesTile2Status.setFont(new java.awt.Font("Segoe UI", 0, 11));
-        deliveriesTile2Panel.add(deliveriesTile2Status, java.awt.BorderLayout.SOUTH);
-
-
-        deliveriesTilesPanel.add(deliveriesTile2Panel);
-
-        deliveriesTile3Panel.setBackground(new java.awt.Color(255, 255, 255));
-        deliveriesTile3Panel.setBorder(javax.swing.BorderFactory.createEmptyBorder(17, 19, 17, 18));
-        deliveriesTile3Panel.setLayout(new java.awt.BorderLayout());
-
-        deliveriesTile3TextPanel.setBackground(new java.awt.Color(255, 255, 255));
-        deliveriesTile3TextPanel.setPreferredSize(new java.awt.Dimension(330, 88));
-        deliveriesTile3TextPanel.setLayout(new java.awt.GridLayout(2, 1, 0, 6));
-
-        deliveriesTile3Title.setText("Delivery status");
-        deliveriesTile3Title.setForeground(new java.awt.Color(35, 55, 44));
-        deliveriesTile3Title.setFont(new java.awt.Font("Segoe UI", 1, 16));
-        deliveriesTile3TextPanel.add(deliveriesTile3Title);
-
-        deliveriesTile3Subtitle.setText("Assigned, scheduled, dispatched and more");
-        deliveriesTile3Subtitle.setForeground(new java.awt.Color(110, 128, 117));
-        deliveriesTile3Subtitle.setFont(new java.awt.Font("Segoe UI", 0, 12));
-        deliveriesTile3TextPanel.add(deliveriesTile3Subtitle);
-
-
-        deliveriesTile3Panel.add(deliveriesTile3TextPanel, java.awt.BorderLayout.NORTH);
-
-        deliveriesTile3Status.setText("Module interface will be integrated here.");
-        deliveriesTile3Status.setForeground(new java.awt.Color(66, 130, 97));
-        deliveriesTile3Status.setFont(new java.awt.Font("Segoe UI", 0, 11));
-        deliveriesTile3Panel.add(deliveriesTile3Status, java.awt.BorderLayout.SOUTH);
-
-
-        deliveriesTilesPanel.add(deliveriesTile3Panel);
-
-        deliveriesTile4Panel.setBackground(new java.awt.Color(255, 255, 255));
-        deliveriesTile4Panel.setBorder(javax.swing.BorderFactory.createEmptyBorder(17, 19, 17, 18));
-        deliveriesTile4Panel.setLayout(new java.awt.BorderLayout());
-
-        deliveriesTile4TextPanel.setBackground(new java.awt.Color(255, 255, 255));
-        deliveriesTile4TextPanel.setPreferredSize(new java.awt.Dimension(330, 88));
-        deliveriesTile4TextPanel.setLayout(new java.awt.GridLayout(2, 1, 0, 6));
-
-        deliveriesTile4Title.setText("Dispatch tracking");
-        deliveriesTile4Title.setForeground(new java.awt.Color(35, 55, 44));
-        deliveriesTile4Title.setFont(new java.awt.Font("Segoe UI", 1, 16));
-        deliveriesTile4TextPanel.add(deliveriesTile4Title);
-
-        deliveriesTile4Subtitle.setText("Keep historical vehicle and agent data");
-        deliveriesTile4Subtitle.setForeground(new java.awt.Color(110, 128, 117));
-        deliveriesTile4Subtitle.setFont(new java.awt.Font("Segoe UI", 0, 12));
-        deliveriesTile4TextPanel.add(deliveriesTile4Subtitle);
-
-
-        deliveriesTile4Panel.add(deliveriesTile4TextPanel, java.awt.BorderLayout.NORTH);
-
-        deliveriesTile4Status.setText("Module interface will be integrated here.");
-        deliveriesTile4Status.setForeground(new java.awt.Color(66, 130, 97));
-        deliveriesTile4Status.setFont(new java.awt.Font("Segoe UI", 0, 11));
-        deliveriesTile4Panel.add(deliveriesTile4Status, java.awt.BorderLayout.SOUTH);
-
-
-        deliveriesTilesPanel.add(deliveriesTile4Panel);
-
+        tblDelOrders.setModel(new javax.swing.table.DefaultTableModel(
+                new Object[][] {}, new String[] {"Order ID", "Client", "Order status", "Total"}) {
+            Class[] types = new Class[] {java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.math.BigDecimal.class};
+            boolean[] canEdit = new boolean[] {false, false, false, false};
+            public Class getColumnClass(int columnIndex) {return types[columnIndex];}
+            public boolean isCellEditable(int rowIndex, int columnIndex) {return canEdit[columnIndex];}
+        });
+        delOrdersScroll.setViewportView(tblDelOrders);
+        delOrdersPanel.add(delOrdersScroll, java.awt.BorderLayout.CENTER);
+        delDataPanel.add(delOrdersPanel, java.awt.BorderLayout.SOUTH);
+        deliveriesTilesPanel.add(delDataPanel, java.awt.BorderLayout.CENTER);
 
         deliveriesDetailsPanel.add(deliveriesTilesPanel, java.awt.BorderLayout.CENTER);
 
-        deliveriesModuleStatus.setText("Assigned developer: Shanika   |   Placeholder screen - no database changes");
+        deliveriesModuleStatus.setText("Shanika | Task 6 - Delivery lifecycle and pending notification events");
         deliveriesModuleStatus.setForeground(new java.awt.Color(110, 128, 117));
         deliveriesModuleStatus.setFont(new java.awt.Font("Segoe UI", 0, 11));
         deliveriesModuleStatus.setPreferredSize(new java.awt.Dimension(700, 47));
@@ -3466,6 +3545,216 @@ public class MainDashboard extends javax.swing.JFrame {
     }
     private void onRefreshOrders(java.awt.event.ActionEvent evt){refreshOrdersData();}
     private void onOrderRowClick(java.awt.event.MouseEvent evt){loadSelectedOrder();}
+
+    // ---------- Task 6: Delivery assignment, scheduling and tracking ----------
+    private final com.econest.deliveries.service.DeliveryService deliveryService =
+            new com.econest.deliveries.service.DeliveryService();
+    private final com.econest.agents.service.DeliveryAgentService deliveryAgents =
+            new com.econest.agents.service.DeliveryAgentService();
+    private final com.econest.orders.service.OrderService deliveryOrders =
+            new com.econest.orders.service.OrderService();
+    private javax.swing.table.TableRowSorter<javax.swing.table.DefaultTableModel> deliverySorter;
+    private Integer selectedDeliveryId;
+    private static final java.time.format.DateTimeFormatter DELIVERY_DATE =
+            java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+    private void prepareDeliveryTables() {
+        deliverySorter = new javax.swing.table.TableRowSorter<>(
+                (javax.swing.table.DefaultTableModel) tblDeliveries.getModel());
+        tblDeliveries.setRowSorter(deliverySorter);
+        tblDeliveries.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblDelOrders.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblDeliveries.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting() && tblDeliveries.getSelectedRow() >= 0) loadSelectedDelivery();
+        });
+        tblDelOrders.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting() && tblDelOrders.getSelectedRow() >= 0) {
+                int id = ((Number) tblDelOrders.getValueAt(tblDelOrders.getSelectedRow(), 0)).intValue();
+                selectDeliveryOrder(id);
+            }
+        });
+        txtDelSearch.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            public void insertUpdate(javax.swing.event.DocumentEvent e) { filterDeliveries(); }
+            public void removeUpdate(javax.swing.event.DocumentEvent e) { filterDeliveries(); }
+            public void changedUpdate(javax.swing.event.DocumentEvent e) { filterDeliveries(); }
+        });
+        cmbDelOrder.addActionListener(e -> {
+            if (!loadingDeliveryChoices) findDeliveryForSelectedOrder();
+        });
+        clearDeliveryDetails();
+    }
+    private boolean loadingDeliveryChoices;
+    private void filterDeliveries() {
+        if (deliverySorter == null) return;
+        String t = txtDelSearch.getText().trim();
+        deliverySorter.setRowFilter(t.isEmpty() ? null
+                : javax.swing.RowFilter.regexFilter("(?i)" + java.util.regex.Pattern.quote(t)));
+    }
+    private static String deliveryDate(java.time.LocalDateTime date) {
+        return date == null ? "" : date.format(DELIVERY_DATE);
+    }
+    private void showDeliveryError(String operation, Exception ex) {
+        javax.swing.JOptionPane.showMessageDialog(this, ex.getMessage(), operation,
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+    }
+    private void refreshDeliveryChoices() {
+        int selectedOrder = selectedOrderChoice(cmbDelOrder), selectedAgent = selectedOrderChoice(cmbDelAgent);
+        loadingDeliveryChoices = true;
+        try {
+            cmbDelOrder.removeAllItems();
+            cmbDelOrder.addItem(new OrderChoice(0, "Select confirmed order"));
+            for (com.econest.orders.model.Order o : deliveryOrders.listOrders()) {
+                if (o.getStatus() == com.econest.orders.model.OrderStatus.CONFIRMED) {
+                    cmbDelOrder.addItem(new OrderChoice(o.getOrderId(),
+                            "#" + o.getOrderId() + "  " + o.getClientNameAtOrder()));
+                }
+            }
+            cmbDelAgent.removeAllItems();
+            cmbDelAgent.addItem(new OrderChoice(0, "Select delivery agent"));
+            for (com.econest.agents.model.DeliveryAgent a : deliveryAgents.listAgents()) {
+                cmbDelAgent.addItem(new OrderChoice(a.getAgentId(),
+                        "#" + a.getAgentId() + "  " + a.getName() + "  [" + a.getVehicleNumber() + "]"));
+            }
+            selectDeliveryChoice(cmbDelOrder, selectedOrder);
+            selectDeliveryChoice(cmbDelAgent, selectedAgent);
+        } catch(Exception ex) { showDeliveryError("Loading orders and delivery agents", ex); }
+        finally { loadingDeliveryChoices = false; }
+    }
+    private static void selectDeliveryChoice(javax.swing.JComboBox<OrderChoice> box, int id) {
+        for (int i = 0; i < box.getItemCount(); i++) {
+            if (box.getItemAt(i).id == id) { box.setSelectedIndex(i); return; }
+        }
+        if (box.getItemCount() > 0) box.setSelectedIndex(0);
+    }
+    private void selectDeliveryOrder(int orderId) {
+        selectDeliveryChoice(cmbDelOrder, orderId);
+        findDeliveryForSelectedOrder();
+    }
+    private void findDeliveryForSelectedOrder() {
+        int orderId = selectedOrderChoice(cmbDelOrder);
+        if (orderId <= 0) { selectedDeliveryId = null; clearDeliveryDetails(); return; }
+        try {
+            java.util.Optional<com.econest.deliveries.model.Delivery> delivery =
+                    deliveryService.getDeliveryByOrder(orderId);
+            if (delivery.isPresent()) {
+                selectedDeliveryId = delivery.get().getDeliveryId();
+                renderDeliveryDetails(delivery.get());
+                selectDeliveryRow(selectedDeliveryId);
+            } else { selectedDeliveryId = null; clearDeliveryDetails(); }
+        } catch(Exception ex) { showDeliveryError("Find delivery for order", ex); }
+    }
+    private void selectDeliveryRow(int deliveryId) {
+        for (int i = 0; i < tblDeliveries.getModel().getRowCount(); i++) {
+            if (((Number) tblDeliveries.getModel().getValueAt(i, 0)).intValue() == deliveryId) {
+                int view = tblDeliveries.convertRowIndexToView(i);
+                if (view >= 0) tblDeliveries.setRowSelectionInterval(view, view);
+                return;
+            }
+        }
+    }
+    private void clearDeliveryDetails() {
+        txtDelId.setText("Not assigned"); txtDelStatus.setText("—");
+        txtDelAgentInfo.setText("—"); txtDelScheduleInfo.setText("—");
+        txtDelSchedule.setText(""); txtDelReason.setText("");
+    }
+    private void renderDeliveryDetails(com.econest.deliveries.model.Delivery d) {
+        txtDelId.setText("#" + d.getDeliveryId());
+        txtDelStatus.setText(d.getStatus().name());
+        txtDelAgentInfo.setText(d.getAgentNameAtAssignment());
+        txtDelScheduleInfo.setText(deliveryDate(d.getScheduledFor()));
+        txtDelSchedule.setText(deliveryDate(d.getScheduledFor()));
+        txtDelReason.setText(d.getFailureReason() == null ? "" : d.getFailureReason());
+        selectDeliveryChoice(cmbDelAgent, d.getAgentId() == null ? 0 : d.getAgentId());
+    }
+    private void refreshDeliveriesData() {
+        if (deliverySorter == null) return;
+        int wasSelected = selectedDeliveryId == null ? 0 : selectedDeliveryId;
+        refreshDeliveryChoices();
+        try {
+            javax.swing.table.DefaultTableModel m =
+                    (javax.swing.table.DefaultTableModel) tblDeliveries.getModel();
+            m.setRowCount(0);
+            for (com.econest.deliveries.model.Delivery d : deliveryService.listDeliveries()) {
+                m.addRow(new Object[]{d.getDeliveryId(), d.getOrderId(), d.getAgentNameAtAssignment(),
+                    d.getStatus().name(), deliveryDate(d.getScheduledFor()), deliveryDate(d.getDispatchedAt()),
+                    deliveryDate(d.getDeliveredAt()), d.getFailureReason() == null ? "" : d.getFailureReason()});
+            }
+            javax.swing.table.DefaultTableModel queue =
+                    (javax.swing.table.DefaultTableModel) tblDelOrders.getModel();
+            queue.setRowCount(0);
+            for (com.econest.orders.model.Order o : deliveryOrders.listOrders()) {
+                if (o.getStatus() == com.econest.orders.model.OrderStatus.CONFIRMED) {
+                    queue.addRow(new Object[]{o.getOrderId(), o.getClientNameAtOrder(),
+                        o.getStatus().name(), o.getTotalAmount()});
+                }
+            }
+            if (wasSelected > 0) selectDeliveryRow(wasSelected);
+            if (selectedDeliveryId != null) findDeliveryForSelectedOrder();
+        } catch(Exception ex) { showDeliveryError("Loading deliveries", ex); }
+    }
+    private void loadSelectedDelivery() {
+        int view = tblDeliveries.getSelectedRow();
+        if (view < 0) return;
+        int row = tblDeliveries.convertRowIndexToModel(view);
+        int id = ((Number) tblDeliveries.getModel().getValueAt(row, 0)).intValue();
+        int oid = ((Number) tblDeliveries.getModel().getValueAt(row, 1)).intValue();
+        try {
+            java.util.Optional<com.econest.deliveries.model.Delivery> d = deliveryService.getDeliveryByOrder(oid);
+            if (d.isPresent() && d.get().getDeliveryId() == id) {
+                selectedDeliveryId = id;
+                loadingDeliveryChoices = true;
+                try {selectDeliveryChoice(cmbDelOrder, oid);} finally {loadingDeliveryChoices = false;}
+                renderDeliveryDetails(d.get());
+            }
+        } catch(Exception ex) {showDeliveryError("Loading selected delivery", ex);}
+    }
+    private java.time.LocalDateTime parseDeliveryDate() {
+        String input=txtDelSchedule.getText().trim();
+        try{return java.time.LocalDateTime.parse(input,DELIVERY_DATE);}
+        catch(java.time.format.DateTimeParseException ex) {
+            throw new IllegalArgumentException("Enter date/time as yyyy-MM-dd HH:mm, e.g. 2026-11-15 14:30");
+        }
+    }
+    private void onAssignDelivery(java.awt.event.ActionEvent evt) {
+        int oid=selectedOrderChoice(cmbDelOrder), aid=selectedOrderChoice(cmbDelAgent);
+        if(oid<=0||aid<=0){javax.swing.JOptionPane.showMessageDialog(this,"Select a confirmed order and an agent.");return;}
+        try {com.econest.deliveries.model.Delivery d=deliveryService.assignAgent(oid,aid);
+            selectedDeliveryId=d.getDeliveryId();refreshDeliveriesData();
+            javax.swing.JOptionPane.showMessageDialog(this,"Delivery #"+selectedDeliveryId+" assigned; pending agent-email event saved.");
+        } catch(Exception ex) {showDeliveryError("Assign or reassign delivery",ex);}
+    }
+    private void onScheduleDelivery(java.awt.event.ActionEvent evt) {
+        if(selectedDeliveryId==null){javax.swing.JOptionPane.showMessageDialog(this,"Select a delivery first.");return;}
+        try {deliveryService.scheduleDelivery(selectedDeliveryId,parseDeliveryDate());refreshDeliveriesData();}
+        catch(Exception ex) {showDeliveryError("Schedule delivery",ex);}
+    }
+    private void onDispatchDelivery(java.awt.event.ActionEvent evt) {
+        if(selectedDeliveryId==null){javax.swing.JOptionPane.showMessageDialog(this,"Select a delivery first.");return;}
+        if(javax.swing.JOptionPane.showConfirmDialog(this,"Dispatch delivery #"+selectedDeliveryId+"?",
+                "Dispatch delivery",javax.swing.JOptionPane.YES_NO_OPTION)!=javax.swing.JOptionPane.YES_OPTION)return;
+        try {deliveryService.dispatchDelivery(selectedDeliveryId);refreshDeliveriesData();
+            javax.swing.JOptionPane.showMessageDialog(this,"Dispatched; pending client-email event saved.");}
+        catch(Exception ex) {showDeliveryError("Dispatch delivery",ex);}
+    }
+    private void onMarkDelivered(java.awt.event.ActionEvent evt) {
+        if(selectedDeliveryId==null){javax.swing.JOptionPane.showMessageDialog(this,"Select a delivery first.");return;}
+        try {deliveryService.completeDelivery(selectedDeliveryId);refreshDeliveriesData();}
+        catch(Exception ex) {showDeliveryError("Mark delivered",ex);}
+    }
+    private void onMarkFailed(java.awt.event.ActionEvent evt) {
+        if(selectedDeliveryId==null){javax.swing.JOptionPane.showMessageDialog(this,"Select a delivery first.");return;}
+        try {deliveryService.failDelivery(selectedDeliveryId,txtDelReason.getText());refreshDeliveriesData();}
+        catch(Exception ex) {showDeliveryError("Mark failed",ex);}
+    }
+    private void onCancelDelivery(java.awt.event.ActionEvent evt) {
+        if(selectedDeliveryId==null){javax.swing.JOptionPane.showMessageDialog(this,"Select a delivery first.");return;}
+        if(javax.swing.JOptionPane.showConfirmDialog(this,"Cancel this delivery assignment? The order will remain confirmed.",
+                "Cancel assignment",javax.swing.JOptionPane.YES_NO_OPTION)!=javax.swing.JOptionPane.YES_OPTION)return;
+        try {deliveryService.cancelDelivery(selectedDeliveryId);refreshDeliveriesData();}
+        catch(Exception ex) {showDeliveryError("Cancel delivery",ex);}
+    }
+    private void onRefreshDeliveries(java.awt.event.ActionEvent evt){refreshDeliveriesData();}
+    private void onDeliveryRowClick(java.awt.event.MouseEvent evt){loadSelectedDelivery();}
     public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -3816,26 +4105,54 @@ public class MainDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel deliveriesDescription;
     private javax.swing.JPanel deliveriesDetailsPanel;
     private javax.swing.JPanel deliveriesTilesPanel;
-    private javax.swing.JPanel deliveriesTile1Panel;
-    private javax.swing.JPanel deliveriesTile1TextPanel;
-    private javax.swing.JLabel deliveriesTile1Title;
-    private javax.swing.JLabel deliveriesTile1Subtitle;
-    private javax.swing.JLabel deliveriesTile1Status;
-    private javax.swing.JPanel deliveriesTile2Panel;
-    private javax.swing.JPanel deliveriesTile2TextPanel;
-    private javax.swing.JLabel deliveriesTile2Title;
-    private javax.swing.JLabel deliveriesTile2Subtitle;
-    private javax.swing.JLabel deliveriesTile2Status;
-    private javax.swing.JPanel deliveriesTile3Panel;
-    private javax.swing.JPanel deliveriesTile3TextPanel;
-    private javax.swing.JLabel deliveriesTile3Title;
-    private javax.swing.JLabel deliveriesTile3Subtitle;
-    private javax.swing.JLabel deliveriesTile3Status;
-    private javax.swing.JPanel deliveriesTile4Panel;
-    private javax.swing.JPanel deliveriesTile4TextPanel;
-    private javax.swing.JLabel deliveriesTile4Title;
-    private javax.swing.JLabel deliveriesTile4Subtitle;
-    private javax.swing.JLabel deliveriesTile4Status;
+    private javax.swing.JPanel delControlsPanel;
+    private javax.swing.JLabel delControlsHeading;
+    private javax.swing.JScrollPane delControlsScroll;
+    private javax.swing.JPanel delInputsPanel;
+    private javax.swing.JPanel delOrderRow;
+    private javax.swing.JLabel lblDelOrder;
+    private javax.swing.JComboBox cmbDelOrder;
+    private javax.swing.JPanel delAgentRow;
+    private javax.swing.JLabel lblDelAgent;
+    private javax.swing.JComboBox cmbDelAgent;
+    private javax.swing.JPanel delScheduleRow;
+    private javax.swing.JLabel lblDelSchedule;
+    private javax.swing.JTextField txtDelSchedule;
+    private javax.swing.JButton btnDelAssign;
+    private javax.swing.JPanel delIdRow;
+    private javax.swing.JLabel lblDelId;
+    private javax.swing.JTextField txtDelId;
+    private javax.swing.JButton btnDelSchedule;
+    private javax.swing.JPanel delStatusRow;
+    private javax.swing.JLabel lblDelStatus;
+    private javax.swing.JTextField txtDelStatus;
+    private javax.swing.JPanel delReasonRow;
+    private javax.swing.JLabel lblDelReason;
+    private javax.swing.JTextField txtDelReason;
+    private javax.swing.JButton btnDelDispatch;
+    private javax.swing.JLabel lblDelActionsHeading;
+    private javax.swing.JPanel delSearchRow;
+    private javax.swing.JLabel lblDelSearch;
+    private javax.swing.JTextField txtDelSearch;
+    private javax.swing.JPanel delAgentInfoRow;
+    private javax.swing.JLabel lblDelAgentInfo;
+    private javax.swing.JTextField txtDelAgentInfo;
+    private javax.swing.JPanel delScheduleInfoRow;
+    private javax.swing.JLabel lblDelScheduleInfo;
+    private javax.swing.JTextField txtDelScheduleInfo;
+    private javax.swing.JButton btnDelCancel;
+    private javax.swing.JPanel delDataPanel;
+    private javax.swing.JPanel delDeliveriesToolbar;
+    private javax.swing.JLabel lblDeliveriesTable;
+    private javax.swing.JButton btnDelDelivered;
+    private javax.swing.JButton btnDelFailed;
+    private javax.swing.JButton btnDelRefresh;
+    private javax.swing.JScrollPane delDeliveriesScroll;
+    private javax.swing.JTable tblDeliveries;
+    private javax.swing.JPanel delOrdersPanel;
+    private javax.swing.JLabel lblDelOrders;
+    private javax.swing.JScrollPane delOrdersScroll;
+    private javax.swing.JTable tblDelOrders;
     private javax.swing.JLabel deliveriesModuleStatus;
     private javax.swing.JPanel reportsPage;
     private javax.swing.JPanel reportsIntroPanel;
