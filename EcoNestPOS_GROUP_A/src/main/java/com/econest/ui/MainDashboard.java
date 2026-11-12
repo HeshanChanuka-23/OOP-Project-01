@@ -30,6 +30,7 @@ public class MainDashboard extends javax.swing.JFrame {
         prepareProductTable();
         prepareInventoryTables();
         prepareClientTable();
+        prepareAgentTable();
     }
 
     /** Show a panel that ALREADY EXISTS in the GUI Builder CardLayout. */
@@ -38,6 +39,7 @@ public class MainDashboard extends javax.swing.JFrame {
         if ("products".equals(pageKey)) refreshProductTable();
         if ("inventory".equals(pageKey)) refreshInventoryData();
         if ("clients".equals(pageKey)) refreshClientTable();
+        if ("agents".equals(pageKey)) refreshAgentTable();
         switch (pageKey) {
             case "dashboard": headerTitleLabel.setText("Overview Dashboard"); break;
             case "products": headerTitleLabel.setText("Products"); break;
@@ -305,26 +307,47 @@ public class MainDashboard extends javax.swing.JFrame {
         agentsDescription = new javax.swing.JLabel();
         agentsDetailsPanel = new javax.swing.JPanel();
         agentsTilesPanel = new javax.swing.JPanel();
-        agentsTile1Panel = new javax.swing.JPanel();
-        agentsTile1TextPanel = new javax.swing.JPanel();
-        agentsTile1Title = new javax.swing.JLabel();
-        agentsTile1Subtitle = new javax.swing.JLabel();
-        agentsTile1Status = new javax.swing.JLabel();
-        agentsTile2Panel = new javax.swing.JPanel();
-        agentsTile2TextPanel = new javax.swing.JPanel();
-        agentsTile2Title = new javax.swing.JLabel();
-        agentsTile2Subtitle = new javax.swing.JLabel();
-        agentsTile2Status = new javax.swing.JLabel();
-        agentsTile3Panel = new javax.swing.JPanel();
-        agentsTile3TextPanel = new javax.swing.JPanel();
-        agentsTile3Title = new javax.swing.JLabel();
-        agentsTile3Subtitle = new javax.swing.JLabel();
-        agentsTile3Status = new javax.swing.JLabel();
-        agentsTile4Panel = new javax.swing.JPanel();
-        agentsTile4TextPanel = new javax.swing.JPanel();
-        agentsTile4Title = new javax.swing.JLabel();
-        agentsTile4Subtitle = new javax.swing.JLabel();
-        agentsTile4Status = new javax.swing.JLabel();
+        agentFormPanel = new javax.swing.JPanel();
+        agentFormHeading = new javax.swing.JPanel();
+        agentFormTitle = new javax.swing.JLabel();
+        agentFormCaption = new javax.swing.JLabel();
+        agentFieldsPanel = new javax.swing.JPanel();
+        agentNameRow = new javax.swing.JPanel();
+        lblAgentName = new javax.swing.JLabel();
+        txtAgentName = new javax.swing.JTextField();
+        agentVehicleTypeRow = new javax.swing.JPanel();
+        lblAgentVehicleType = new javax.swing.JLabel();
+        cmbAgentVehicleType = new javax.swing.JComboBox<>();
+        agentVehicleNumberRow = new javax.swing.JPanel();
+        lblAgentVehicleNumber = new javax.swing.JLabel();
+        agentVehicleNumberScroll = new javax.swing.JScrollPane();
+        txtAgentVehicleNumber = new javax.swing.JTextArea();
+        agentEmailRow = new javax.swing.JPanel();
+        lblAgentEmail = new javax.swing.JLabel();
+        txtAgentEmail = new javax.swing.JTextField();
+        agentPhoneRow = new javax.swing.JPanel();
+        lblAgentPhone = new javax.swing.JLabel();
+        txtAgentPhone = new javax.swing.JTextField();
+        agentIdRow = new javax.swing.JPanel();
+        lblCurrentAgent = new javax.swing.JLabel();
+        lblSelectedAgentId = new javax.swing.JLabel();
+        agentActionsPanel = new javax.swing.JPanel();
+        btnAddAgent = new javax.swing.JButton();
+        btnUpdateAgent = new javax.swing.JButton();
+        btnDeleteAgent = new javax.swing.JButton();
+        btnClearAgent = new javax.swing.JButton();
+        agentTablePanel = new javax.swing.JPanel();
+        agentTableHeading = new javax.swing.JPanel();
+        agentTableTitleArea = new javax.swing.JPanel();
+        agentTableTitle = new javax.swing.JLabel();
+        agentTableCaption = new javax.swing.JLabel();
+        agentSearchPanel = new javax.swing.JPanel();
+        txtAgentSearch = new javax.swing.JTextField();
+        btnSearchAgent = new javax.swing.JButton();
+        btnRefreshAgents = new javax.swing.JButton();
+        agentTableScroll = new javax.swing.JScrollPane();
+        tblAgents = new javax.swing.JTable();
+        agentTableHint = new javax.swing.JLabel();
         agentsModuleStatus = new javax.swing.JLabel();
         ordersPage = new javax.swing.JPanel();
         ordersIntroPanel = new javax.swing.JPanel();
@@ -1621,128 +1644,165 @@ public class MainDashboard extends javax.swing.JFrame {
         agentsDetailsPanel.setLayout(new java.awt.BorderLayout());
 
         agentsTilesPanel.setBackground(new java.awt.Color(246, 249, 247));
-        agentsTilesPanel.setLayout(new java.awt.GridLayout(2, 2, 17, 17));
+        agentsTilesPanel.setLayout(new java.awt.BorderLayout(13, 0));
 
-        agentsTile1Panel.setBackground(new java.awt.Color(255, 255, 255));
-        agentsTile1Panel.setBorder(javax.swing.BorderFactory.createEmptyBorder(17, 19, 17, 18));
-        agentsTile1Panel.setLayout(new java.awt.BorderLayout());
+        agentFormPanel.setBackground(new java.awt.Color(255, 255, 255));
+        agentFormPanel.setPreferredSize(new java.awt.Dimension(343, 445));
+        agentFormPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(16, 15, 15, 15));
+        agentFormPanel.setLayout(new java.awt.BorderLayout(0, 12));
 
-        agentsTile1TextPanel.setBackground(new java.awt.Color(255, 255, 255));
-        agentsTile1TextPanel.setPreferredSize(new java.awt.Dimension(330, 88));
-        agentsTile1TextPanel.setLayout(new java.awt.GridLayout(2, 1, 0, 6));
+        agentFormHeading.setBackground(new java.awt.Color(255, 255, 255));
+        agentFormHeading.setPreferredSize(new java.awt.Dimension(310, 50));
+        agentFormHeading.setLayout(new java.awt.GridLayout(2, 1, 0, 3));
+        agentFormTitle.setText("Delivery agent details");
+        agentFormTitle.setFont(new java.awt.Font("Segoe UI", 1, 17));
+        agentFormTitle.setForeground(new java.awt.Color(35, 55, 44));
+        agentFormHeading.add(agentFormTitle);
+        agentFormCaption.setText("Register personnel and vehicle information");
+        agentFormCaption.setFont(new java.awt.Font("Segoe UI", 0, 11));
+        agentFormCaption.setForeground(new java.awt.Color(110, 128, 117));
+        agentFormHeading.add(agentFormCaption);
+        agentFormPanel.add(agentFormHeading, java.awt.BorderLayout.NORTH);
 
-        agentsTile1Title.setText("Agent directory");
-        agentsTile1Title.setForeground(new java.awt.Color(35, 55, 44));
-        agentsTile1Title.setFont(new java.awt.Font("Segoe UI", 1, 16));
-        agentsTile1TextPanel.add(agentsTile1Title);
+        agentFieldsPanel.setBackground(new java.awt.Color(255, 255, 255));
+        agentFieldsPanel.setLayout(new java.awt.GridLayout(6, 1, 0, 10));
 
-        agentsTile1Subtitle.setText("Add, update and remove agents");
-        agentsTile1Subtitle.setForeground(new java.awt.Color(110, 128, 117));
-        agentsTile1Subtitle.setFont(new java.awt.Font("Segoe UI", 0, 12));
-        agentsTile1TextPanel.add(agentsTile1Subtitle);
+        agentNameRow.setBackground(new java.awt.Color(255, 255, 255));
+        agentNameRow.setLayout(new java.awt.BorderLayout(8, 0));
+        lblAgentName.setText("Agent name");
+        lblAgentName.setPreferredSize(new java.awt.Dimension(105, 25));
+        agentNameRow.add(lblAgentName, java.awt.BorderLayout.WEST);
+        agentNameRow.add(txtAgentName, java.awt.BorderLayout.CENTER);
+        agentFieldsPanel.add(agentNameRow);
 
+        agentVehicleTypeRow.setBackground(new java.awt.Color(255, 255, 255));
+        agentVehicleTypeRow.setLayout(new java.awt.BorderLayout(8, 0));
+        lblAgentVehicleType.setText("Vehicle type");
+        lblAgentVehicleType.setPreferredSize(new java.awt.Dimension(105, 25));
+        agentVehicleTypeRow.add(lblAgentVehicleType, java.awt.BorderLayout.WEST);
+        cmbAgentVehicleType.setEditable(true);
+        cmbAgentVehicleType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Motorbike", "Van", "Car", "Bicycle", "Truck" }));
+        agentVehicleTypeRow.add(cmbAgentVehicleType, java.awt.BorderLayout.CENTER);
+        agentFieldsPanel.add(agentVehicleTypeRow);
 
-        agentsTile1Panel.add(agentsTile1TextPanel, java.awt.BorderLayout.NORTH);
+        agentVehicleNumberRow.setBackground(new java.awt.Color(255, 255, 255));
+        agentVehicleNumberRow.setLayout(new java.awt.BorderLayout(8, 0));
+        lblAgentVehicleNumber.setText("Vehicle no.");
+        lblAgentVehicleNumber.setPreferredSize(new java.awt.Dimension(105, 25));
+        agentVehicleNumberRow.add(lblAgentVehicleNumber, java.awt.BorderLayout.WEST);
+        txtAgentVehicleNumber.setLineWrap(false);
+        txtAgentVehicleNumber.setWrapStyleWord(false);
+        txtAgentVehicleNumber.setRows(1);
+        agentVehicleNumberScroll.setPreferredSize(new java.awt.Dimension(210, 57));
+        agentVehicleNumberScroll.setViewportView(txtAgentVehicleNumber);
+        agentVehicleNumberRow.add(agentVehicleNumberScroll, java.awt.BorderLayout.CENTER);
+        agentFieldsPanel.add(agentVehicleNumberRow);
 
-        agentsTile1Status.setText("Module interface will be integrated here.");
-        agentsTile1Status.setForeground(new java.awt.Color(66, 130, 97));
-        agentsTile1Status.setFont(new java.awt.Font("Segoe UI", 0, 11));
-        agentsTile1Panel.add(agentsTile1Status, java.awt.BorderLayout.SOUTH);
+        agentEmailRow.setBackground(new java.awt.Color(255, 255, 255));
+        agentEmailRow.setLayout(new java.awt.BorderLayout(8, 0));
+        lblAgentEmail.setText("Email");
+        lblAgentEmail.setPreferredSize(new java.awt.Dimension(105, 25));
+        agentEmailRow.add(lblAgentEmail, java.awt.BorderLayout.WEST);
+        agentEmailRow.add(txtAgentEmail, java.awt.BorderLayout.CENTER);
+        agentFieldsPanel.add(agentEmailRow);
 
+        agentPhoneRow.setBackground(new java.awt.Color(255, 255, 255));
+        agentPhoneRow.setLayout(new java.awt.BorderLayout(8, 0));
+        lblAgentPhone.setText("Phone");
+        lblAgentPhone.setPreferredSize(new java.awt.Dimension(105, 25));
+        agentPhoneRow.add(lblAgentPhone, java.awt.BorderLayout.WEST);
+        agentPhoneRow.add(txtAgentPhone, java.awt.BorderLayout.CENTER);
+        agentFieldsPanel.add(agentPhoneRow);
 
-        agentsTilesPanel.add(agentsTile1Panel);
+        agentIdRow.setBackground(new java.awt.Color(255, 255, 255));
+        agentIdRow.setLayout(new java.awt.BorderLayout(8, 0));
+        lblCurrentAgent.setText("Selected ID");
+        lblCurrentAgent.setPreferredSize(new java.awt.Dimension(105, 25));
+        agentIdRow.add(lblCurrentAgent, java.awt.BorderLayout.WEST);
+        lblSelectedAgentId.setText("New agent");
+        lblSelectedAgentId.setFont(new java.awt.Font("Segoe UI", 1, 12));
+        lblSelectedAgentId.setForeground(new java.awt.Color(66, 130, 97));
+        agentIdRow.add(lblSelectedAgentId, java.awt.BorderLayout.CENTER);
+        agentFieldsPanel.add(agentIdRow);
+        agentFormPanel.add(agentFieldsPanel, java.awt.BorderLayout.CENTER);
 
-        agentsTile2Panel.setBackground(new java.awt.Color(255, 255, 255));
-        agentsTile2Panel.setBorder(javax.swing.BorderFactory.createEmptyBorder(17, 19, 17, 18));
-        agentsTile2Panel.setLayout(new java.awt.BorderLayout());
+        agentActionsPanel.setBackground(new java.awt.Color(255, 255, 255));
+        agentActionsPanel.setPreferredSize(new java.awt.Dimension(310, 98));
+        agentActionsPanel.setLayout(new java.awt.GridLayout(2, 2, 9, 9));
+        btnAddAgent.setText("Add agent");
+        btnAddAgent.addActionListener(evt -> onAddAgent(evt));
+        agentActionsPanel.add(btnAddAgent);
+        btnUpdateAgent.setText("Update");
+        btnUpdateAgent.addActionListener(evt -> onUpdateAgent(evt));
+        agentActionsPanel.add(btnUpdateAgent);
+        btnDeleteAgent.setText("Delete");
+        btnDeleteAgent.addActionListener(evt -> onDeleteAgent(evt));
+        agentActionsPanel.add(btnDeleteAgent);
+        btnClearAgent.setText("Clear fields");
+        btnClearAgent.addActionListener(evt -> onClearAgent(evt));
+        agentActionsPanel.add(btnClearAgent);
+        agentFormPanel.add(agentActionsPanel, java.awt.BorderLayout.SOUTH);
+        agentsTilesPanel.add(agentFormPanel, java.awt.BorderLayout.WEST);
 
-        agentsTile2TextPanel.setBackground(new java.awt.Color(255, 255, 255));
-        agentsTile2TextPanel.setPreferredSize(new java.awt.Dimension(330, 88));
-        agentsTile2TextPanel.setLayout(new java.awt.GridLayout(2, 1, 0, 6));
+        agentTablePanel.setBackground(new java.awt.Color(255, 255, 255));
+        agentTablePanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(16, 15, 15, 15));
+        agentTablePanel.setLayout(new java.awt.BorderLayout(0, 10));
+        agentTableHeading.setBackground(new java.awt.Color(255, 255, 255));
+        agentTableHeading.setPreferredSize(new java.awt.Dimension(500, 93));
+        agentTableHeading.setLayout(new java.awt.BorderLayout(0, 6));
+        agentTableTitleArea.setBackground(new java.awt.Color(255, 255, 255));
+        agentTableTitleArea.setPreferredSize(new java.awt.Dimension(400, 44));
+        agentTableTitleArea.setLayout(new java.awt.GridLayout(2, 1, 0, 3));
+        agentTableTitle.setText("Delivery agents");
+        agentTableTitle.setFont(new java.awt.Font("Segoe UI", 1, 17));
+        agentTableTitle.setForeground(new java.awt.Color(35, 55, 44));
+        agentTableTitleArea.add(agentTableTitle);
+        agentTableCaption.setText("Select an agent to edit, update vehicle details or delete");
+        agentTableCaption.setFont(new java.awt.Font("Segoe UI", 0, 11));
+        agentTableCaption.setForeground(new java.awt.Color(110, 128, 117));
+        agentTableTitleArea.add(agentTableCaption);
+        agentTableHeading.add(agentTableTitleArea, java.awt.BorderLayout.NORTH);
 
-        agentsTile2Title.setText("Vehicle information");
-        agentsTile2Title.setForeground(new java.awt.Color(35, 55, 44));
-        agentsTile2Title.setFont(new java.awt.Font("Segoe UI", 1, 16));
-        agentsTile2TextPanel.add(agentsTile2Title);
+        agentSearchPanel.setBackground(new java.awt.Color(255, 255, 255));
+        agentSearchPanel.setPreferredSize(new java.awt.Dimension(500, 38));
+        agentSearchPanel.setLayout(new java.awt.BorderLayout(8, 0));
+        agentSearchPanel.add(txtAgentSearch, java.awt.BorderLayout.CENTER);
+        txtAgentSearch.addActionListener(evt -> onSearchAgent(evt));
+        btnSearchAgent.setText("Search");
+        btnSearchAgent.addActionListener(evt -> onSearchAgent(evt));
+        agentSearchPanel.add(btnSearchAgent, java.awt.BorderLayout.EAST);
+        btnRefreshAgents.setText("Refresh");
+        btnRefreshAgents.addActionListener(evt -> onRefreshAgents(evt));
+        agentSearchPanel.add(btnRefreshAgents, java.awt.BorderLayout.WEST);
+        agentTableHeading.add(agentSearchPanel, java.awt.BorderLayout.SOUTH);
+        agentTablePanel.add(agentTableHeading, java.awt.BorderLayout.NORTH);
 
-        agentsTile2Subtitle.setText("Vehicle type and registration number");
-        agentsTile2Subtitle.setForeground(new java.awt.Color(110, 128, 117));
-        agentsTile2Subtitle.setFont(new java.awt.Font("Segoe UI", 0, 12));
-        agentsTile2TextPanel.add(agentsTile2Subtitle);
+        tblAgents.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {},
+            new String [] { "ID", "Name", "Email", "Phone", "Vehicle Type", "Vehicle No." }
+        ) {
+            Class[] types = new Class[] { Integer.class, String.class, String.class, String.class, String.class, String.class };
+            boolean[] canEdit = new boolean[] { false, false, false, false, false, false };
+            public Class getColumnClass(int columnIndex) { return types[columnIndex]; }
+            public boolean isCellEditable(int rowIndex, int columnIndex) { return canEdit[columnIndex]; }
+        });
+        tblAgents.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblAgents.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) { onAgentTableClick(evt); }
+        });
+        agentTableScroll.setViewportView(tblAgents);
+        agentTablePanel.add(agentTableScroll, java.awt.BorderLayout.CENTER);
 
-
-        agentsTile2Panel.add(agentsTile2TextPanel, java.awt.BorderLayout.NORTH);
-
-        agentsTile2Status.setText("Module interface will be integrated here.");
-        agentsTile2Status.setForeground(new java.awt.Color(66, 130, 97));
-        agentsTile2Status.setFont(new java.awt.Font("Segoe UI", 0, 11));
-        agentsTile2Panel.add(agentsTile2Status, java.awt.BorderLayout.SOUTH);
-
-
-        agentsTilesPanel.add(agentsTile2Panel);
-
-        agentsTile3Panel.setBackground(new java.awt.Color(255, 255, 255));
-        agentsTile3Panel.setBorder(javax.swing.BorderFactory.createEmptyBorder(17, 19, 17, 18));
-        agentsTile3Panel.setLayout(new java.awt.BorderLayout());
-
-        agentsTile3TextPanel.setBackground(new java.awt.Color(255, 255, 255));
-        agentsTile3TextPanel.setPreferredSize(new java.awt.Dimension(330, 88));
-        agentsTile3TextPanel.setLayout(new java.awt.GridLayout(2, 1, 0, 6));
-
-        agentsTile3Title.setText("Contact details");
-        agentsTile3Title.setForeground(new java.awt.Color(35, 55, 44));
-        agentsTile3Title.setFont(new java.awt.Font("Segoe UI", 1, 16));
-        agentsTile3TextPanel.add(agentsTile3Title);
-
-        agentsTile3Subtitle.setText("Record current agent contact details");
-        agentsTile3Subtitle.setForeground(new java.awt.Color(110, 128, 117));
-        agentsTile3Subtitle.setFont(new java.awt.Font("Segoe UI", 0, 12));
-        agentsTile3TextPanel.add(agentsTile3Subtitle);
-
-
-        agentsTile3Panel.add(agentsTile3TextPanel, java.awt.BorderLayout.NORTH);
-
-        agentsTile3Status.setText("Module interface will be integrated here.");
-        agentsTile3Status.setForeground(new java.awt.Color(66, 130, 97));
-        agentsTile3Status.setFont(new java.awt.Font("Segoe UI", 0, 11));
-        agentsTile3Panel.add(agentsTile3Status, java.awt.BorderLayout.SOUTH);
-
-
-        agentsTilesPanel.add(agentsTile3Panel);
-
-        agentsTile4Panel.setBackground(new java.awt.Color(255, 255, 255));
-        agentsTile4Panel.setBorder(javax.swing.BorderFactory.createEmptyBorder(17, 19, 17, 18));
-        agentsTile4Panel.setLayout(new java.awt.BorderLayout());
-
-        agentsTile4TextPanel.setBackground(new java.awt.Color(255, 255, 255));
-        agentsTile4TextPanel.setPreferredSize(new java.awt.Dimension(330, 88));
-        agentsTile4TextPanel.setLayout(new java.awt.GridLayout(2, 1, 0, 6));
-
-        agentsTile4Title.setText("History preservation");
-        agentsTile4Title.setForeground(new java.awt.Color(35, 55, 44));
-        agentsTile4Title.setFont(new java.awt.Font("Segoe UI", 1, 16));
-        agentsTile4TextPanel.add(agentsTile4Title);
-
-        agentsTile4Subtitle.setText("Keep past delivery agent snapshots");
-        agentsTile4Subtitle.setForeground(new java.awt.Color(110, 128, 117));
-        agentsTile4Subtitle.setFont(new java.awt.Font("Segoe UI", 0, 12));
-        agentsTile4TextPanel.add(agentsTile4Subtitle);
-
-
-        agentsTile4Panel.add(agentsTile4TextPanel, java.awt.BorderLayout.NORTH);
-
-        agentsTile4Status.setText("Module interface will be integrated here.");
-        agentsTile4Status.setForeground(new java.awt.Color(66, 130, 97));
-        agentsTile4Status.setFont(new java.awt.Font("Segoe UI", 0, 11));
-        agentsTile4Panel.add(agentsTile4Status, java.awt.BorderLayout.SOUTH);
-
-
-        agentsTilesPanel.add(agentsTile4Panel);
-
+        agentTableHint.setText("Tip: You can search all agent fields. Active assignments prevent deletion.");
+        agentTableHint.setForeground(new java.awt.Color(110, 128, 117));
+        agentTableHint.setFont(new java.awt.Font("Segoe UI", 0, 11));
+        agentTableHint.setPreferredSize(new java.awt.Dimension(500, 25));
+        agentTablePanel.add(agentTableHint, java.awt.BorderLayout.SOUTH);
+        agentsTilesPanel.add(agentTablePanel, java.awt.BorderLayout.CENTER);
 
         agentsDetailsPanel.add(agentsTilesPanel, java.awt.BorderLayout.CENTER);
 
-        agentsModuleStatus.setText("Assigned developer: Piyathissa   |   Placeholder screen - no database changes");
+        agentsModuleStatus.setText("Piyathissa | Task 4 - Delivery Agents | Ready for database operations");
         agentsModuleStatus.setForeground(new java.awt.Color(110, 128, 117));
         agentsModuleStatus.setFont(new java.awt.Font("Segoe UI", 0, 11));
         agentsModuleStatus.setPreferredSize(new java.awt.Dimension(700, 47));
@@ -3015,6 +3075,153 @@ public class MainDashboard extends javax.swing.JFrame {
     private void onRefreshClients(java.awt.event.ActionEvent evt) { refreshClientTable(); }
     private void onClientTableClick(java.awt.event.MouseEvent evt) { loadSelectedClientIntoForm(); }
 
+    // ===== Task 4: Delivery Agent Management (outside initComponents) =====
+    private final com.econest.agents.service.DeliveryAgentService agentService =
+            new com.econest.agents.service.DeliveryAgentService();
+    private Integer selectedAgentId;
+    private javax.swing.table.TableRowSorter<javax.swing.table.DefaultTableModel> agentSorter;
+
+    private void prepareAgentTable() {
+        javax.swing.table.DefaultTableModel model =
+                (javax.swing.table.DefaultTableModel) tblAgents.getModel();
+        agentSorter = new javax.swing.table.TableRowSorter<>(model);
+        tblAgents.setRowSorter(agentSorter);
+        tblAgents.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblAgents.setRowHeight(27);
+        int[] sizes = {50, 145, 175, 110, 125, 125};
+        for (int i = 0; i < sizes.length; i++) {
+            tblAgents.getColumnModel().getColumn(i).setPreferredWidth(sizes[i]);
+        }
+        tblAgents.getSelectionModel().addListSelectionListener(evt -> {
+            if (!evt.getValueIsAdjusting()) loadSelectedAgentIntoForm();
+        });
+        txtAgentSearch.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            public void insertUpdate(javax.swing.event.DocumentEvent e) { applyAgentSearch(); }
+            public void removeUpdate(javax.swing.event.DocumentEvent e) { applyAgentSearch(); }
+            public void changedUpdate(javax.swing.event.DocumentEvent e) { applyAgentSearch(); }
+        });
+    }
+
+    private void refreshAgentTable() {
+        if (agentSorter == null) return;
+        javax.swing.table.DefaultTableModel model =
+                (javax.swing.table.DefaultTableModel) tblAgents.getModel();
+        try {
+            java.util.List<com.econest.agents.model.DeliveryAgent> agents = agentService.listAgents();
+            model.setRowCount(0);
+            for (com.econest.agents.model.DeliveryAgent agent : agents) {
+                model.addRow(new Object[] {agent.getAgentId(), agent.getName(),
+                    agent.getEmail(), agent.getPhone(), agent.getVehicleType(),
+                    agent.getVehicleNumber()});
+            }
+            selectedAgentId = null;
+            lblSelectedAgentId.setText("New agent");
+            agentsModuleStatus.setText("Delivery agents loaded: " + agents.size()
+                    + " | Piyathissa - Delivery Agent Management (Task 4)");
+            applyAgentSearch();
+        } catch (java.sql.SQLException | RuntimeException ex) {
+            agentsModuleStatus.setText("Could not load agents: " + ex.getMessage());
+            showAgentError("Database load failed", ex);
+        }
+    }
+
+    private com.econest.agents.model.DeliveryAgent readAgentForm() {
+        Object vehicle = cmbAgentVehicleType.getSelectedItem();
+        return new com.econest.agents.model.DeliveryAgent(
+                txtAgentName.getText(), txtAgentEmail.getText(), txtAgentPhone.getText(),
+                vehicle == null ? "" : vehicle.toString(),
+                txtAgentVehicleNumber.getText());
+    }
+
+    private void loadSelectedAgentIntoForm() {
+        int row = tblAgents.getSelectedRow();
+        if (row < 0) return;
+        int modelRow = tblAgents.convertRowIndexToModel(row);
+        javax.swing.table.DefaultTableModel model =
+                (javax.swing.table.DefaultTableModel) tblAgents.getModel();
+        selectedAgentId = ((Number) model.getValueAt(modelRow, 0)).intValue();
+        lblSelectedAgentId.setText(String.valueOf(selectedAgentId));
+        txtAgentName.setText((String) model.getValueAt(modelRow, 1));
+        txtAgentEmail.setText((String) model.getValueAt(modelRow, 2));
+        txtAgentPhone.setText((String) model.getValueAt(modelRow, 3));
+        cmbAgentVehicleType.setSelectedItem((String) model.getValueAt(modelRow, 4));
+        txtAgentVehicleNumber.setText((String) model.getValueAt(modelRow, 5));
+    }
+
+    private void clearAgentFields() {
+        tblAgents.clearSelection();
+        selectedAgentId = null;
+        lblSelectedAgentId.setText("New agent");
+        txtAgentName.setText("");
+        txtAgentEmail.setText("");
+        txtAgentPhone.setText("");
+        cmbAgentVehicleType.setSelectedItem("Motorbike");
+        txtAgentVehicleNumber.setText("");
+    }
+
+    private void applyAgentSearch() {
+        if (agentSorter == null) return;
+        // Clear previous selection before filtering so updates cannot target a hidden row.
+        tblAgents.clearSelection();
+        selectedAgentId = null;
+        lblSelectedAgentId.setText("New agent");
+        String query = txtAgentSearch.getText().trim();
+        if (query.isEmpty()) agentSorter.setRowFilter(null);
+        else agentSorter.setRowFilter(javax.swing.RowFilter.regexFilter(
+                "(?i)" + java.util.regex.Pattern.quote(query)));
+    }
+
+    private void showAgentError(String action, Exception ex) {
+        javax.swing.JOptionPane.showMessageDialog(this, action + ": " + ex.getMessage(),
+                "EcoNest Delivery Agents", javax.swing.JOptionPane.ERROR_MESSAGE);
+    }
+
+    private void onAddAgent(java.awt.event.ActionEvent evt) {
+        try {
+            int id = agentService.addAgent(readAgentForm());
+            clearAgentFields(); refreshAgentTable();
+            javax.swing.JOptionPane.showMessageDialog(this, "Delivery agent #" + id + " registered.");
+        } catch (java.sql.SQLException | RuntimeException ex) { showAgentError("Add failed", ex); }
+    }
+
+    private void onUpdateAgent(java.awt.event.ActionEvent evt) {
+        if (selectedAgentId == null) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Select an agent from the table first.");
+            return;
+        }
+        try {
+            com.econest.agents.model.DeliveryAgent agent = readAgentForm();
+            agent.setAgentId(selectedAgentId);
+            agentService.updateAgent(agent);
+            clearAgentFields(); refreshAgentTable();
+            javax.swing.JOptionPane.showMessageDialog(this, "Agent and vehicle details updated.");
+        } catch (java.sql.SQLException | RuntimeException ex) { showAgentError("Update failed", ex); }
+    }
+
+    private void onDeleteAgent(java.awt.event.ActionEvent evt) {
+        if (selectedAgentId == null) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Select an agent from the table first.");
+            return;
+        }
+        int decision = javax.swing.JOptionPane.showConfirmDialog(this,
+                "Permanently delete delivery agent #" + selectedAgentId + "?\n"
+                + "Any active delivery must first be reassigned or completed.\n"
+                + "Past deliveries retain the agent/vehicle snapshot.",
+                "Confirm permanent deletion", javax.swing.JOptionPane.YES_NO_OPTION,
+                javax.swing.JOptionPane.WARNING_MESSAGE);
+        if (decision != javax.swing.JOptionPane.YES_OPTION) return;
+        try {
+            agentService.deleteAgent(selectedAgentId);
+            clearAgentFields(); refreshAgentTable();
+            javax.swing.JOptionPane.showMessageDialog(this, "Delivery agent permanently deleted.");
+        } catch (java.sql.SQLException | RuntimeException ex) { showAgentError("Delete failed", ex); }
+    }
+
+    private void onClearAgent(java.awt.event.ActionEvent evt) { clearAgentFields(); }
+    private void onSearchAgent(java.awt.event.ActionEvent evt) { applyAgentSearch(); }
+    private void onRefreshAgents(java.awt.event.ActionEvent evt) { refreshAgentTable(); }
+    private void onAgentTableClick(java.awt.event.MouseEvent evt) { loadSelectedAgentIntoForm(); }
+
     public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -3260,26 +3467,47 @@ public class MainDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel agentsDescription;
     private javax.swing.JPanel agentsDetailsPanel;
     private javax.swing.JPanel agentsTilesPanel;
-    private javax.swing.JPanel agentsTile1Panel;
-    private javax.swing.JPanel agentsTile1TextPanel;
-    private javax.swing.JLabel agentsTile1Title;
-    private javax.swing.JLabel agentsTile1Subtitle;
-    private javax.swing.JLabel agentsTile1Status;
-    private javax.swing.JPanel agentsTile2Panel;
-    private javax.swing.JPanel agentsTile2TextPanel;
-    private javax.swing.JLabel agentsTile2Title;
-    private javax.swing.JLabel agentsTile2Subtitle;
-    private javax.swing.JLabel agentsTile2Status;
-    private javax.swing.JPanel agentsTile3Panel;
-    private javax.swing.JPanel agentsTile3TextPanel;
-    private javax.swing.JLabel agentsTile3Title;
-    private javax.swing.JLabel agentsTile3Subtitle;
-    private javax.swing.JLabel agentsTile3Status;
-    private javax.swing.JPanel agentsTile4Panel;
-    private javax.swing.JPanel agentsTile4TextPanel;
-    private javax.swing.JLabel agentsTile4Title;
-    private javax.swing.JLabel agentsTile4Subtitle;
-    private javax.swing.JLabel agentsTile4Status;
+    private javax.swing.JPanel agentFormPanel;
+    private javax.swing.JPanel agentFormHeading;
+    private javax.swing.JLabel agentFormTitle;
+    private javax.swing.JLabel agentFormCaption;
+    private javax.swing.JPanel agentFieldsPanel;
+    private javax.swing.JPanel agentNameRow;
+    private javax.swing.JLabel lblAgentName;
+    private javax.swing.JTextField txtAgentName;
+    private javax.swing.JPanel agentVehicleTypeRow;
+    private javax.swing.JLabel lblAgentVehicleType;
+    private javax.swing.JComboBox<String> cmbAgentVehicleType;
+    private javax.swing.JPanel agentVehicleNumberRow;
+    private javax.swing.JLabel lblAgentVehicleNumber;
+    private javax.swing.JScrollPane agentVehicleNumberScroll;
+    private javax.swing.JTextArea txtAgentVehicleNumber;
+    private javax.swing.JPanel agentEmailRow;
+    private javax.swing.JLabel lblAgentEmail;
+    private javax.swing.JTextField txtAgentEmail;
+    private javax.swing.JPanel agentPhoneRow;
+    private javax.swing.JLabel lblAgentPhone;
+    private javax.swing.JTextField txtAgentPhone;
+    private javax.swing.JPanel agentIdRow;
+    private javax.swing.JLabel lblCurrentAgent;
+    private javax.swing.JLabel lblSelectedAgentId;
+    private javax.swing.JPanel agentActionsPanel;
+    private javax.swing.JButton btnAddAgent;
+    private javax.swing.JButton btnUpdateAgent;
+    private javax.swing.JButton btnDeleteAgent;
+    private javax.swing.JButton btnClearAgent;
+    private javax.swing.JPanel agentTablePanel;
+    private javax.swing.JPanel agentTableHeading;
+    private javax.swing.JPanel agentTableTitleArea;
+    private javax.swing.JLabel agentTableTitle;
+    private javax.swing.JLabel agentTableCaption;
+    private javax.swing.JPanel agentSearchPanel;
+    private javax.swing.JTextField txtAgentSearch;
+    private javax.swing.JButton btnSearchAgent;
+    private javax.swing.JButton btnRefreshAgents;
+    private javax.swing.JScrollPane agentTableScroll;
+    private javax.swing.JTable tblAgents;
+    private javax.swing.JLabel agentTableHint;
     private javax.swing.JLabel agentsModuleStatus;
     private javax.swing.JPanel ordersPage;
     private javax.swing.JPanel ordersIntroPanel;
