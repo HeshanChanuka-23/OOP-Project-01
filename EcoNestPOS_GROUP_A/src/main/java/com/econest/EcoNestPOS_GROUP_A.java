@@ -1,16 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
 package com.econest;
 
-/**
- *
- * @author Animex
- */
-public class EcoNestPOS_GROUP_A {
+import com.econest.ui.MainDashboard;
+import javax.swing.SwingUtilities;
 
+/** Main entry point of EcoNest POS (NetBeans Maven Run Project). */
+public class EcoNestPOS_GROUP_A {
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        SwingUtilities.invokeLater(() -> new MainDashboard().setVisible(true));
     }
 }

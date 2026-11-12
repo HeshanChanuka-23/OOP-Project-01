@@ -23,7 +23,6 @@ public class MainDashboard extends javax.swing.JFrame {
 
     public MainDashboard() {
         initComponents();
-        showPage("dashboard");
         setMinimumSize(new Dimension(1020, 680));
         setSize(1220, 780);
         setLocationRelativeTo(null);
@@ -35,11 +34,14 @@ public class MainDashboard extends javax.swing.JFrame {
         prepareDeliveryTables();
         prepareReportTables();
         prepareEmailTable();
+        configureConsistentScrolling();
+        showPage("dashboard");
     }
 
     /** Show a panel that ALREADY EXISTS in the GUI Builder CardLayout. */
     public final void showPage(String pageKey) {
         ((CardLayout) contentPanel.getLayout()).show(contentPanel, pageKey);
+        if ("dashboard".equals(pageKey)) refreshDashboardMetrics();
         if ("products".equals(pageKey)) refreshProductTable();
         if ("inventory".equals(pageKey)) refreshInventoryData();
         if ("clients".equals(pageKey)) refreshClientTable();
@@ -508,6 +510,7 @@ public class MainDashboard extends javax.swing.JFrame {
         reportCardLowCount = new javax.swing.JPanel();
         reportCardTitleLowCount = new javax.swing.JLabel();
         lblReportLowCount = new javax.swing.JLabel();
+        reportTablesOuterScroll = new javax.swing.JScrollPane();
         reportTablesPanel = new javax.swing.JPanel();
         reportFlowPanel = new javax.swing.JPanel();
         lblReportFlowHeading = new javax.swing.JLabel();
@@ -802,7 +805,7 @@ public class MainDashboard extends javax.swing.JFrame {
         metricsHeadingPanelTitle.setFont(new java.awt.Font("Segoe UI", 1, 17));
         metricsHeadingPanel.add(metricsHeadingPanelTitle);
 
-        metricsHeadingPanelCaption.setText("Values update when the module database services are connected.");
+        metricsHeadingPanelCaption.setText("Live database totals — refreshed whenever you open Dashboard.");
         metricsHeadingPanelCaption.setForeground(new java.awt.Color(110, 128, 117));
         metricsHeadingPanelCaption.setFont(new java.awt.Font("Segoe UI", 0, 11));
         metricsHeadingPanel.add(metricsHeadingPanelCaption);
@@ -2112,11 +2115,11 @@ public class MainDashboard extends javax.swing.JFrame {
         contentPanel.add(ordersPage, "orders");
 
         deliveriesPage.setBackground(new java.awt.Color(246, 249, 247));
-        deliveriesPage.setBorder(javax.swing.BorderFactory.createEmptyBorder(21, 27, 20, 27));
+        deliveriesPage.setBorder(javax.swing.BorderFactory.createEmptyBorder(12, 16, 12, 16));
         deliveriesPage.setLayout(new java.awt.BorderLayout());
 
         deliveriesIntroPanel.setBackground(new java.awt.Color(246, 249, 247));
-        deliveriesIntroPanel.setPreferredSize(new java.awt.Dimension(820, 128));
+        deliveriesIntroPanel.setPreferredSize(new java.awt.Dimension(820, 94));
         deliveriesIntroPanel.setLayout(new java.awt.GridLayout(3, 1, 0, 3));
 
         deliveriesEyebrow.setText("ECONEST / DELIVERIES");
@@ -2143,15 +2146,16 @@ public class MainDashboard extends javax.swing.JFrame {
         deliveriesTilesPanel.setBackground(new java.awt.Color(246, 249, 247));
         deliveriesTilesPanel.setLayout(new java.awt.BorderLayout(12, 0));
         delControlsPanel.setBackground(new java.awt.Color(255, 255, 255));
-        delControlsPanel.setPreferredSize(new java.awt.Dimension(350, 480));
+        delControlsPanel.setPreferredSize(new java.awt.Dimension(335, 480));
         delControlsPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(12, 11, 12, 11));
         delControlsPanel.setLayout(new java.awt.BorderLayout(0, 6));
         delControlsHeading.setText("Delivery assignment and tracking");
         delControlsHeading.setFont(new java.awt.Font("Segoe UI", 1, 15));
-        delControlsHeading.setPreferredSize(new java.awt.Dimension(330, 38));
+        delControlsHeading.setPreferredSize(new java.awt.Dimension(305, 38));
         delControlsPanel.add(delControlsHeading, java.awt.BorderLayout.NORTH);
 
         delInputsPanel.setBackground(new java.awt.Color(255, 255, 255));
+        delInputsPanel.setPreferredSize(new java.awt.Dimension(270, 620));
         delInputsPanel.setLayout(new java.awt.GridLayout(14, 1, 0, 4));
         delOrderRow.setBackground(new java.awt.Color(255, 255, 255));
         delOrderRow.setPreferredSize(new java.awt.Dimension(270, 34));
@@ -2178,7 +2182,7 @@ public class MainDashboard extends javax.swing.JFrame {
         lblDelSchedule.setPreferredSize(new java.awt.Dimension(105, 28));
         delScheduleRow.add(lblDelSchedule, java.awt.BorderLayout.WEST);
 
-        txtDelSchedule.setToolTipText("yyyy-MM-dd HH:mm");
+        txtDelSchedule.setToolTipText("Example: 2026-11-15 14:30 (24-hour local time)");
         delScheduleRow.add(txtDelSchedule, java.awt.BorderLayout.CENTER);
         delInputsPanel.add(delScheduleRow);
         btnDelAssign.setText("ASSIGN / REASSIGN");
@@ -2277,6 +2281,7 @@ public class MainDashboard extends javax.swing.JFrame {
         delDeliveriesToolbar.add(btnDelRefresh);
         delDataPanel.add(delDeliveriesToolbar, java.awt.BorderLayout.NORTH);
 
+        tblDeliveries.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         tblDeliveries.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][] {}, new String[] {"Delivery ID", "Order ID", "Agent", "Status", "Scheduled for", "Dispatched at", "Delivered at", "Failure"}) {
             Class[] types = new Class[] {java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class};
@@ -2290,7 +2295,7 @@ public class MainDashboard extends javax.swing.JFrame {
         delDeliveriesScroll.setViewportView(tblDeliveries);
         delDataPanel.add(delDeliveriesScroll, java.awt.BorderLayout.CENTER);
         delOrdersPanel.setBackground(new java.awt.Color(255, 255, 255));
-        delOrdersPanel.setPreferredSize(new java.awt.Dimension(700, 235));
+        delOrdersPanel.setPreferredSize(new java.awt.Dimension(700, 170));
         delOrdersPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 8, 7, 8));
         delOrdersPanel.setLayout(new java.awt.BorderLayout(0, 5));
         lblDelOrders.setText("ORDERS — select a confirmed order for assignment");
@@ -2314,8 +2319,8 @@ public class MainDashboard extends javax.swing.JFrame {
         deliveriesModuleStatus.setText("Shanika | Task 6 - Delivery lifecycle and pending notification events");
         deliveriesModuleStatus.setForeground(new java.awt.Color(110, 128, 117));
         deliveriesModuleStatus.setFont(new java.awt.Font("Segoe UI", 0, 11));
-        deliveriesModuleStatus.setPreferredSize(new java.awt.Dimension(700, 47));
-        deliveriesModuleStatus.setBorder(javax.swing.BorderFactory.createEmptyBorder(13, 0, 5, 0));
+        deliveriesModuleStatus.setPreferredSize(new java.awt.Dimension(700, 28));
+        deliveriesModuleStatus.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 0, 3, 0));
         deliveriesDetailsPanel.add(deliveriesModuleStatus, java.awt.BorderLayout.SOUTH);
 
 
@@ -2325,11 +2330,11 @@ public class MainDashboard extends javax.swing.JFrame {
         contentPanel.add(deliveriesPage, "deliveries");
 
         reportsPage.setBackground(new java.awt.Color(246, 249, 247));
-        reportsPage.setBorder(javax.swing.BorderFactory.createEmptyBorder(21, 27, 20, 27));
+        reportsPage.setBorder(javax.swing.BorderFactory.createEmptyBorder(12, 16, 12, 16));
         reportsPage.setLayout(new java.awt.BorderLayout());
 
         reportsIntroPanel.setBackground(new java.awt.Color(246, 249, 247));
-        reportsIntroPanel.setPreferredSize(new java.awt.Dimension(820, 128));
+        reportsIntroPanel.setPreferredSize(new java.awt.Dimension(820, 94));
         reportsIntroPanel.setLayout(new java.awt.GridLayout(3, 1, 0, 3));
 
         reportsEyebrow.setText("ECONEST / REPORTS");
@@ -2356,7 +2361,7 @@ public class MainDashboard extends javax.swing.JFrame {
         reportsTilesPanel.setBackground(new java.awt.Color(246, 249, 247));
         reportsTilesPanel.setLayout(new java.awt.BorderLayout(0, 9));
         reportToolbarPanel.setBackground(new java.awt.Color(255, 255, 255));
-        reportToolbarPanel.setPreferredSize(new java.awt.Dimension(810, 62));
+        reportToolbarPanel.setPreferredSize(new java.awt.Dimension(810, 56));
         reportToolbarPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(8, 14, 8, 14));
         reportToolbarPanel.setLayout(new java.awt.BorderLayout(6, 0));
         reportPickerPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -2376,8 +2381,8 @@ public class MainDashboard extends javax.swing.JFrame {
         reportPickerPanel.add(txtReportYear);
         reportToolbarPanel.add(reportPickerPanel, java.awt.BorderLayout.WEST);
         btnGenerateReport.setText("GENERATE REPORT");
-        btnGenerateReport.setBackground(new java.awt.Color(39, 111, 80));
-        btnGenerateReport.setForeground(new java.awt.Color(255, 255, 255));
+        btnGenerateReport.setBackground(new java.awt.Color(222, 241, 229));
+        btnGenerateReport.setForeground(new java.awt.Color(24, 72, 48));
         btnGenerateReport.setFont(new java.awt.Font("Segoe UI", 1, 12));
         btnGenerateReport.setPreferredSize(new java.awt.Dimension(180, 36));
         btnGenerateReport.addActionListener(evt -> onGenerateReport(evt));
@@ -2386,7 +2391,7 @@ public class MainDashboard extends javax.swing.JFrame {
         reportBodyPanel.setBackground(new java.awt.Color(246, 249, 247));
         reportBodyPanel.setLayout(new java.awt.BorderLayout(0, 9));
         reportMetricsPanel.setBackground(new java.awt.Color(246, 249, 247));
-        reportMetricsPanel.setPreferredSize(new java.awt.Dimension(810, 140));
+        reportMetricsPanel.setPreferredSize(new java.awt.Dimension(810, 110));
         reportMetricsPanel.setLayout(new java.awt.GridLayout(2, 4, 9, 8));
         reportCardGross.setBackground(new java.awt.Color(255, 255, 255));
         reportCardGross.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 12, 9, 8));
@@ -2486,6 +2491,7 @@ public class MainDashboard extends javax.swing.JFrame {
         reportMetricsPanel.add(reportCardLowCount);
         reportBodyPanel.add(reportMetricsPanel, java.awt.BorderLayout.NORTH);
         reportTablesPanel.setBackground(new java.awt.Color(246, 249, 247));
+        reportTablesPanel.setPreferredSize(new java.awt.Dimension(730, 530));
         reportTablesPanel.setLayout(new java.awt.GridLayout(2, 1, 0, 9));
         reportFlowPanel.setBackground(new java.awt.Color(255, 255, 255));
         reportFlowPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(8, 12, 8, 12));
@@ -2521,7 +2527,8 @@ public class MainDashboard extends javax.swing.JFrame {
         reportLowScroll.setViewportView(tblReportLowStock);
         reportLowPanel.add(reportLowScroll, java.awt.BorderLayout.CENTER);
         reportTablesPanel.add(reportLowPanel);
-        reportBodyPanel.add(reportTablesPanel, java.awt.BorderLayout.CENTER);
+        reportTablesOuterScroll.setViewportView(reportTablesPanel);
+        reportBodyPanel.add(reportTablesOuterScroll, java.awt.BorderLayout.CENTER);
         reportsTilesPanel.add(reportBodyPanel, java.awt.BorderLayout.CENTER);
         lblReportNotice.setText("Choose a month and year, then press GENERATE REPORT.");
         lblReportNotice.setForeground(new java.awt.Color(91, 119, 103));
@@ -2533,8 +2540,8 @@ public class MainDashboard extends javax.swing.JFrame {
         reportsModuleStatus.setText("Methsindu | Task 7 — Derived monthly reports and current low-stock alerts");
         reportsModuleStatus.setForeground(new java.awt.Color(110, 128, 117));
         reportsModuleStatus.setFont(new java.awt.Font("Segoe UI", 0, 11));
-        reportsModuleStatus.setPreferredSize(new java.awt.Dimension(700, 47));
-        reportsModuleStatus.setBorder(javax.swing.BorderFactory.createEmptyBorder(13, 0, 5, 0));
+        reportsModuleStatus.setPreferredSize(new java.awt.Dimension(700, 28));
+        reportsModuleStatus.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 0, 3, 0));
         reportsDetailsPanel.add(reportsModuleStatus, java.awt.BorderLayout.SOUTH);
 
 
@@ -2597,22 +2604,22 @@ public class MainDashboard extends javax.swing.JFrame {
         cmbEmailFilter.addActionListener(evt -> onEmailFilterChanged(evt));
         emailButtonsPanel.add(cmbEmailFilter);
         btnEmailRefresh.setText("REFRESH");
-        btnEmailRefresh.setBackground(new java.awt.Color(39, 111, 80));
-        btnEmailRefresh.setForeground(new java.awt.Color(255, 255, 255));
+        btnEmailRefresh.setBackground(new java.awt.Color(222, 241, 229));
+        btnEmailRefresh.setForeground(new java.awt.Color(24, 72, 48));
         btnEmailRefresh.setFont(new java.awt.Font("Segoe UI", 1, 12));
         btnEmailRefresh.setPreferredSize(new java.awt.Dimension(178, 36));
         btnEmailRefresh.addActionListener(evt -> onRefreshEmails(evt));
         emailButtonsPanel.add(btnEmailRefresh);
         btnEmailRetry.setText("RETRY CLIENT EMAILS");
-        btnEmailRetry.setBackground(new java.awt.Color(39, 111, 80));
-        btnEmailRetry.setForeground(new java.awt.Color(255, 255, 255));
+        btnEmailRetry.setBackground(new java.awt.Color(222, 241, 229));
+        btnEmailRetry.setForeground(new java.awt.Color(24, 72, 48));
         btnEmailRetry.setFont(new java.awt.Font("Segoe UI", 1, 12));
         btnEmailRetry.setPreferredSize(new java.awt.Dimension(178, 36));
         btnEmailRetry.addActionListener(evt -> onRetryClientEmails(evt));
         emailButtonsPanel.add(btnEmailRetry);
         btnEmailRetryAgent.setText("RETRY AGENT EMAILS");
-        btnEmailRetryAgent.setBackground(new java.awt.Color(39, 111, 80));
-        btnEmailRetryAgent.setForeground(new java.awt.Color(255, 255, 255));
+        btnEmailRetryAgent.setBackground(new java.awt.Color(222, 241, 229));
+        btnEmailRetryAgent.setForeground(new java.awt.Color(24, 72, 48));
         btnEmailRetryAgent.setFont(new java.awt.Font("Segoe UI", 1, 12));
         btnEmailRetryAgent.setPreferredSize(new java.awt.Dimension(178, 36));
         btnEmailRetryAgent.addActionListener(evt -> onRetryAgentEmails(evt));
@@ -2687,6 +2694,123 @@ public class MainDashboard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 
+    // ===== Dashboard | current MariaDB totals (does not modify business data) =====
+    // Every metric is loaded from live data on opening Dashboard. We never use
+    // hard-coded values, and the slow JDBC queries run off the Swing event thread.
+    private int dashboardRefreshSequence = 0;
+
+    private static final class DashboardTotals {
+        final long products;
+        final long stockUnits;
+        final long orders;
+        final java.math.BigDecimal monthSales;
+
+        DashboardTotals(long products, long stockUnits, long orders,
+                        java.math.BigDecimal monthSales) {
+            this.products = products;
+            this.stockUnits = stockUnits;
+            this.orders = orders;
+            this.monthSales = monthSales;
+        }
+    }
+
+    private static DashboardTotals loadDashboardTotals() throws java.sql.SQLException {
+        java.time.YearMonth month = java.time.YearMonth.now();
+        java.sql.Timestamp from = java.sql.Timestamp.valueOf(month.atDay(1).atStartOfDay());
+        java.sql.Timestamp to = java.sql.Timestamp.valueOf(month.plusMonths(1).atDay(1).atStartOfDay());
+        try (java.sql.Connection connection = com.econest.config.DatabaseConnection.getConnection()) {
+            long products = readCount(connection, "SELECT COUNT(*) FROM products");
+            long stockUnits = readCount(connection,
+                    "SELECT COALESCE(SUM(quantity_on_hand), 0) FROM inventory");
+            long orders = readCount(connection, "SELECT COUNT(*) FROM orders");
+
+            // Exactly the Task 7 report rule: confirmed this month minus
+            // cancellations recorded this month, including earlier-month orders.
+            String sql = "SELECT "
+                    + "COALESCE(SUM(CASE WHEN confirmed_at >= ? AND confirmed_at < ? "
+                    + "THEN total_amount ELSE 0 END), 0) AS gross, "
+                    + "COALESCE(SUM(CASE WHEN cancelled_at >= ? AND cancelled_at < ? "
+                    + "AND confirmed_at IS NOT NULL THEN total_amount ELSE 0 END), 0) AS cancelled "
+                    + "FROM orders";
+            try (java.sql.PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setTimestamp(1, from);
+                statement.setTimestamp(2, to);
+                statement.setTimestamp(3, from);
+                statement.setTimestamp(4, to);
+                try (java.sql.ResultSet rs = statement.executeQuery()) {
+                    rs.next();
+                    java.math.BigDecimal net = rs.getBigDecimal("gross")
+                            .subtract(rs.getBigDecimal("cancelled"));
+                    return new DashboardTotals(products, stockUnits, orders, net);
+                }
+            }
+        }
+    }
+
+    private static long readCount(java.sql.Connection connection, String sql)
+            throws java.sql.SQLException {
+        try (java.sql.PreparedStatement ps = connection.prepareStatement(sql);
+             java.sql.ResultSet rs = ps.executeQuery()) {
+            rs.next();
+            return rs.getLong(1);
+        }
+    }
+
+    private void refreshDashboardMetrics() {
+        final int sequence = ++dashboardRefreshSequence;
+        metricProductsValue.setText("...");
+        metricInventoryValue.setText("...");
+        metricOrdersValue.setText("...");
+        metricSalesValue.setText("...");
+        metricsHeadingPanelCaption.setText("Loading live EcoNest totals from MariaDB...");
+
+        new javax.swing.SwingWorker<DashboardTotals, Void>() {
+            @Override protected DashboardTotals doInBackground() throws Exception {
+                return loadDashboardTotals();
+            }
+            @Override protected void done() {
+                if (sequence != dashboardRefreshSequence) return;
+                try {
+                    DashboardTotals result = get();
+                    metricProductsValue.setText(Long.toString(result.products));
+                    metricInventoryValue.setText(Long.toString(result.stockUnits));
+                    metricOrdersValue.setText(Long.toString(result.orders));
+                    metricSalesValue.setText(result.monthSales.toPlainString());
+                    metricsHeadingPanelCaption.setText(
+                        "Live counts and " + java.time.YearMonth.now()
+                        + " net sales — refreshed on opening Dashboard.");
+                } catch (Exception ex) {
+                    // Never show made-up dashboard totals if the database is offline.
+                    metricProductsValue.setText("—");
+                    metricInventoryValue.setText("—");
+                    metricOrdersValue.setText("—");
+                    metricSalesValue.setText("—");
+                    metricsHeadingPanelCaption.setText(
+                        "Totals unavailable — check MariaDB, then reopen Dashboard.");
+                }
+            }
+        }.execute();
+    }
+
+    // Set the mouse-wheel unit step on every existing GUI Builder scroll pane.
+    // The Reports page already uses 20; use that speed everywhere else too.
+    private void configureConsistentScrolling() {
+        javax.swing.JScrollPane[] panes = {
+            productDescriptionScroll, productTableScroll,
+            invControlsScroll, invStockScroll, invHistoryScroll,
+            clientAddressScroll, clientTableScroll,
+            agentVehicleNumberScroll, agentTableScroll,
+            ordControlsScroll, ordOrdersScroll, ordItemsScroll,
+            delControlsScroll, delDeliveriesScroll, delOrdersScroll,
+            reportTablesOuterScroll, reportFlowScroll, reportLowScroll,
+            emailTableScroll
+        };
+        for (javax.swing.JScrollPane pane : panes) {
+            pane.getVerticalScrollBar().setUnitIncrement(20);
+            pane.getHorizontalScrollBar().setUnitIncrement(20);
+        }
+    }
+
     // ===== Task 7 | Reporting; no business logic inside initComponents() =====
     private final com.econest.reports.service.ReportService reportService =
             new com.econest.reports.service.ReportService();
@@ -2697,6 +2821,9 @@ public class MainDashboard extends javax.swing.JFrame {
         txtReportYear.setText(Integer.toString(current.getYear()));
         tblReportMonthlyStock.setAutoCreateRowSorter(true);
         tblReportLowStock.setAutoCreateRowSorter(true);
+        tblReportMonthlyStock.setRowHeight(25);
+        tblReportLowStock.setRowHeight(25);
+        reportTablesOuterScroll.getVerticalScrollBar().setUnitIncrement(20);
     }
 
     private void onGenerateReport(java.awt.event.ActionEvent evt) {
@@ -3775,6 +3902,11 @@ public class MainDashboard extends javax.swing.JFrame {
         deliverySorter = new javax.swing.table.TableRowSorter<>(
                 (javax.swing.table.DefaultTableModel) tblDeliveries.getModel());
         tblDeliveries.setRowSorter(deliverySorter);
+        // Preserve readable table columns instead of squeezing eight columns into a small panel.
+        int[] deliveryColumnWidths = {95, 90, 150, 110, 165, 165, 165, 200};
+        for (int i = 0; i < deliveryColumnWidths.length; i++) {
+            tblDeliveries.getColumnModel().getColumn(i).setPreferredWidth(deliveryColumnWidths[i]);
+        }
         tblDeliveries.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblDelOrders.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblDeliveries.getSelectionModel().addListSelectionListener(e -> {
@@ -3875,7 +4007,14 @@ public class MainDashboard extends javax.swing.JFrame {
         txtDelStatus.setText(d.getStatus().name());
         txtDelAgentInfo.setText(d.getAgentNameAtAssignment());
         txtDelScheduleInfo.setText(deliveryDate(d.getScheduledFor()));
-        txtDelSchedule.setText(deliveryDate(d.getScheduledFor()));
+        // Suggest a future local time only for an unscheduled ASSIGNED delivery.
+        // This is a UI suggestion, never an automatic database write.
+        txtDelSchedule.setText(d.getScheduledFor() == null
+                ? (d.getStatus() == com.econest.deliveries.model.DeliveryStatus.ASSIGNED
+                    ? java.time.LocalDateTime.now().plusDays(1).withHour(9).withMinute(0)
+                            .withSecond(0).withNano(0).format(DELIVERY_DATE)
+                    : "")
+                : deliveryDate(d.getScheduledFor()));
         txtDelReason.setText(d.getFailureReason() == null ? "" : d.getFailureReason());
         selectDeliveryChoice(cmbDelAgent, d.getAgentId() == null ? 0 : d.getAgentId());
     }
@@ -3925,7 +4064,9 @@ public class MainDashboard extends javax.swing.JFrame {
         String input=txtDelSchedule.getText().trim();
         try{return java.time.LocalDateTime.parse(input,DELIVERY_DATE);}
         catch(java.time.format.DateTimeParseException ex) {
-            throw new IllegalArgumentException("Enter date/time as yyyy-MM-dd HH:mm, e.g. 2026-11-15 14:30");
+            throw new IllegalArgumentException("Enter local date/time as yyyy-MM-dd HH:mm (24-hour clock), e.g. "
+                    + java.time.LocalDateTime.now().plusDays(1).withHour(9).withMinute(0)
+                            .withSecond(0).withNano(0).format(DELIVERY_DATE));
         }
     }
     private void onAssignDelivery(java.awt.event.ActionEvent evt) {
@@ -3937,9 +4078,19 @@ public class MainDashboard extends javax.swing.JFrame {
         } catch(Exception ex) {showDeliveryError("Assign or reassign delivery",ex);}
     }
     private void onScheduleDelivery(java.awt.event.ActionEvent evt) {
-        if(selectedDeliveryId==null){javax.swing.JOptionPane.showMessageDialog(this,"Select a delivery first.");return;}
-        try {deliveryService.scheduleDelivery(selectedDeliveryId,parseDeliveryDate());refreshDeliveriesData();}
-        catch(Exception ex) {showDeliveryError("Schedule delivery",ex);}
+        if (selectedDeliveryId == null) {
+            javax.swing.JOptionPane.showMessageDialog(this,"Select an assigned delivery first.");
+            return;
+        }
+        String status = txtDelStatus.getText().trim();
+        if (!"ASSIGNED".equals(status) && !"SCHEDULED".equals(status)) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Only ASSIGNED or SCHEDULED deliveries can be scheduled. Selected status: " + status,
+                    "Schedule delivery", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        try { deliveryService.scheduleDelivery(selectedDeliveryId, parseDeliveryDate()); refreshDeliveriesData(); }
+        catch (Exception ex) { showDeliveryError("Schedule delivery", ex); }
     }
     private void onDispatchDelivery(java.awt.event.ActionEvent evt) {
         if(selectedDeliveryId==null){javax.swing.JOptionPane.showMessageDialog(this,"Select a delivery first.");return;}
@@ -4407,6 +4558,7 @@ public class MainDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel reportCardLowCount;
     private javax.swing.JLabel reportCardTitleLowCount;
     private javax.swing.JLabel lblReportLowCount;
+    private javax.swing.JScrollPane reportTablesOuterScroll;
     private javax.swing.JPanel reportTablesPanel;
     private javax.swing.JPanel reportFlowPanel;
     private javax.swing.JLabel lblReportFlowHeading;
