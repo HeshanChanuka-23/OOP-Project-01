@@ -2255,33 +2255,40 @@
                           <BorderConstraints direction="Center"/>
                         </Constraint>
                       </Constraints>
-                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-                        <Property name="rows" type="int" value="2"/>
-                        <Property name="columns" type="int" value="2"/>
-                        <Property name="horizontalGap" type="int" value="17"/>
-                        <Property name="verticalGap" type="int" value="17"/>
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout">
+                        <Property name="horizontalGap" type="int" value="13"/>
                       </Layout>
                       <SubComponents>
-                        <Container class="javax.swing.JPanel" name="clientsTile1Panel">
+                        <Container class="javax.swing.JPanel" name="clientFormPanel">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                              <Color red="ff" green="ff" blue="ff" type="rgb"/>
+                            </Property>
+                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[343, 445]"/>
                             </Property>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
-                                <EmptyBorder top="17" left="19" bottom="17" right="18"/>
+                                <EmptyBorder top="16" left="15" bottom="15" right="15"/>
                               </Border>
                             </Property>
                           </Properties>
-                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                              <BorderConstraints direction="West"/>
+                            </Constraint>
+                          </Constraints>
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout">
+                            <Property name="verticalGap" type="int" value="12"/>
+                          </Layout>
                           <SubComponents>
-                            <Container class="javax.swing.JPanel" name="clientsTile1TextPanel">
+                            <Container class="javax.swing.JPanel" name="clientFormHeading">
                               <Properties>
                                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                  <Color red="ff" green="ff" blue="ff" type="rgb"/>
                                 </Property>
                                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                                  <Dimension value="[330, 88]"/>
+                                  <Dimension value="[310, 50]"/>
                                 </Property>
                               </Properties>
                               <Constraints>
@@ -2292,41 +2299,327 @@
                               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                                 <Property name="rows" type="int" value="2"/>
                                 <Property name="columns" type="int" value="1"/>
-                                <Property name="verticalGap" type="int" value="6"/>
+                                <Property name="verticalGap" type="int" value="3"/>
                               </Layout>
                               <SubComponents>
-                                <Component class="javax.swing.JLabel" name="clientsTile1Title">
+                                <Component class="javax.swing.JLabel" name="clientFormTitle">
                                   <Properties>
-                                    <Property name="text" type="java.lang.String" value="Client directory"/>
+                                    <Property name="text" type="java.lang.String" value="Client details"/>
                                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                      <Color blue="2c" green="37" red="23" type="rgb"/>
+                                      <Color red="23" green="37" blue="2c" type="rgb"/>
                                     </Property>
                                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                      <Font name="Segoe UI" size="16" style="1"/>
+                                      <Font name="Segoe UI" size="17" style="1"/>
                                     </Property>
                                   </Properties>
                                 </Component>
-                                <Component class="javax.swing.JLabel" name="clientsTile1Subtitle">
+                                <Component class="javax.swing.JLabel" name="clientFormCaption">
                                   <Properties>
-                                    <Property name="text" type="java.lang.String" value="Search and view customer records"/>
+                                    <Property name="text" type="java.lang.String" value="Add or edit household / office clients"/>
                                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                      <Color blue="75" green="80" red="6e" type="rgb"/>
+                                      <Color red="6e" green="80" blue="75" type="rgb"/>
                                     </Property>
                                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                      <Font name="Segoe UI" size="12" style="0"/>
+                                      <Font name="Segoe UI" size="11" style="0"/>
                                     </Property>
                                   </Properties>
                                 </Component>
                               </SubComponents>
                             </Container>
-                            <Component class="javax.swing.JLabel" name="clientsTile1Status">
+                            <Container class="javax.swing.JPanel" name="clientFieldsPanel">
                               <Properties>
-                                <Property name="text" type="java.lang.String" value="Module interface will be integrated here."/>
-                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="61" green="82" red="42" type="rgb"/>
+                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color red="ff" green="ff" blue="ff" type="rgb"/>
                                 </Property>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Segoe UI" size="11" style="0"/>
+                              </Properties>
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                  <BorderConstraints direction="Center"/>
+                                </Constraint>
+                              </Constraints>
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+                                <Property name="rows" type="int" value="6"/>
+                                <Property name="columns" type="int" value="1"/>
+                                <Property name="verticalGap" type="int" value="10"/>
+                              </Layout>
+                              <SubComponents>
+                                <Container class="javax.swing.JPanel" name="clientNameRow">
+                                  <Properties>
+                                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                      <Color red="ff" green="ff" blue="ff" type="rgb"/>
+                                    </Property>
+                                  </Properties>
+                                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout">
+                                    <Property name="horizontalGap" type="int" value="8"/>
+                                  </Layout>
+                                  <SubComponents>
+                                    <Component class="javax.swing.JLabel" name="lblClientName">
+                                      <Properties>
+                                        <Property name="text" type="java.lang.String" value="Client name"/>
+                                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                          <Color red="23" green="37" blue="2c" type="rgb"/>
+                                        </Property>
+                                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                          <Font name="Segoe UI" size="12" style="0"/>
+                                        </Property>
+                                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                          <Dimension value="[105, 25]"/>
+                                        </Property>
+                                      </Properties>
+                                      <Constraints>
+                                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                          <BorderConstraints direction="West"/>
+                                        </Constraint>
+                                      </Constraints>
+                                    </Component>
+                                    <Component class="javax.swing.JTextField" name="txtClientName">
+                                      <Properties>
+                                        <Property name="text" type="java.lang.String" value=""/>
+                                      </Properties>
+                                      <Constraints>
+                                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                          <BorderConstraints direction="Center"/>
+                                        </Constraint>
+                                      </Constraints>
+                                    </Component>
+                                  </SubComponents>
+                                </Container>
+                                <Container class="javax.swing.JPanel" name="clientTypeRow">
+                                  <Properties>
+                                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                      <Color red="ff" green="ff" blue="ff" type="rgb"/>
+                                    </Property>
+                                  </Properties>
+                                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout">
+                                    <Property name="horizontalGap" type="int" value="8"/>
+                                  </Layout>
+                                  <SubComponents>
+                                    <Component class="javax.swing.JLabel" name="lblClientType">
+                                      <Properties>
+                                        <Property name="text" type="java.lang.String" value="Client type"/>
+                                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                          <Color red="23" green="37" blue="2c" type="rgb"/>
+                                        </Property>
+                                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                          <Font name="Segoe UI" size="12" style="0"/>
+                                        </Property>
+                                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                          <Dimension value="[105, 25]"/>
+                                        </Property>
+                                      </Properties>
+                                      <Constraints>
+                                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                          <BorderConstraints direction="West"/>
+                                        </Constraint>
+                                      </Constraints>
+                                    </Component>
+                                    <Component class="javax.swing.JComboBox" name="cmbClientType">
+                                      <Properties>
+                                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                                          <StringArray count="2">
+                                            <StringItem index="0" value="HOUSEHOLD"/>
+                                            <StringItem index="1" value="OFFICE"/>
+                                            </StringArray>
+                                        </Property>
+                                      </Properties>
+                                      <Constraints>
+                                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                          <BorderConstraints direction="Center"/>
+                                        </Constraint>
+                                      </Constraints>
+                                    </Component>
+                                  </SubComponents>
+                                </Container>
+                                <Container class="javax.swing.JPanel" name="clientAddressRow">
+                                  <Properties>
+                                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                      <Color red="ff" green="ff" blue="ff" type="rgb"/>
+                                    </Property>
+                                  </Properties>
+                                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout">
+                                    <Property name="horizontalGap" type="int" value="8"/>
+                                  </Layout>
+                                  <SubComponents>
+                                    <Component class="javax.swing.JLabel" name="lblClientAddress">
+                                      <Properties>
+                                        <Property name="text" type="java.lang.String" value="Address"/>
+                                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                          <Color red="23" green="37" blue="2c" type="rgb"/>
+                                        </Property>
+                                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                          <Font name="Segoe UI" size="12" style="0"/>
+                                        </Property>
+                                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                          <Dimension value="[105, 25]"/>
+                                        </Property>
+                                      </Properties>
+                                      <Constraints>
+                                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                          <BorderConstraints direction="West"/>
+                                        </Constraint>
+                                      </Constraints>
+                                    </Component>
+                                    <Container class="javax.swing.JScrollPane" name="clientAddressScroll">
+                                      <Properties>
+                                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                          <Dimension value="[210, 57]"/>
+                                        </Property>
+                                      </Properties>
+                                      <Constraints>
+                                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                          <BorderConstraints direction="Center"/>
+                                        </Constraint>
+                                      </Constraints>
+                                      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                                      <SubComponents>
+                                        <Component class="javax.swing.JTextArea" name="txtClientAddress">
+                                          <Properties>
+                                            <Property name="text" type="java.lang.String" value=""/>
+                                            <Property name="lineWrap" type="boolean" value="true"/>
+                                            <Property name="wrapStyleWord" type="boolean" value="true"/>
+                                          </Properties>
+                                        </Component>
+                                      </SubComponents>
+                                    </Container>
+                                  </SubComponents>
+                                </Container>
+                                <Container class="javax.swing.JPanel" name="clientEmailRow">
+                                  <Properties>
+                                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                      <Color red="ff" green="ff" blue="ff" type="rgb"/>
+                                    </Property>
+                                  </Properties>
+                                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout">
+                                    <Property name="horizontalGap" type="int" value="8"/>
+                                  </Layout>
+                                  <SubComponents>
+                                    <Component class="javax.swing.JLabel" name="lblClientEmail">
+                                      <Properties>
+                                        <Property name="text" type="java.lang.String" value="Email"/>
+                                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                          <Color red="23" green="37" blue="2c" type="rgb"/>
+                                        </Property>
+                                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                          <Font name="Segoe UI" size="12" style="0"/>
+                                        </Property>
+                                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                          <Dimension value="[105, 25]"/>
+                                        </Property>
+                                      </Properties>
+                                      <Constraints>
+                                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                          <BorderConstraints direction="West"/>
+                                        </Constraint>
+                                      </Constraints>
+                                    </Component>
+                                    <Component class="javax.swing.JTextField" name="txtClientEmail">
+                                      <Properties>
+                                        <Property name="text" type="java.lang.String" value=""/>
+                                      </Properties>
+                                      <Constraints>
+                                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                          <BorderConstraints direction="Center"/>
+                                        </Constraint>
+                                      </Constraints>
+                                    </Component>
+                                  </SubComponents>
+                                </Container>
+                                <Container class="javax.swing.JPanel" name="clientPhoneRow">
+                                  <Properties>
+                                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                      <Color red="ff" green="ff" blue="ff" type="rgb"/>
+                                    </Property>
+                                  </Properties>
+                                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout">
+                                    <Property name="horizontalGap" type="int" value="8"/>
+                                  </Layout>
+                                  <SubComponents>
+                                    <Component class="javax.swing.JLabel" name="lblClientPhone">
+                                      <Properties>
+                                        <Property name="text" type="java.lang.String" value="Phone"/>
+                                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                          <Color red="23" green="37" blue="2c" type="rgb"/>
+                                        </Property>
+                                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                          <Font name="Segoe UI" size="12" style="0"/>
+                                        </Property>
+                                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                          <Dimension value="[105, 25]"/>
+                                        </Property>
+                                      </Properties>
+                                      <Constraints>
+                                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                          <BorderConstraints direction="West"/>
+                                        </Constraint>
+                                      </Constraints>
+                                    </Component>
+                                    <Component class="javax.swing.JTextField" name="txtClientPhone">
+                                      <Properties>
+                                        </Properties>
+                                      <Constraints>
+                                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                          <BorderConstraints direction="Center"/>
+                                        </Constraint>
+                                      </Constraints>
+                                    </Component>
+                                  </SubComponents>
+                                </Container>
+                                <Container class="javax.swing.JPanel" name="clientIdRow">
+                                  <Properties>
+                                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                      <Color red="ff" green="ff" blue="ff" type="rgb"/>
+                                    </Property>
+                                  </Properties>
+                                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout">
+                                    <Property name="horizontalGap" type="int" value="8"/>
+                                  </Layout>
+                                  <SubComponents>
+                                    <Component class="javax.swing.JLabel" name="lblCurrentClient">
+                                      <Properties>
+                                        <Property name="text" type="java.lang.String" value="Selected ID"/>
+                                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                          <Color red="23" green="37" blue="2c" type="rgb"/>
+                                        </Property>
+                                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                          <Font name="Segoe UI" size="12" style="0"/>
+                                        </Property>
+                                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                          <Dimension value="[105, 25]"/>
+                                        </Property>
+                                      </Properties>
+                                      <Constraints>
+                                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                          <BorderConstraints direction="West"/>
+                                        </Constraint>
+                                      </Constraints>
+                                    </Component>
+                                    <Component class="javax.swing.JLabel" name="lblSelectedClientId">
+                                      <Properties>
+                                        <Property name="text" type="java.lang.String" value="New client"/>
+                                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                          <Color red="42" green="82" blue="61" type="rgb"/>
+                                        </Property>
+                                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                          <Font name="Segoe UI" size="12" style="1"/>
+                                        </Property>
+                                      </Properties>
+                                      <Constraints>
+                                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                          <BorderConstraints direction="Center"/>
+                                        </Constraint>
+                                      </Constraints>
+                                    </Component>
+                                  </SubComponents>
+                                </Container>
+                              </SubComponents>
+                            </Container>
+                            <Container class="javax.swing.JPanel" name="clientActionsPanel">
+                              <Properties>
+                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color red="ff" green="ff" blue="ff" type="rgb"/>
+                                </Property>
+                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                  <Dimension value="[310, 98]"/>
                                 </Property>
                               </Properties>
                               <Constraints>
@@ -2334,29 +2627,100 @@
                                   <BorderConstraints direction="South"/>
                                 </Constraint>
                               </Constraints>
-                            </Component>
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+                                <Property name="rows" type="int" value="2"/>
+                                <Property name="columns" type="int" value="2"/>
+                                <Property name="horizontalGap" type="int" value="9"/>
+                                <Property name="verticalGap" type="int" value="9"/>
+                              </Layout>
+                              <SubComponents>
+                                <Component class="javax.swing.JButton" name="btnAddClient">
+                                  <Properties>
+                                    <Property name="text" type="java.lang.String" value="Add client"/>
+                                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                      <Color red="23" green="37" blue="2c" type="rgb"/>
+                                    </Property>
+                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                      <Font name="Segoe UI" size="12" style="1"/>
+                                    </Property>
+                                  </Properties>
+                                  <Events>
+                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="onAddClient"/>
+                                  </Events>
+                                </Component>
+                                <Component class="javax.swing.JButton" name="btnUpdateClient">
+                                  <Properties>
+                                    <Property name="text" type="java.lang.String" value="Update"/>
+                                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                      <Color red="23" green="37" blue="2c" type="rgb"/>
+                                    </Property>
+                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                      <Font name="Segoe UI" size="12" style="1"/>
+                                    </Property>
+                                  </Properties>
+                                  <Events>
+                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="onUpdateClient"/>
+                                  </Events>
+                                </Component>
+                                <Component class="javax.swing.JButton" name="btnDeleteClient">
+                                  <Properties>
+                                    <Property name="text" type="java.lang.String" value="Delete"/>
+                                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                      <Color red="23" green="37" blue="2c" type="rgb"/>
+                                    </Property>
+                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                      <Font name="Segoe UI" size="12" style="1"/>
+                                    </Property>
+                                  </Properties>
+                                  <Events>
+                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="onDeleteClient"/>
+                                  </Events>
+                                </Component>
+                                <Component class="javax.swing.JButton" name="btnClearClient">
+                                  <Properties>
+                                    <Property name="text" type="java.lang.String" value="Clear fields"/>
+                                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                      <Color red="23" green="37" blue="2c" type="rgb"/>
+                                    </Property>
+                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                      <Font name="Segoe UI" size="12" style="1"/>
+                                    </Property>
+                                  </Properties>
+                                  <Events>
+                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="onClearClient"/>
+                                  </Events>
+                                </Component>
+                              </SubComponents>
+                            </Container>
                           </SubComponents>
                         </Container>
-                        <Container class="javax.swing.JPanel" name="clientsTile2Panel">
+                        <Container class="javax.swing.JPanel" name="clientTablePanel">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                              <Color red="ff" green="ff" blue="ff" type="rgb"/>
                             </Property>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
-                                <EmptyBorder top="17" left="19" bottom="17" right="18"/>
+                                <EmptyBorder top="16" left="15" bottom="15" right="15"/>
                               </Border>
                             </Property>
                           </Properties>
-                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                              <BorderConstraints direction="Center"/>
+                            </Constraint>
+                          </Constraints>
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout">
+                            <Property name="verticalGap" type="int" value="10"/>
+                          </Layout>
                           <SubComponents>
-                            <Container class="javax.swing.JPanel" name="clientsTile2TextPanel">
+                            <Container class="javax.swing.JPanel" name="clientTableHeading">
                               <Properties>
                                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                  <Color red="ff" green="ff" blue="ff" type="rgb"/>
                                 </Property>
                                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                                  <Dimension value="[330, 88]"/>
+                                  <Dimension value="[500, 93]"/>
                                 </Property>
                               </Properties>
                               <Constraints>
@@ -2364,194 +2728,166 @@
                                   <BorderConstraints direction="North"/>
                                 </Constraint>
                               </Constraints>
-                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-                                <Property name="rows" type="int" value="2"/>
-                                <Property name="columns" type="int" value="1"/>
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout">
                                 <Property name="verticalGap" type="int" value="6"/>
                               </Layout>
                               <SubComponents>
-                                <Component class="javax.swing.JLabel" name="clientsTile2Title">
+                                <Container class="javax.swing.JPanel" name="clientTableTitleArea">
                                   <Properties>
-                                    <Property name="text" type="java.lang.String" value="Contact details"/>
-                                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                      <Color blue="2c" green="37" red="23" type="rgb"/>
+                                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                      <Color red="ff" green="ff" blue="ff" type="rgb"/>
                                     </Property>
-                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                      <Font name="Segoe UI" size="16" style="1"/>
+                                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                      <Dimension value="[400, 44]"/>
                                     </Property>
                                   </Properties>
-                                </Component>
-                                <Component class="javax.swing.JLabel" name="clientsTile2Subtitle">
+                                  <Constraints>
+                                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                      <BorderConstraints direction="North"/>
+                                    </Constraint>
+                                  </Constraints>
+                                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+                                    <Property name="rows" type="int" value="2"/>
+                                    <Property name="columns" type="int" value="1"/>
+                                    <Property name="verticalGap" type="int" value="3"/>
+                                  </Layout>
+                                  <SubComponents>
+                                    <Component class="javax.swing.JLabel" name="clientTableTitle">
+                                      <Properties>
+                                        <Property name="text" type="java.lang.String" value="Registered clients"/>
+                                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                          <Color red="23" green="37" blue="2c" type="rgb"/>
+                                        </Property>
+                                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                          <Font name="Segoe UI" size="17" style="1"/>
+                                        </Property>
+                                      </Properties>
+                                    </Component>
+                                    <Component class="javax.swing.JLabel" name="clientTableCaption">
+                                      <Properties>
+                                        <Property name="text" type="java.lang.String" value="Select a row to update or permanently delete a client"/>
+                                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                          <Color red="6e" green="80" blue="75" type="rgb"/>
+                                        </Property>
+                                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                          <Font name="Segoe UI" size="11" style="0"/>
+                                        </Property>
+                                      </Properties>
+                                    </Component>
+                                  </SubComponents>
+                                </Container>
+                                <Container class="javax.swing.JPanel" name="clientSearchPanel">
                                   <Properties>
-                                    <Property name="text" type="java.lang.String" value="Update email, phone and address"/>
-                                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                      <Color blue="75" green="80" red="6e" type="rgb"/>
+                                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                      <Color red="ff" green="ff" blue="ff" type="rgb"/>
                                     </Property>
-                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                      <Font name="Segoe UI" size="12" style="0"/>
+                                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                      <Dimension value="[500, 38]"/>
                                     </Property>
                                   </Properties>
+                                  <Constraints>
+                                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                      <BorderConstraints direction="South"/>
+                                    </Constraint>
+                                  </Constraints>
+                                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout">
+                                    <Property name="horizontalGap" type="int" value="8"/>
+                                  </Layout>
+                                  <SubComponents>
+                                    <Component class="javax.swing.JTextField" name="txtClientSearch">
+                                      <Properties>
+                                        <Property name="text" type="java.lang.String" value=""/>
+                                      </Properties>
+                                      <Events>
+                                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="onSearchClient"/>
+                                      </Events>
+                                      <Constraints>
+                                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                          <BorderConstraints direction="Center"/>
+                                        </Constraint>
+                                      </Constraints>
+                                    </Component>
+                                    <Component class="javax.swing.JButton" name="btnSearchClient">
+                                      <Properties>
+                                        <Property name="text" type="java.lang.String" value="Search"/>
+                                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                          <Color red="23" green="37" blue="2c" type="rgb"/>
+                                        </Property>
+                                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                          <Font name="Segoe UI" size="12" style="0"/>
+                                        </Property>
+                                      </Properties>
+                                      <Events>
+                                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="onSearchClient"/>
+                                      </Events>
+                                      <Constraints>
+                                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                          <BorderConstraints direction="East"/>
+                                        </Constraint>
+                                      </Constraints>
+                                    </Component>
+                                    <Component class="javax.swing.JButton" name="btnRefreshClients">
+                                      <Properties>
+                                        <Property name="text" type="java.lang.String" value="Refresh"/>
+                                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                          <Color red="23" green="37" blue="2c" type="rgb"/>
+                                        </Property>
+                                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                          <Font name="Segoe UI" size="12" style="0"/>
+                                        </Property>
+                                      </Properties>
+                                      <Events>
+                                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="onRefreshClients"/>
+                                      </Events>
+                                      <Constraints>
+                                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                          <BorderConstraints direction="West"/>
+                                        </Constraint>
+                                      </Constraints>
+                                    </Component>
+                                  </SubComponents>
+                                </Container>
+                              </SubComponents>
+                            </Container>
+                            <Container class="javax.swing.JScrollPane" name="clientTableScroll">
+                              <Properties/>
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                  <BorderConstraints direction="Center"/>
+                                </Constraint>
+                              </Constraints>
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                              <SubComponents>
+                                <Component class="javax.swing.JTable" name="tblClients">
+                                  <Properties>
+                                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                                      <Table columnCount="6" rowCount="0">
+                                        <Column editable="false" title="ID" type="java.lang.Integer"/>
+                                        <Column editable="false" title="Name" type="java.lang.String"/>
+                                        <Column editable="false" title="Type" type="java.lang.String"/>
+                                        <Column editable="false" title="Email" type="java.lang.String"/>
+                                        <Column editable="false" title="Phone" type="java.lang.String"/>
+                                        <Column editable="false" title="Address" type="java.lang.String"/>
+                                      </Table>
+                                    </Property>
+                                  </Properties>
+                                  <Events>
+                                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="onClientTableClick"/>
+                                  </Events>
                                 </Component>
                               </SubComponents>
                             </Container>
-                            <Component class="javax.swing.JLabel" name="clientsTile2Status">
+                            <Component class="javax.swing.JLabel" name="clientTableHint">
                               <Properties>
-                                <Property name="text" type="java.lang.String" value="Module interface will be integrated here."/>
+                                <Property name="text" type="java.lang.String" value="Tip: Search clients or select a row to load the contact details."/>
                                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="61" green="82" red="42" type="rgb"/>
+                                  <Color red="6e" green="80" blue="75" type="rgb"/>
                                 </Property>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Segoe UI" size="11" style="0"/>
-                                </Property>
-                              </Properties>
-                              <Constraints>
-                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-                                  <BorderConstraints direction="South"/>
-                                </Constraint>
-                              </Constraints>
-                            </Component>
-                          </SubComponents>
-                        </Container>
-                        <Container class="javax.swing.JPanel" name="clientsTile3Panel">
-                          <Properties>
-                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                            </Property>
-                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
-                                <EmptyBorder top="17" left="19" bottom="17" right="18"/>
-                              </Border>
-                            </Property>
-                          </Properties>
-                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
-                          <SubComponents>
-                            <Container class="javax.swing.JPanel" name="clientsTile3TextPanel">
-                              <Properties>
-                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
                                 </Property>
                                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                                  <Dimension value="[330, 88]"/>
-                                </Property>
-                              </Properties>
-                              <Constraints>
-                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-                                  <BorderConstraints direction="North"/>
-                                </Constraint>
-                              </Constraints>
-                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-                                <Property name="rows" type="int" value="2"/>
-                                <Property name="columns" type="int" value="1"/>
-                                <Property name="verticalGap" type="int" value="6"/>
-                              </Layout>
-                              <SubComponents>
-                                <Component class="javax.swing.JLabel" name="clientsTile3Title">
-                                  <Properties>
-                                    <Property name="text" type="java.lang.String" value="Customer types"/>
-                                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                      <Color blue="2c" green="37" red="23" type="rgb"/>
-                                    </Property>
-                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                      <Font name="Segoe UI" size="16" style="1"/>
-                                    </Property>
-                                  </Properties>
-                                </Component>
-                                <Component class="javax.swing.JLabel" name="clientsTile3Subtitle">
-                                  <Properties>
-                                    <Property name="text" type="java.lang.String" value="Household and office clients"/>
-                                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                      <Color blue="75" green="80" red="6e" type="rgb"/>
-                                    </Property>
-                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                      <Font name="Segoe UI" size="12" style="0"/>
-                                    </Property>
-                                  </Properties>
-                                </Component>
-                              </SubComponents>
-                            </Container>
-                            <Component class="javax.swing.JLabel" name="clientsTile3Status">
-                              <Properties>
-                                <Property name="text" type="java.lang.String" value="Module interface will be integrated here."/>
-                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="61" green="82" red="42" type="rgb"/>
-                                </Property>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Segoe UI" size="11" style="0"/>
-                                </Property>
-                              </Properties>
-                              <Constraints>
-                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-                                  <BorderConstraints direction="South"/>
-                                </Constraint>
-                              </Constraints>
-                            </Component>
-                          </SubComponents>
-                        </Container>
-                        <Container class="javax.swing.JPanel" name="clientsTile4Panel">
-                          <Properties>
-                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                            </Property>
-                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
-                                <EmptyBorder top="17" left="19" bottom="17" right="18"/>
-                              </Border>
-                            </Property>
-                          </Properties>
-                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
-                          <SubComponents>
-                            <Container class="javax.swing.JPanel" name="clientsTile4TextPanel">
-                              <Properties>
-                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                                </Property>
-                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                                  <Dimension value="[330, 88]"/>
-                                </Property>
-                              </Properties>
-                              <Constraints>
-                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-                                  <BorderConstraints direction="North"/>
-                                </Constraint>
-                              </Constraints>
-                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-                                <Property name="rows" type="int" value="2"/>
-                                <Property name="columns" type="int" value="1"/>
-                                <Property name="verticalGap" type="int" value="6"/>
-                              </Layout>
-                              <SubComponents>
-                                <Component class="javax.swing.JLabel" name="clientsTile4Title">
-                                  <Properties>
-                                    <Property name="text" type="java.lang.String" value="Order history"/>
-                                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                      <Color blue="2c" green="37" red="23" type="rgb"/>
-                                    </Property>
-                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                      <Font name="Segoe UI" size="16" style="1"/>
-                                    </Property>
-                                  </Properties>
-                                </Component>
-                                <Component class="javax.swing.JLabel" name="clientsTile4Subtitle">
-                                  <Properties>
-                                    <Property name="text" type="java.lang.String" value="Keep client snapshots on past orders"/>
-                                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                      <Color blue="75" green="80" red="6e" type="rgb"/>
-                                    </Property>
-                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                      <Font name="Segoe UI" size="12" style="0"/>
-                                    </Property>
-                                  </Properties>
-                                </Component>
-                              </SubComponents>
-                            </Container>
-                            <Component class="javax.swing.JLabel" name="clientsTile4Status">
-                              <Properties>
-                                <Property name="text" type="java.lang.String" value="Module interface will be integrated here."/>
-                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="61" green="82" red="42" type="rgb"/>
-                                </Property>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Segoe UI" size="11" style="0"/>
+                                  <Dimension value="[500, 25]"/>
                                 </Property>
                               </Properties>
                               <Constraints>
@@ -2566,7 +2902,7 @@
                     </Container>
                     <Component class="javax.swing.JLabel" name="clientsModuleStatus">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Assigned developer: Piyathissa   |   Placeholder screen - no database changes"/>
+                        <Property name="text" type="java.lang.String" value="Piyathissa | Task 2 — Clients  •  Ready for database operations"/>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="75" green="80" red="6e" type="rgb"/>
                         </Property>
