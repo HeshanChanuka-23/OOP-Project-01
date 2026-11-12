@@ -33,25 +33,49 @@ public class DeliveryService {
         if(!"CONFIRMED".equals(orderStatus))throw new IllegalStateException("Only confirmed orders can have active deliveries");
         return d;
     }
-    /** UML: at most one Delivery per Order; a different agent before dispatch updates the existing record. */
+    /** Internal return value keeps the exact notification ID tied to this assignment transaction. */
+    private static final class AssignmentEvent {
+        final Delivery delivery;
+        final int notificationId; // zero = existing unchanged assignment, no new email
+        AssignmentEvent(Delivery delivery,int notificationId) {
+            this.delivery=delivery;this.notificationId=notificationId;
+        }
+    }
+    /** UML: one Delivery per Order; changed assignments before dispatch create a new email event. */
     public Delivery assignAgent(int orderId,int agentId)throws SQLException {
         id(orderId,"order");id(agentId,"agent");
-        return transaction(c->{
+        AssignmentEvent result=transaction(c->{
             if(!"CONFIRMED".equals(dao.lockOrderStatus(c,orderId)))
                 throw new IllegalStateException("Confirm the order before assigning a delivery");
             Delivery current=dao.lockByOrder(c,orderId);
             if(current!=null){
                 if(current.getStatus()!=DeliveryStatus.ASSIGNED&&current.getStatus()!=DeliveryStatus.SCHEDULED)
                     throw new IllegalStateException("Agent reassignment is allowed only before dispatch");
-                if(current.getAgentId()!=null&&current.getAgentId()==agentId)return current; // unchanged assignment: no duplicate email
+                if(current.getAgentId()!=null&&current.getAgentId()==agentId)
+                    return new AssignmentEvent(current,0); // no duplicate assignment event
             }
             DeliveryAgent agent=dao.lockAgent(c,agentId);
             int deliveryId;
             if(current==null){deliveryId=dao.insertAssignment(c,orderId,agent);}
             else{deliveryId=current.getDeliveryId();dao.reassign(c,deliveryId,agent);}
-            dao.insertPendingNotification(c,deliveryId,agent.getEmail(),"AGENT_ASSIGNED");
-            return dao.lockById(c,deliveryId);
+            // Same transaction: business assignment AND durable AGENT_ASSIGNED outbox event.
+            int notificationId=dao.insertPendingNotificationReturningId(c,deliveryId,agent.getEmail(),"AGENT_ASSIGNED");
+            return new AssignmentEvent(dao.lockById(c,deliveryId),notificationId);
         });
+        // Only AFTER commit; external SMTP never runs in the assignment DB transaction.
+        if(result.notificationId>0) {
+            Thread mailThread=new Thread(()->{
+                try {
+                    new com.econest.emails.service.EmailService()
+                            .notifyAgentAssigned(result.delivery,result.notificationId);
+                }catch(Exception ex) {
+                    java.util.logging.Logger.getLogger(DeliveryService.class.getName())
+                            .log(java.util.logging.Level.WARNING,"Queued agent-assignment email could not be processed",ex);
+                }
+            },"EcoNest-agent-assignment-email");
+            mailThread.setDaemon(true);mailThread.start();
+        }
+        return result.delivery;
     }
     public void scheduleDelivery(int deliveryId,LocalDateTime date)throws SQLException {
         id(deliveryId,"delivery");if(date==null)throw new IllegalArgumentException("Set the delivery date/time");
